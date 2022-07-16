@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.my-nav{
+height: 13vh;
+background-color: #48C9B0;
+
+}
+
+.my-nav-title{
+font-size: 3em;
+font-weight: bold;
+padding: 0.5% 1%;
+margin-left: 2%;
+
+}
+
+.my-nav-title:hover{
+    background-color: #1c836e;
+    border-radius: 10px;
+}
+
+.my-card-operaciones{
+    height: 40vh;
+    display: flex;
+    align-items: center;
+
+}
+
+.oculto{
+    display: none;
+}
