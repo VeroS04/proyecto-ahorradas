@@ -22,6 +22,11 @@ margin-left: 2%;
     border-radius: 10px;
 }
 
+.btns-nav:hover {
+    background-color: #1c836e;
+    border-radius: 10px;
+}
+
 .my-card-operaciones{
     height: 40vh;
     display: flex;
