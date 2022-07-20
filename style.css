@@ -3,6 +3,8 @@
     padding: 0;
 }
 
+/* *************** INICIO DEL NAV ********************** */
+
 .my-nav{
 height: 13vh;
 background-color: #48C9B0;
@@ -27,13 +29,71 @@ margin-left: 2%;
     border-radius: 10px;
 }
 
-.my-card-operaciones{
+/* .card-container{
     height: 40vh;
     display: flex;
     align-items: center;
+} 
 
-}
+.contenedor-card{
+    height: 40vh;
+    display: flex;
+    align-items: center;
+  } */
+
+
+
+/* .my-operaciones{
+    display: flex;
+    flex-direction: column;
+    
+} */
+
+
 
 .oculto{
     display: none;
+}
+
+
+.operaciones-title{
+display: flex;
+justify-content: space-between;
+}
+
+.btn-nueva-operacion{
+    background-color: #48C9B0;
+    border: none;
+    color: white;
+}
+
+.btn-nueva-operacion:hover{
+    background-color: #69edd3;
+    
+
+}
+
+a{
+    text-decoration: none;
+}
+
+.container-balance-filtro {
+    margin: 0% 13%;
+}
+
+.container {
+    padding: 6% 0% 0% 0%;
+}
+
+.contenedor-card{
+    display: flex;
+    align-items: center;
+}
+
+.my-card{
+    padding: 5%;
+}
+
+.my-operaciones {
+    padding: 3%;
 }
