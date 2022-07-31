@@ -5,6 +5,22 @@ const balance = document.getElementById("balance");
 const categorias = document.getElementById("categorias");
 const reportes = document.getElementById("reportes");
 const btnCancelar = document.getElementById("cancelar-btn");
+const containerNuevaOperacion = document.getElementById("container-nueva-operacion");
+const btnNuevaOperacion = document.getElementById("btn-nueva-operacion");
+const filtros = document.getElementById("filtros");
+const cardBalance = document.getElementById("card-balance");
+const operaciones = document.getElementById("operaciones");
+const descripcion = document.getElementById("descripcion");
+const monto = document.getElementById("monto");
+const tipo = document.getElementById("tipo");
+const categoria = document.getElementById("categoria");
+const fecha = document.getElementById("fecha");
+const cancelarBtn = document.getElementById("cancelarBtn");
+const agregarBtn = document.getElementById("agregarBtn");
+const ocultarFiltros = document.getElementById("ocultar-filtros");
+const containerFiltros = document.getElementById("container-filtros");
+
+// ************ SECCION EVENTOS ************
 
 btnBalance.addEventListener("click", () => {
   balance.classList.remove("oculto");
@@ -28,13 +44,7 @@ btnReportes.addEventListener("click", () => {
   balance.classList.add("oculto");
 });
 
-const containerNuevaOperacion = document.getElementById(
-  "container-nueva-operacion"
-);
-const btnNuevaOperacion = document.getElementById("btn-nueva-operacion");
-const filtros = document.getElementById("filtros");
-const cardBalance = document.getElementById("card-balance");
-const operaciones = document.getElementById("operaciones");
+
 
 btnNuevaOperacion.addEventListener("click", () => {
   containerNuevaOperacion.classList.remove("oculto");
@@ -50,28 +60,19 @@ btnCancelar.addEventListener("click", () => {
   containerNuevaOperacion.classList.add("oculto");
 });
 
-const descripcion = document.getElementById("descripcion");
-const monto = document.getElementById("monto");
-const tipo = document.getElementById("tipo");
-const categoria = document.getElementById("categoria");
-const fecha = document.getElementById("fecha");
-const cancelarBtn = document.getElementById("cancelarBtn");
-const agregarBtn = document.getElementById("agregarBtn");
+ocultarFiltros.addEventListener("click", () => {
+  containerFiltros.classList.toggle("oculto");
+ });
 
-agregarBtn.addEventListener("click", (e) => {
-  e.preventDeFault();
-  console.log(descripcion.value);
-  console.log(monto.value);
-  console.log(tipo.value);
-  console.log(categoria.value);
-  console.log(fecha.value);
-});
 
-// const ocultarFiltros = document.getElementById("ocultar-filtros");
-// const containerFiltros = document.getElementById("container-filtros");
-// ocultarFiltros.addEventListener("click", () => {
-//   containerFiltros.classList.toggle("oculto");
-//  });
+// agregarBtn.addEventListener("click", (e) => {
+//   e.preventDeFault();
+//   console.log(descripcion.value);
+//   console.log(monto.value);
+//   console.log(tipo.value);
+//   console.log(categoria.value);
+//   console.log(fecha.value);
+// });
 
 // const operacion = {
 //     monto: 0,

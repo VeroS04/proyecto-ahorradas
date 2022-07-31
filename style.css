@@ -97,3 +97,13 @@ a{
 .my-operaciones {
     padding: 3%;
 }
+
+.my-card-categorias, .my-card-reportes {
+    width: 40%;
+    margin: auto;
+    margin-top: 6%;
+}
+
+.input-nombre-categoria {
+    margin-right: 1%;
+}
