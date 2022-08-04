@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js" integrity="sha512-Bcog7KQsuePA92aZHcQfeAp3w4BiUKHgihhKJLsSVVU67s7KspPbywP7nTMZtJ8YOn//vLCeWvYnb00KryziDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" href="./assets/iconos/iconofavicon.png" />
     <title>Proyecto Ahorradas</title>
@@ -136,78 +137,86 @@
           </div>
               <!--  *** INICIO DE OPERACIONES *** -->
 
-          <div class="col-sm-12 col-md-8 container-operaciones" id="operaciones" >
-            <div class="card my-operaciones shadow p-3 mb-5 bg-body rounded border border-1">
+          <div class="col-sm-12 col-md-8 container-operaciones">
+            <div class="card my-operaciones shadow p-3 mb-5 bg-body rounded border border-1" id="card-operaciones">
               <div class="operaciones-title d-flex justify-content-between">
                 <h5 class="card-title fs-4 fw-bold">Operaciones</h5>
                 <button type="button" class="btn btn-nueva-operacion" id="btn-nueva-operacion">
                   + Nueva operación
                 </button>
               </div>
-              <div class="img-operaciones d-flex justify-content-center mb-3">
+              <div class="img-operaciones d-flex justify-content-center mb-3" id="sin-operaciones">
                 <img src="./assets/imagenes/Wallet_Isometric.svg" />
                 </div>
                 <div class="d-flex flex-column justify-content-center align-items-center">
                 <h3>Sin resultados</h3>
                 <p>Cambia los filtros o agrega operaciones</p>
               </div>
-            </div>
-          </div>
-                    <!--  ************************* INICIO CONTAINER NUEVA OPERACION ********************-->
-
-          <div class="oculto" id="container-nueva-operacion">
-            <div class="row justify-content-center">
-              <div class="col-md-8">
-                <form class="shadow-lg p-3 mb-5 bg-body rounded">
-                  <h2 class="mt-5">Nueva operación</h2>
-                  <div class="mb-3">
-                    <label for="description" class="form-label">Descripción</label>
-                    <input type="text" class="form-control" id="description" aria-describedby="description"/>
-                  </div>
-                  <div class="mb-3">
-                    <label for="monto" class="form-label">Monto</label>
-                    <input type="number" class="form-control" id="monto" />
-                  </div>
-                  <div class="mb-3">
-                    <label for="tipo" class="form-label">Tipo</label>
-                    <select id="tipo" class="form-select" aria-label="Default select example">
-                      <option value="gasto" selected>Gasto</option>
-                      <option value="ganancia">Ganancia</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="categoria" class="form-label">Categoria</label>
-                    <select id="categoria" class="form-select" aria-label="Default select example">
-                      <option value="comida" selected>Comida</option>
-                      <option value="servicio">Servicios</option>
-                      <option value="salidas">Salidas</option>
-                      <option value="educacion">Educación</option>
-                      <option value="transporte">Transporte</option>
-                      <option value="trabajo">Trabajo</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="fecha" class="form-label">Fecha</label>
-                    <input type="date" class="form-control" id="fecha" aria-describedby="description"/>
-                  </div>
-                  <button id="agregar-btn" type="submit" class="btn btn-success">
-                    Agregar
-                  </button>
-                  <button id="cancelar-btn" type="submit" class="btn btn-light">
-                    Cancelar
-                  </button>
-                </form>
+              <div id="con-operaciones" class="d-none">
+                <div class="d-flex justify-content-between">
+                  <div class="col-3">Descripción</div>
+                  <div class="col-2">Categoría</div>
+                  <div class="col-2 text-end">Fecha</div>
+                  <div class="col-2 text-end">Monto</div>
+                  <div class="col-3 text-end">Acciones</div>
+                </div>
+                <div id="operaciones">
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+      
+                          <!--  ************************* INICIO CONTAINER NUEVA OPERACION ********************-->
+
+      <div class="d-none mt-5" id="container-nueva-operacion">
+        <div class="row justify-content-center">
+          <div class="col-md-5 col-sm-12">
+            <form class="card my-card shadow-lg px-5 py-4 mt-5 bg-body rounded">
+              <h2 class="mt-5">Nueva operación</h2>
+              <div class="mb-3">
+                <label for="description-input" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="descripcion-input"/>
+              </div>
+              <div class="mb-3">
+                <label for="monto-input" class="form-label">Monto</label>
+                <input type="number" class="form-control" id="monto-input" value="0"/>
+              </div>
+              <div class="mb-3">
+                <label for="tipo-select" class="form-label">Tipo</label>
+                <select id="tipo-select" class="form-select">
+                  <option value="gasto" selected>Gasto</option>
+                  <option value="ganancia">Ganancia</option>
+                </select>
+                </div>
+                <div class="mb-3">
+                  <label for="categoria-select" class="form-label">Categoria</label>
+                    <select id="categoria-select" class="form-select categoria-select">
+                    </select>
+                </div>
+                <div class="mb-3">
+                  <label for="fecha-input" class="form-label">Fecha</label>
+                  <input type="date" class="form-control" id="fecha-input"/>
+                </div>
+                <div class="text-end mt-5">
+                  <button id="agregar-btn" type="button" class="btn btn-success">
+                    Agregar
+                  </button>
+                  <button id="cancelar-btn" type="submit" class="btn btn-light">
+                    Cancelar
+                  </button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
 
       <!-- *************** FIN SECTION DE BALANCE, FILTROS Y OPERACIONES *************** -->
 
       <!--  ******************* INICIO DE SECCION CATEGORIAS ********************** -->
 
-      <section class="oculto" id="categorias">
+      <section class="d-none" id="categorias">
         <div class="card shadow p-3 rounded border border-1 my-card-categorias">
           <h1 class="mb-5">Categorias</h1>
           <form>
@@ -226,7 +235,7 @@
 
       <!--  ******************** INICIO DE SECCION REPORTES ************************* -->
 
-      <section class="oculto" id="reportes">
+      <section class="d-none" id="reportes">
         <div class="card my-card-reportes shadow p-3 mb-5 bg-body rounded border border-1">
           <h1 class="card-title fw-bold">Reportes</h1>
           <div class="img-operaciones d-flex justify-content-center mb-3">
