@@ -1,95 +1,57 @@
 const btnBalance = document.getElementById("btn-balance");
 const btnCategorias = document.getElementById("btn-categorias");
 const btnReportes = document.getElementById("btn-reportes");
+const btnNuevaOperacion = document.getElementById("btn-nueva-operacion");
+const cancelarBtn = document.getElementById("cancelar-btn");
+const agregarBtn = document.getElementById("agregar-btn");
+const ocultarFiltros = document.getElementById("ocultar-filtros");
+
 const balance = document.getElementById("balance");
 const categorias = document.getElementById("categorias");
 const reportes = document.getElementById("reportes");
-const btnCancelar = document.getElementById("cancelar-btn");
 const containerNuevaOperacion = document.getElementById("container-nueva-operacion");
-const btnNuevaOperacion = document.getElementById("btn-nueva-operacion");
 const filtros = document.getElementById("filtros");
 const cardBalance = document.getElementById("card-balance");
 const operaciones = document.getElementById("operaciones");
-const descripcion = document.getElementById("descripcion");
-const monto = document.getElementById("monto");
-const tipo = document.getElementById("tipo");
-const categoria = document.getElementById("categoria");
-const fecha = document.getElementById("fecha");
-const cancelarBtn = document.getElementById("cancelarBtn");
-const agregarBtn = document.getElementById("agregarBtn");
-const ocultarFiltros = document.getElementById("ocultar-filtros");
+const descripcionInput = document.getElementById("descripcion-input");
+const montoInput = document.getElementById("monto-input");
+const tipoSelect = document.getElementById("tipo-select");
+const categoriaSelect = document.getElementById("categoria-select");
+const fechaInput = document.getElementById("fecha-input");
 const containerFiltros = document.getElementById("container-filtros");
 
 // ************ SECCION EVENTOS ************
 
 btnBalance.addEventListener("click", () => {
-  balance.classList.remove("oculto");
-  categorias.classList.add("oculto");
-  reportes.classList.add("oculto");
-  containerNuevaOperacion.classList.add("oculto");
-  filtros.classList.remove("oculto");
-  cardBalance.classList.remove("oculto");
-  operaciones.classList.remove("oculto");
+  balance.classList.remove("d-none");
+  categorias.classList.add("d-none");
+  reportes.classList.add("d-none");
+  containerNuevaOperacion.classList.add("d-none");
 });
 
 btnCategorias.addEventListener("click", () => {
-  categorias.classList.remove("oculto");
-  balance.classList.add("oculto");
-  reportes.classList.add("oculto");
+  categorias.classList.remove("d-none");
+  balance.classList.add("d-none");
+  reportes.classList.add("d-none");
 });
 
 btnReportes.addEventListener("click", () => {
-  reportes.classList.remove("oculto");
-  categorias.classList.add("oculto");
-  balance.classList.add("oculto");
+  reportes.classList.remove("d-none");
+  categorias.classList.add("d-none");
+  balance.classList.add("d-none");
 });
-
-
 
 btnNuevaOperacion.addEventListener("click", () => {
-  containerNuevaOperacion.classList.remove("oculto");
-  filtros.classList.add("oculto");
-  cardBalance.classList.add("oculto");
-  operaciones.classList.add("oculto");
+  containerNuevaOperacion.classList.remove("d-none");
+  balance.classList.add("d-none");
 });
 
-btnCancelar.addEventListener("click", () => {
-  filtros.classList.remove("oculto");
-  cardBalance.classList.remove("oculto");
-  operaciones.classList.remove("oculto");
-  containerNuevaOperacion.classList.add("oculto");
+cancelarBtn.addEventListener("click", () => {
+  balance.classList.remove("d-none");
+  containerNuevaOperacion.classList.add("d-none");
 });
 
 ocultarFiltros.addEventListener("click", () => {
-  containerFiltros.classList.toggle("oculto");
+  containerFiltros.classList.toggle("d-none");
  });
 
-
-// agregarBtn.addEventListener("click", (e) => {
-//   e.preventDeFault();
-//   console.log(descripcion.value);
-//   console.log(monto.value);
-//   console.log(tipo.value);
-//   console.log(categoria.value);
-//   console.log(fecha.value);
-// });
-
-// const operacion = {
-//     monto: 0,
-//     descripcion: '',
-//     tipo: '',
-//     categoria: '',
-//     fecha: '',
-// }
-
-// const rellenarArreglo = obj => {
-//     obj = {
-//  monto: inputMonto.value,
-//  descripcion: inputDescrip.value,
-//  tipo: inputTipo.value,
-//  categoria:inputCateg.value ,
-//  fecha: inputFecha.value,
-
-//  }
-//     gastos.push(obj)
-// }
