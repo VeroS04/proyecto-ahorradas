@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js" integrity="sha512-Bcog7KQsuePA92aZHcQfeAp3w4BiUKHgihhKJLsSVVU67s7KspPbywP7nTMZtJ8YOn//vLCeWvYnb00KryziDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js" integrity="sha512-Bcog7KQsuePA92aZHcQfeAp3w4BiUKHgihhKJLsSVVU67s7KspPbywP7nTMZtJ8YOn//vLCeWvYnb00KryziDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" href="./assets/iconos/iconofavicon.png" />
     <title>Proyecto Ahorradas</title>
@@ -145,14 +145,16 @@
                   + Nueva operación
                 </button>
               </div>
-              <div class="img-operaciones d-flex justify-content-center mb-3" id="sin-operaciones">
-                <img src="./assets/imagenes/Wallet_Isometric.svg" />
+              <div class="img-operaciones d-flex justify-content-center flex-column mb-3" id="sin-operaciones">
+                <div class="d-flex justify-content-center mb-3">
+                  <img src="./assets/imagenes/Wallet_Isometric.svg" />
                 </div>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                <h3>Sin resultados</h3>
-                <p>Cambia los filtros o agrega operaciones</p>
+                  <h3>Sin resultados</h3>
+                  <p>Cambia los filtros o agrega operaciones</p>
+                </div>
               </div>
-              <div id="con-operaciones" class="d-none">
+              <div id="con-operaciones" class="d-none mb-5 mt-5">
                 <div class="d-flex justify-content-between">
                   <div class="col-3">Descripción</div>
                   <div class="col-2">Categoría</div>
@@ -197,7 +199,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="fecha-input" class="form-label">Fecha</label>
-                  <input type="date" class="form-control" id="fecha-input"/>
+                  <input type="date" class=" input form-control" name id="fecha-input"/>
                 </div>
                 <div class="text-end mt-5">
                   <button id="agregar-btn" type="button" class="btn btn-success">
@@ -249,8 +251,7 @@
       </section>
     </main>
 
-    <script
-     src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
     </script>
     <script src="./app.js"></script>
   </body>
