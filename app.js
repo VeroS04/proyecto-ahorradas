@@ -58,29 +58,7 @@ ocultarFiltros.addEventListener("click", () => {
 });
 
 
-// ************    SECCION FILTROS   ************
 
-
-//          ** FILTRO POR GASTO/GANANCIA **
-
-let arrTipoFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
-
-const selectFilterTipo = document.getElementById("select-filter-tipo");
-
-selectFilterTipo.addEventListener('change', e => {
-  if(e.target.value !== 'todos'){
-    const arrFiltroTipo = arrOperaciones.filter(operacion => operacion.tipo == e.target.value)
-    localStorage.setItem('arrTipoFiltro', arrFiltroTipo)
-    localStorage.setItem('arrTipoFiltro',JSON.stringify(arrFiltroTipo))
-
-    operacionAgregada(arrFiltroTipo);
-}else{
-
-    operacionAgregada(arrOperaciones);
-}
-})
-
-arrTipoFiltro = [...arrOperaciones]
 
 
 
@@ -163,6 +141,77 @@ operacionAgregada = arr => {
   })
 
 }
+
+// ************    SECCION FILTROS   ************
+
+
+//          ** FILTRO POR GASTO/GANANCIA **
+
+let arrTipoFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
+
+const selectFilterTipo = document.getElementById("select-filter-tipo");
+
+selectFilterTipo.addEventListener('change', e => {
+  if(e.target.value !== 'todos'){
+    const arrFiltroTipo = arrOperaciones.filter(operacion => operacion.tipo == e.target.value)
+    localStorage.setItem('arrTipoFiltro', arrFiltroTipo)
+    localStorage.setItem('arrTipoFiltro',JSON.stringify(arrFiltroTipo))
+
+    operacionAgregada(arrFiltroTipo);
+}else{
+
+    operacionAgregada(arrOperaciones);
+}
+})
+
+arrTipoFiltro = [...arrOperaciones]
+
+//     ****** FILTRO POR CATEGORIA *******
+
+
+const arrCategoriasIniciales = [
+  'Comida',
+  'Servicios',
+  'Salidas',
+  'Educacion',
+  'Transporte',
+  'Trabajo'
+]
+
+const generarFiltrosCategorias = () => {
+  const selects = document.getElementsByClassName('categoria-select')
+  
+  for (let i = 0; i < selects.length; i++) {
+    const select = selects[i];
+    if(select.classList.contains('filtro-categoria')){
+      select.innerHTML = '<option value="todas">Todas</option>'
+    }
+    for(let j = 0; j < arrCategoriasIniciales.length; j++) {
+      select.innerHTML += `<option value=${arrCategoriasIniciales[j]}>${arrCategoriasIniciales[j]}</option>`
+    }
+  }
+}
+generarFiltrosCategorias()
+
+const selectFilterCategorias = document.getElementById("select-filter-categorias");
+
+let arrCategiriaFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
+
+selectFilterCategorias.addEventListener('input', e => {
+  if(e.target.value !== 'todos'){
+    const arrFiltroCategorias= arrOperaciones.filter(operacion => operacion.categoria === e.target.value)
+    localStorage.setItem('arrCategiriaFiltro', arrFiltroCategorias)
+    localStorage.setItem('arrCategiriaFiltro',JSON.stringify(arrFiltroCategorias))
+
+    operacionAgregada(arrFiltroCategorias);
+  }else{
+
+    operacionAgregada(arrOperaciones);
+}
+})
+
+arrCategiriaFiltro = [...arrOperaciones]
+
 
 const inicializar = () => {
   fechaInput.valueAsDate = new Date ()
