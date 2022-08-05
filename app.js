@@ -55,3 +55,28 @@ ocultarFiltros.addEventListener("click", () => {
   containerFiltros.classList.toggle("d-none");
  });
 
+// ************    SECCION FILTROS   ************
+
+
+//          ** FILTRO POR GASTO/GANANCIA **
+
+let arrTipoFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
+
+const selectFilterTipo = document.getElementById("select-filter-tipo");
+
+selectFilterTipo.addEventListener('change', e => {
+  if(e.target.value !== 'todos'){
+    const arrFiltroTipo = arrOperaciones.filter(operacion => operacion.tipo == e.target.value)
+    localStorage.setItem('arrTipoFiltro', arrFiltroTipo)
+    localStorage.setItem('arrTipoFiltro',JSON.stringify(arrFiltroTipo))
+
+    operacionAgregada(arrFiltroTipo);
+}else{
+
+    operacionAgregada(arrOperaciones);
+}
+})
+
+arrTipoFiltro = [...arrOperaciones]
+
+
