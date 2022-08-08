@@ -104,14 +104,8 @@
                       </div>
                       <div class="mb-4">
                         <label for="categorias" class="fw-bold mb-2 fs-6">Categorías</label>
-                        <select class="form-select categoria-select filtro-tipo" id="select-filter-categorias"  aria-label="Default select example">
-                          <option value="todas" selected>Todas</option>
-                          <option value="comida">Comida</option>
-                          <option value="servicios">Servicios</option>
-                          <option value="salidas">Salidas</option>
-                          <option value="educacion">Educación</option>
-                          <option value="transporte">Transporte</option>
-                          <option value="trabajo">Trabajo</option>
+                        <select class="form-select categoria-select filtro-categoria" id="select-filter-categorias"  aria-label="Default select example">
+                          <option value="todas">Todas</option>
                         </select>
                       </div>
                       <div class="mb-4">
@@ -213,6 +207,55 @@
           </div>
         </div>
       </div>
+
+      <!--  ************************* INICIO CONTAINER EDITAR OPERACION ********************-->
+
+      <div class="d-none mt-5" id="container-editar-operacion">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <form class="shadow-lg p-4 mb-5 bg-body rounded my-card">
+              <h2 class="mt-3 mb-4">Editar operación</h2>
+              <div class="mb-3">
+                <label for="edit-description" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="input-edit-descripcion" aria-describedby="description"/>
+              </div>
+              <div class="mb-3">
+                <label for="edit-monto" class="form-label">Monto</label>
+                <input type="number" class="form-control" id="input-edit-monto"/>
+              </div>
+              <div class="mb-3">
+                <label for="edit-tipo" class="form-label">Tipo</label>
+                <select id="select-edit-tipo" class="form-select" aria-label="Default select example">
+                  <option value="gasto" selected>Gasto</option>
+                  <option value="ganancia">Ganancia</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="edit-categoria" class="form-label">Categoria</label>
+                <select id="select-edit-categoria" class="form-select categoria-select" aria-label="Default select example">
+                  <option value="comida" selected>Comida</option>
+                  <option value="servicio">Servicios</option>
+                  <option value="salidas">Salidas</option>
+                  <option value="educacion">Educación</option>
+                  <option value="transporte">Transporte</option>
+                  <option value="trabajo">Trabajo</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="edit-fecha" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="input-edit-fecha" aria-describedby="description"/>
+              </div>
+              <button id="agregar-editado-btn" type="submit" class="btn btn-success">
+                Editar
+              </button>
+              <button id="cancelar-editar-btn" type="submit" class="btn btn-light">
+                Cancelar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
 
       <!-- *************** FIN SECTION DE BALANCE, FILTROS Y OPERACIONES *************** -->
 

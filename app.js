@@ -5,6 +5,7 @@ const btnNuevaOperacion = document.getElementById("btn-nueva-operacion");
 const cancelarBtn = document.getElementById("cancelar-btn");
 const agregarBtn = document.getElementById("agregar-btn");
 const ocultarFiltros = document.getElementById("ocultar-filtros");
+const agregarEditadoBtn = document.getElementById("agregar-editado-btn");
 
 const balance = document.getElementById("balance");
 const categorias = document.getElementById("categorias");
@@ -21,6 +22,12 @@ const containerFiltros = document.getElementById("container-filtros");
 const sinOperaciones = document.getElementById("sin-operaciones");
 const conOperaciones = document.getElementById("con-operaciones");
 const operaciones = document.getElementById("operaciones")
+const inputEditarDescripcion = document.getElementById("input-edit-descripcion");
+const inputEditarMonto = document.getElementById("input-edit-monto");
+const selectEditarTipo = document.getElementById("select-edit-tipo");
+const selectEditarCategoria = document.getElementById("select-edit-categoria");
+const inputEditarFecha = document.getElementById("input-edit-fecha");
+const cardEditarOperacion = document.getElementById('container-editar-operacion')
 
 // ************ SECCION EVENTOS ************
 
@@ -116,31 +123,87 @@ operacionAgregada = arr => {
   let str = ''
   arr.forEach((operacion) => {
 
-    // const { id, descripcion, categoria, fecha, tipo, monto} = operacion;
+    const { id, descripcion, categoria, fecha, tipo, monto} = operacion;
 
     str += `<div class="mi-flex d-flex flex-row mt-4" >
-              <div class="col-3 p-2">
-                <span>${operacion.descripcion}</span>
+              <div class="col-3">
+                <span>${descripcion}</span>
               </div>
               <div class="col-2">
-                <span class="color text-success">${operacion.categoria}</span>
+                <span class="color text-success">${categoria}</span>
               </div>
               <div class="col-2 text-end">
-                <span>${operacion.fecha}</span>
+                <span>${fecha}</span>
               </div>
               <div class="col-2 text-end fw-bold">
-                <span class="${operacion.tipo === 'ganancia'? 'green' : 'red'}">${operacion.monto}</span>
+                <span class="${tipo === 'ganancia'? 'green' : 'red'}">${monto}</span>
               </div>
                 <span class="col-3 text-end">
-                  <a href="#" class="btn-editar me-2" data-id=${operacion.id} >Editar</a>
-                  <a href="#" class="btn-eliminar" data-id=${operacion.id} >Eliminar</a>
+                  <a href="#" class="btn-editar me-2" data-id=${id} >Editar</a>
+                  <a href="#" class="btn-eliminar" data-id=${id} >Eliminar</a>
                 </span>
             </div>`
 
           operaciones.innerHTML = str;
   })
 
+ //                             BOTON EDITAR OPERACION
+  
+ const editarBtns = document.querySelectorAll('.btn-editar')
+
+ editarBtns.forEach(btn => {
+   btn.addEventListener('click', e => {
+     const arrEditarOperacion = arrOperaciones.filter(operacion => operacion.id === e.target.dataset.id)
+     
+     editarOperacion(arrEditarOperacion)
+     listaOperaciones(arrOperaciones)
+
+   })
+ })
+
+
+const editarOperacion = arr => {
+  const {descripcion, monto, tipo, categoria, fecha} = arr[0]
+
+  inputEditarDescripcion.value= descripcion;
+  inputEditarMonto.value= monto;
+  inputEditarFecha.value= fecha;
+  selectEditarCategoria.value= categoria;
+  selectEditarTipo.value= tipo
+
+  balance.classList.add('d-none');
+  cardEditarOperacion.classList.remove('d-none')
+  console.log(arr)
+  
 }
+
+}
+
+agregarEditadoBtn.addEventListener('click', () => {
+
+  const operacionEditada = {
+    id: uuidv4(),
+    descripcion: inputEditarDescripcion.value,
+    monto: inputEditarMonto.value,
+    tipo: selectEditarTipo.value,
+    categoria: selectEditarCategoria.value,
+    fecha: inputEditarFecha.value  
+  }
+
+  console.log(operacionEditada);
+  balance.classList.remove('d-none');
+  cardEditarOperacion.classList.add('d-none')
+  
+})
+
+
+const cancelarEdicionBtn = document.getElementById('cancelar-editar-btn')
+
+cancelarEdicionBtn.addEventListener('click', () =>{
+  balance.classList.remove('d-none');
+  cardEditarOperacion.classList.add('d-none')
+})
+
 
 // ************    SECCION FILTROS   ************
 
@@ -198,7 +261,7 @@ const selectFilterCategorias = document.getElementById("select-filter-categorias
 let arrCategiriaFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
 
 selectFilterCategorias.addEventListener('input', e => {
-  if(e.target.value !== 'todos'){
+  if(e.target.value !== 'todas'){
     const arrFiltroCategorias= arrOperaciones.filter(operacion => operacion.categoria === e.target.value)
     localStorage.setItem('arrCategiriaFiltro', arrFiltroCategorias)
     localStorage.setItem('arrCategiriaFiltro',JSON.stringify(arrFiltroCategorias))
