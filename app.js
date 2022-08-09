@@ -120,6 +120,7 @@ agregarBtn.addEventListener('click', () => {
 })
 
 operacionAgregada = arr => {
+  document.getElementById('operaciones').innerHTML = ''
   let str = ''
   arr.forEach((operacion) => {
 
@@ -146,6 +147,7 @@ operacionAgregada = arr => {
 
           operaciones.innerHTML = str;
   })
+
 
  //                             BOTON EDITAR OPERACION
   
@@ -203,6 +205,18 @@ cancelarEdicionBtn.addEventListener('click', () =>{
   balance.classList.remove('d-none');
   cardEditarOperacion.classList.add('d-none')
 })
+
+  const btnsEliminar = document.querySelectorAll('.btn-eliminar');
+  btnsEliminar.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const arregloSinOperacion = arrOperaciones.filter(operacion => operacion.id !== e.target.dataset.id)
+      localStorage.setItem('arrOperaciones', JSON.stringify(arregloSinOperacion))
+      arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
+      operacionAgregada(arrOperaciones)
+      listaOperaciones(arrOperaciones)
+   })
+})
+
 
 
 // ************    SECCION FILTROS   ************
