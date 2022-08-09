@@ -69,10 +69,6 @@ ocultarFiltros.addEventListener("click", () => {
 
 
 
-//                                            *********************************************************************
-//                                                                     SECCION BALANCE
-//                                            *********************************************************************
-
 //                                                             ************************************
 //                                                                     SECCION OPERACIONES
 //                                                             ************************************
@@ -218,6 +214,58 @@ cancelarEdicionBtn.addEventListener('click', () =>{
 })
 
 
+//                                            *********************************************************************
+//                                                                     SECCION BALANCE
+//                                            *********************************************************************
+
+
+const sumaGastos = arr => {
+ // let arrOperacionesGastos = [];
+  const resultGastos = arr.filter(operacion => operacion.tipo === 'gasto').reduce((prev, current) => 
+  prev + Number(current.monto), 0)
+
+  console.log(resultGastos);
+  //console.log(arrOperacionesGastos.push(resultGastos))
+}
+sumaGastos(arrOperaciones)
+
+const sumaGanancias = arr => {
+  //let arrOperacionesGanancias = [];
+  const resultGanancias = arr.filter(operacion => operacion.tipo === 'ganancia').reduce((prev, current) => 
+  prev + Number(current.monto), 0)
+
+  console.log(resultGanancias);
+  //console.log(arrOperacionesGanancias.push(resultGanancias))
+}
+sumaGanancias(arrOperaciones)
+
+console.log(sumaGanancias(arrOperaciones) - sumaGastos(arrOperaciones))
+
+// const totalGanancia = arr =>
+// arr.filter(operacion => operacion.tipo === 'ganancia')
+// //.reduce((prev, current) => 
+// // prev + current.monto, 0)
+// console.log(totalGanancia)
+
+//   const operacionesGastos = []
+//   let count = 0;
+//   for(let i= 0; i < arr.length; i++){
+//     const  operacion = arr[i];
+//     if(operacion.tipo === 'Gasto'){
+//       operacionesGastos.push(operacion)
+//     }
+//   }
+//       for(let i = 0; i < operacionesGastos.length; i++){
+// const monto  = operacionesGastos[i].monto;
+// count += monto;
+//   }
+//   return count;
+//   }
+
+//totalGastos(arrOperaciones)
+//totalGanancia(arrOperaciones)
+//sumaOperaciones(arrOperaciones)
+
 
 // ************    SECCION FILTROS   ************
 
@@ -250,7 +298,7 @@ const arrCategoriasIniciales = [
   'Comida',
   'Servicios',
   'Salidas',
-  'Educacion',
+  'Educacion', 
   'Transporte',
   'Trabajo'
 ]
