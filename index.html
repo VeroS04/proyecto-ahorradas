@@ -266,12 +266,14 @@
           <h1 class="mb-5">Categorias</h1>
           <form>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label mb-3 fw-bold fs-6">Nombre</label>
+              <label for="nombre-input" class="form-label mb-3 fw-bold fs-6">Nombre</label>
               <div class="d-flex ml-2">
-                <input type="email" class="form-control input-nombre-categoria" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" class="form-control input-nombre-categoria mb-4" id="nombre-input">
                 <div class="buttom-agregar">
-                  <button type="submit" class="btn btn-success" id="agregar-categoria">Agregar</button>
+                  <button type="submit" class="btn btn-success" id="agregar-categoria-nueva">Agregar</button>
                 </div>
+              </div>
+              <div id="lista-categorias" class="d-flex flex-column">
               </div>
             </div>
           </form>

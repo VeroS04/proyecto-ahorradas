@@ -144,65 +144,10 @@ operacionAgregada = arr => {
           operaciones.innerHTML = str;
   })
 
-
- //                             BOTON EDITAR OPERACION
-  
- const editarBtns = document.querySelectorAll('.btn-editar')
-
- editarBtns.forEach(btn => {
-   btn.addEventListener('click', e => {
-     const arrEditarOperacion = arrOperaciones.filter(operacion => operacion.id === e.target.dataset.id)
-     
-     editarOperacion(arrEditarOperacion)
-     listaOperaciones(arrOperaciones)
-
-   })
- })
-
-
-const editarOperacion = arr => {
-  const {descripcion, monto, tipo, categoria, fecha} = arr[0]
-
-  inputEditarDescripcion.value= descripcion;
-  inputEditarMonto.value= monto;
-  inputEditarFecha.value= fecha;
-  selectEditarCategoria.value= categoria;
-  selectEditarTipo.value= tipo
-
-  balance.classList.add('d-none');
-  cardEditarOperacion.classList.remove('d-none')
-  console.log(arr)
-  
-}
-
-}
-
-agregarEditadoBtn.addEventListener('click', () => {
-
-  const operacionEditada = {
-    id: uuidv4(),
-    descripcion: inputEditarDescripcion.value,
-    monto: inputEditarMonto.value,
-    tipo: selectEditarTipo.value,
-    categoria: selectEditarCategoria.value,
-    fecha: inputEditarFecha.value  
-  }
-
-  console.log(operacionEditada);
-  balance.classList.remove('d-none');
-  cardEditarOperacion.classList.add('d-none')
-  
-})
-
-
-const cancelarEdicionBtn = document.getElementById('cancelar-editar-btn')
-
-cancelarEdicionBtn.addEventListener('click', () =>{
-  balance.classList.remove('d-none');
-  cardEditarOperacion.classList.add('d-none')
-})
+  //                             BOTON ELIMINAR OPERACION
 
   const btnsEliminar = document.querySelectorAll('.btn-eliminar');
+
   btnsEliminar.forEach(btn => {
     btn.addEventListener('click', e => {
       const arregloSinOperacion = arrOperaciones.filter(operacion => operacion.id !== e.target.dataset.id)
@@ -211,7 +156,71 @@ cancelarEdicionBtn.addEventListener('click', () =>{
       operacionAgregada(arrOperaciones)
       listaOperaciones(arrOperaciones)
    })
-})
+  })
+
+  //                             BOTON EDITAR OPERACION
+  
+  const editarBtns = document.querySelectorAll('.btn-editar')
+
+  editarBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+     const arrEditarOperacion = arrOperaciones.filter(operacion => operacion.id === e.target.dataset.id)
+     localStorage.setItem('arrOperaciones', JSON.stringify(arrEditarOperacion))
+     arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
+     
+     editarOperacion(arrEditarOperacion)
+     listaOperaciones(arrOperaciones)
+
+    })
+  })
+
+
+  const editarOperacion = arr => {
+    const {id, descripcion, monto, tipo, categoria, fecha} = arr[0]
+
+    inputEditarDescripcion.value= descripcion;
+    inputEditarMonto.value= monto;
+    inputEditarFecha.value= fecha;
+    selectEditarCategoria.value= categoria;
+    selectEditarTipo.value= tipo
+
+  
+    balance.classList.add('d-none');
+    cardEditarOperacion.classList.remove('d-none')
+    console.log(arr)
+  
+  }
+  
+
+  agregarEditadoBtn.addEventListener('click', () => {
+
+    const operacionEditada = {
+      id: uuidv4(),
+      descripcion: inputEditarDescripcion.value,
+      monto: inputEditarMonto.value,
+      tipo: selectEditarTipo.value,
+      categoria: selectEditarCategoria.value,
+      fecha: inputEditarFecha.value  
+    }
+  
+    console.log(operacionEditada);
+    balance.classList.remove('d-none');
+    cardEditarOperacion.classList.add('d-none')
+    
+  })
+  
+  
+  const cancelarEdicionBtn = document.getElementById('cancelar-editar-btn')
+  
+  cancelarEdicionBtn.addEventListener('click', () =>{
+    balance.classList.remove('d-none');
+    cardEditarOperacion.classList.add('d-none')
+  })
+}
+
+
+
+  
 
 
 //                                            *********************************************************************
@@ -289,8 +298,6 @@ selectFilterTipo.addEventListener('change', e => {
 }
 })
 
-arrTipoFiltro = [...arrOperaciones]
-
 //     ****** FILTRO POR CATEGORIA *******
 
 
@@ -335,7 +342,47 @@ selectFilterCategorias.addEventListener('input', e => {
 }
 })
 
-arrCategiriaFiltro = [...arrOperaciones]
+
+//                                            *********************************************************************
+//                                                                     SECCION CATEGORIA
+//                                            *********************************************************************
+
+const generarCategorias = () => {
+const ListaDeCategorias = document.getElementById('lista-categorias')
+
+    for(let i = 0; i < arrCategoriasIniciales.length; i++) {
+      ListaDeCategorias.innerHTML +=` <div class="d-flex justify-content-between mt-3 mb-2">
+                                        <div style="color:#00947e; background-color: #ebfffc;">${arrCategoriasIniciales[i]}</div>
+                                        <div>
+                                          <a href="#" class="btn-editar-categoria me-2" data-id= >Editar</a>
+                                          <a href="#" class="btn-eliminar-categoria" data-id= >Eliminar</a> 
+                                        </div>
+                                      </div>
+                                      <br>`
+
+    }
+    console.log(ListaDeCategorias);
+  }
+
+
+generarCategorias()
+
+// const generarFiltrosCategorias = () => {
+//   const selects = document.getElementsByClassName('categoria-select')
+  
+//   for (let i = 0; i < selects.length; i++) {
+//     const select = selects[i];
+//     if(select.classList.contains('filtro-categoria')){
+//       select.innerHTML = '<option value="todas">Todas</option>'
+//     }
+//     for(let j = 0; j < arrCategoriasIniciales.length; j++) {
+//       select.innerHTML += `<option value=${arrCategoriasIniciales[j]}>${arrCategoriasIniciales[j]}</option>`
+//     }
+//   }
+// }
+
+
+
 
 
 const inicializar = () => {
