@@ -42,12 +42,14 @@ btnCategorias.addEventListener("click", () => {
   categorias.classList.remove("d-none");
   balance.classList.add("d-none");
   reportes.classList.add("d-none");
+  containerNuevaOperacion.classList.add("d-none");
 });
 
 btnReportes.addEventListener("click", () => {
   reportes.classList.remove("d-none");
   categorias.classList.add("d-none");
   balance.classList.add("d-none");
+  containerNuevaOperacion.classList.add("d-none");
 });
 
 btnNuevaOperacion.addEventListener("click", () => {
@@ -301,7 +303,7 @@ selectFilterTipo.addEventListener('change', e => {
 //     ****** FILTRO POR CATEGORIA *******
 
 
-const arrCategoriasIniciales = [
+let arrCategoriasIniciales = [
   'Comida',
   'Servicios',
   'Salidas',
@@ -347,39 +349,66 @@ selectFilterCategorias.addEventListener('input', e => {
 //                                                                     SECCION CATEGORIA
 //                                            *********************************************************************
 
-const generarCategorias = () => {
+const categoriaNuevaBtn = document.getElementById('agregar-categoria-nueva');
+const inputNombreCategoria = document.getElementById('nombre-input');
 const ListaDeCategorias = document.getElementById('lista-categorias')
 
+// let arrCategoriaNueva =  JSON.parse(localStorage.getItem('arrCategoriasIniciales')) || [];
+
+categoriaNuevaBtn.addEventListener('click', ()=> {
+  const nombres = { 
+
+    nombre: inputNombreCategoria.value
+  }
+  arrCategoriasIniciales.push(nombres.nombre)
+
+  inputNombreCategoria.value='';
+
+  console.log(arrCategoriasIniciales);
+
+  ListaDeCategorias.innerHTML +=` <div class="d-flex justify-content-between mt-3 mb-2">
+  <div style="color:#00947e; background-color: #ebfffc;">${nombres.nombre}</div>
+  <div>
+    <a href="#" class="btn-editar-categoria me-2" data-id=${nombres.id} >Editar</a>
+    <a href="#" class="btn-eliminar-categoria" data-id=${nombres.id} >Eliminar</a> 
+  </div>
+</div>`
+
+
+})
+
+const generarCategorias = () => {
+
+  const ids = { 
+    id: uuidv4()
+  }
     for(let i = 0; i < arrCategoriasIniciales.length; i++) {
+      
       ListaDeCategorias.innerHTML +=` <div class="d-flex justify-content-between mt-3 mb-2">
                                         <div style="color:#00947e; background-color: #ebfffc;">${arrCategoriasIniciales[i]}</div>
                                         <div>
-                                          <a href="#" class="btn-editar-categoria me-2" data-id= >Editar</a>
-                                          <a href="#" class="btn-eliminar-categoria" data-id= >Eliminar</a> 
+                                          <a href="#" class="btn-editar-categoria me-2" data-id=${ids.id} >Editar</a>
+                                          <a href="#" class="btn-eliminar-categoria" data-id=${ids.id} >Eliminar</a> 
                                         </div>
-                                      </div>
-                                      <br>`
-
+                                      </div>`
+      
     }
-    console.log(ListaDeCategorias);
-  }
+      console.log(arrCategoriasIniciales);
+
+      const btnsEliminarCategoria = document.querySelectorAll('.btn-eliminar-categoria');
+      btnsEliminarCategoria.forEach(btn => {
+        btn.addEventListener('click', e => {
+          console.log(e.dataset.id);
+        //  const arregloSinCategoria = arrCategoriasIniciales.filter(categoria => categoria.id !== e.dataset.id)
+          // localStorage.setItem('arrCategoriasIniciales', JSON.stringify(arregloSinCategoria))
+          // arrCategoriasIniciales = JSON.parse(localStorage.getItem('arrCategoriasIniciales'))
+          // generarCategorias(arrCategoriasIniciales)
+      })
+      })
+      console.log(btnsEliminarCategoria);
+}
 
 
-generarCategorias()
-
-// const generarFiltrosCategorias = () => {
-//   const selects = document.getElementsByClassName('categoria-select')
-  
-//   for (let i = 0; i < selects.length; i++) {
-//     const select = selects[i];
-//     if(select.classList.contains('filtro-categoria')){
-//       select.innerHTML = '<option value="todas">Todas</option>'
-//     }
-//     for(let j = 0; j < arrCategoriasIniciales.length; j++) {
-//       select.innerHTML += `<option value=${arrCategoriasIniciales[j]}>${arrCategoriasIniciales[j]}</option>`
-//     }
-//   }
-// }
 
 
 
@@ -387,6 +416,7 @@ generarCategorias()
 
 const inicializar = () => {
   fechaInput.valueAsDate = new Date ()
+  generarCategorias(arrCategoriasIniciales)
   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
 }
