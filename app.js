@@ -167,7 +167,7 @@ operacionAgregada = arr => {
 
   editarBtns.forEach(btn => {
     btn.addEventListener('click', e => {
-     const arrEditarOperacion = arrOperaciones.filter(operacion => operacion.id === e.target.dataset.id)
+     let arrEditarOperacion = arrOperaciones.filter(operacion => operacion.id === e.target.dataset.id)
      localStorage.setItem('arrOperaciones', JSON.stringify(arrEditarOperacion))
      arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
      
@@ -277,13 +277,31 @@ selectFilterTipo.addEventListener('change', e => {
 //     ****** FILTRO POR CATEGORIA *******
 
 
-let arrCategoriasIniciales = [
-  'Comida',
-  'Servicios',
-  'Salidas',
-  'Educacion', 
-  'Transporte',
-  'Trabajo'
+let arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias')) || [
+  {
+    categoria: 'Comida',
+    id: uuidv4(),
+  },
+  {
+    categoria: 'Servicios',
+    id: uuidv4(),
+  },
+  {
+    categoria: 'Salidas',
+    id: uuidv4(),
+  },
+  {
+    categoria: 'Educacion',
+    id: uuidv4(),
+  }, 
+  {
+    categoria: 'Transporte',
+    id: uuidv4(),
+  },
+  {
+    categoria: 'Trabajo',
+    id: uuidv4(),
+  }
 ]
 
 const generarFiltrosCategorias = () => {
@@ -295,7 +313,7 @@ const generarFiltrosCategorias = () => {
       select.innerHTML = '<option value="todas">Todas</option>'
     }
     for(let j = 0; j < arrCategoriasIniciales.length; j++) {
-      select.innerHTML += `<option value=${arrCategoriasIniciales[j]}>${arrCategoriasIniciales[j]}</option>`
+      select.innerHTML += `<option value=${arrCategoriasIniciales[j].categoria}>${arrCategoriasIniciales[j].categoria}</option>`
     }
   }
 }
@@ -327,59 +345,52 @@ const categoriaNuevaBtn = document.getElementById('agregar-categoria-nueva');
 const inputNombreCategoria = document.getElementById('nombre-input');
 const ListaDeCategorias = document.getElementById('lista-categorias')
 
-// let arrCategoriaNueva =  JSON.parse(localStorage.getItem('arrCategoriasIniciales')) || [];
-
 categoriaNuevaBtn.addEventListener('click', ()=> {
-  const nombres = { 
 
-    nombre: inputNombreCategoria.value
-  }
-  arrCategoriasIniciales.push(nombres.nombre)
+  const nuevaCategoria = {categoria: inputNombreCategoria.value , id: uuidv4()}
+
+  arrCategoriasIniciales.push(nuevaCategoria)
 
   inputNombreCategoria.value='';
 
-  console.log(arrCategoriasIniciales);
-
   ListaDeCategorias.innerHTML +=` <div class="d-flex justify-content-between mt-3 mb-2">
-  <div style="color:#00947e; background-color: #ebfffc;">${nombres.nombre}</div>
-  <div>
-    <a href="#" class="btn-editar-categoria me-2" data-id=${nombres.id} >Editar</a>
-    <a href="#" class="btn-eliminar-categoria" data-id=${nombres.id} >Eliminar</a> 
-  </div>
-</div>`
+  <div style="color:#00947e; background-color: #ebfffc;">${nuevaCategoria.categoria}</div>
+    <div>
+      <a href="#" class="btn-editar-categoria me-2" data-id=${nuevaCategoria.id}>Editar</a>
+      <a href="#" class="btn-eliminar-categoria" data-id=${nuevaCategoria.id}>Eliminar</a> 
+    </div>
+  </div>`
 
+localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
+const categoriaEditada = JSON.parse(localStorage.getItem('categorias'))
 
+generarFiltrosCategorias(categoriaEditada)
 })
 
 const generarCategorias = () => {
 
-  const ids = { 
-    id: uuidv4()
-  }
     for(let i = 0; i < arrCategoriasIniciales.length; i++) {
       
       ListaDeCategorias.innerHTML +=` <div class="d-flex justify-content-between mt-3 mb-2">
-                                        <div style="color:#00947e; background-color: #ebfffc;">${arrCategoriasIniciales[i]}</div>
+                                        <div style="color:#00947e; background-color: #ebfffc;">${arrCategoriasIniciales[i].categoria}</div>
                                         <div>
-                                          <a href="#" class="btn-editar-categoria me-2" data-id=${ids.id} >Editar</a>
-                                          <a href="#" class="btn-eliminar-categoria" data-id=${ids.id} >Eliminar</a> 
+                                          <a href="#" class="btn-editar-categoria me-2" data-id=${arrCategoriasIniciales[i].id} >Editar</a>
+                                          <a href="#" class="btn-eliminar-categoria" data-id=${arrCategoriasIniciales[i].id} >Eliminar</a> 
                                         </div>
                                       </div>`
       
     }
+    localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
       console.log(arrCategoriasIniciales);
 
       const btnsEliminarCategoria = document.querySelectorAll('.btn-eliminar-categoria');
       btnsEliminarCategoria.forEach(btn => {
         btn.addEventListener('click', e => {
           console.log(e.dataset.id);
-        //  const arregloSinCategoria = arrCategoriasIniciales.filter(categoria => categoria.id !== e.dataset.id)
-          // localStorage.setItem('arrCategoriasIniciales', JSON.stringify(arregloSinCategoria))
-          // arrCategoriasIniciales = JSON.parse(localStorage.getItem('arrCategoriasIniciales'))
-          // generarCategorias(arrCategoriasIniciales)
       })
       })
       console.log(btnsEliminarCategoria);
+      
 }
 
 
