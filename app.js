@@ -144,6 +144,7 @@ operacionAgregada = arr => {
             </div>`
 
           operaciones.innerHTML = str;
+          totalBalance(arrOperaciones)
   })
 
   //                             BOTON ELIMINAR OPERACION
@@ -233,19 +234,22 @@ operacionAgregada = arr => {
 const totalBalance = arr => {
   const resultGanancias = arr.filter(operacion => operacion.tipo === 'ganancia').reduce((prev, current) => 
   prev + Number(current.monto), 0)
- const totalGanancia = document.getElementById('total-ganancia').innerHTML += `<p class="fs-5">Ganancias</p>
+ const totalGanancia = document.getElementById('total-ganancia').innerHTML = `<p class="fs-5">Ganancias</p>
  <div class="total-ganancias" style="color:rgb(109, 213, 6);">+$${resultGanancias}</div>`
 
 
   const resultGastos = arr.filter(operacion => operacion.tipo === 'gasto').reduce((prev, current) => 
   prev + Number(current.monto), 0)
-  const totalGastos = document.getElementById('total-gastos').innerHTML += `<p class="fs-5">Gastos</p>
+  const totalGastos = document.getElementById('total-gastos').innerHTML = `<p class="fs-5">Gastos</p>
   <div class="total-gastos" style="color:rgb(209, 7, 7);">-$${resultGastos}</div>`
-  const totalBalance = document.getElementById('total-balance').innerHTML += `<h4>Total</h4>
+  const totalBalance = document.getElementById('total-balance').innerHTML = `<h4>Total</h4>
   <div class="total-total fw-bold fs-4">$${resultGanancias - resultGastos}</div>`
 
-  // Falta local storage para no tener que refrescar la página
+  
 }
+
+
+
 
 
 // ************    SECCION FILTROS   ************
