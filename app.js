@@ -252,10 +252,12 @@ const totalBalance = arr => {
 
 
 
-// ************    SECCION FILTROS   ************
+//                             ***********************************************    
+//                                          SECCION FILTROS   
+//                             ***********************************************
 
 
-//          ** FILTRO POR GASTO/GANANCIA **
+//          ***** FILTRO POR GASTO/GANANCIA *****
 
 let arrTipoFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
 
@@ -274,7 +276,7 @@ selectFilterTipo.addEventListener('change', e => {
 }
 })
 
-//     ****** FILTRO POR CATEGORIA *******
+//           ****** FILTRO POR CATEGORIA *******
 
 
 let arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias')) || [
@@ -337,6 +339,47 @@ selectFilterCategorias.addEventListener('input', e => {
 })
 
 
+//         ****************   FILTRO ORDENAR POR ********************
+
+
+const filtroOrdenarPor = document.getElementById('filtro-ordenar-por')
+let ordenCategorias;
+filtroOrdenarPor.addEventListener('input', e => {
+if(e.target.value === 'mayor-monto'){
+  ordenCategorias = arrOperaciones.sort((a, b) => Number(a.monto) > Number(b.monto) ? -1 : Number(a.monto) < Number(b.monto) ? 1 : 0)
+
+  // const ordenCategorias = arrOperaciones.sort((a, b) => {
+  //   if(Number(a.monto) > Number(b.monto)){
+  //     return -1;
+  //   }else if(Number(a.monto) < Number(b.monto)){
+  //   return 1;
+  //   }
+  //   else{
+  //   return 0;
+  //   }
+  // })
+  
+}else if(e.target.value === 'menor-monto'){
+  ordenCategorias = arrOperaciones.sort((a, b) => Number(a.monto) > Number(b.monto) ? 1 : Number(a.monto) < Number(b.monto) ? -1 : 0)
+  
+}else if(e.target.value === 'a-z'){
+  ordenCategorias = arrOperaciones.sort((a, b) => a.descripcion.localeCompare(b.descripcion))
+}else if(e.target.value === 'z-a'){
+  ordenCategorias = arrOperaciones.sort((a, b) => b.descripcion.localeCompare(a.descripcion))
+}
+operacionAgregada(ordenCategorias)
+})
+
+
+//****** Falta ver tema local storage 
+
+//                 ***************** FILTRO DESDE ***************
+
+//**** Falta que los filtros funcionen juntos
+
+
+
+
 //                                            *********************************************************************
 //                                                                     SECCION CATEGORIA
 //                                            *********************************************************************
@@ -389,7 +432,7 @@ const generarCategorias = () => {
           console.log(e.dataset.id);
       })
       })
-      console.log(btnsEliminarCategoria);
+      
       
 }
 
