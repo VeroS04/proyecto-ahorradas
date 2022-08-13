@@ -78,10 +78,10 @@ ocultarFiltros.addEventListener("click", () => {
 let arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
 
 const listaOperaciones = (arr) => {
-  if (!arr.length){
+  if (!arr.length) {
     sinOperaciones.classList.remove('d-none');
     conOperaciones.classList.add('d-none');
-  }else {
+  } else {
     sinOperaciones.classList.add('d-none');
     conOperaciones.classList.remove('d-none');
   }
@@ -114,7 +114,7 @@ agregarBtn.addEventListener('click', () => {
   localStorage.setItem('arrOperaciones', JSON.stringify(arrOperaciones))
 
   operacionAgregada(arrOperaciones)
-  
+
 })
 
 operacionAgregada = arr => {
@@ -122,7 +122,14 @@ operacionAgregada = arr => {
   let str = ''
   arr.forEach((operacion) => {
 
-    const { id, descripcion, categoria, fecha, tipo, monto} = operacion;
+    const {
+      id,
+      descripcion,
+      categoria,
+      fecha,
+      tipo,
+      monto
+    } = operacion;
 
     str += `<div class="mi-flex d-flex flex-row mt-4" >
               <div class="col-3">
@@ -143,8 +150,7 @@ operacionAgregada = arr => {
                 </span>
             </div>`
 
-          operaciones.innerHTML = str;
-          totalBalance(arrOperaciones)
+    operaciones.innerHTML = str;
   })
 
   //                    ************* BOTON ELIMINAR OPERACION ****************
@@ -158,8 +164,10 @@ operacionAgregada = arr => {
       arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
       operacionAgregada(arrOperaciones)
       listaOperaciones(arrOperaciones)
-   })
+    })
   })
+
+  //                             BOTON EDITAR OPERACION
 
   //                     *************  BOTON EDITAR OPERACION  *****************
   
@@ -167,33 +175,40 @@ operacionAgregada = arr => {
 
   editarBtns.forEach(btn => {
     btn.addEventListener('click', e => {
-     let arrEditarOperacion = arrOperaciones.filter(operacion => operacion.id === e.target.dataset.id)
-     localStorage.setItem('arrOperaciones', JSON.stringify(arrEditarOperacion))
-     arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
-     
-     editarOperacion(arrEditarOperacion)
-     listaOperaciones(arrOperaciones)
+      let arrEditarOperacion = arrOperaciones.filter(operacion => operacion.id === e.target.dataset.id)
+      localStorage.setItem('arrOperaciones', JSON.stringify(arrEditarOperacion))
+      arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
+
+      editarOperacion(arrEditarOperacion)
+      listaOperaciones(arrOperaciones)
 
     })
   })
 
 
   const editarOperacion = arr => {
-    const {id, descripcion, monto, tipo, categoria, fecha} = arr[0]
+    const {
+      id,
+      descripcion,
+      monto,
+      tipo,
+      categoria,
+      fecha
+    } = arr[0]
 
-    inputEditarDescripcion.value= descripcion;
-    inputEditarMonto.value= monto;
-    inputEditarFecha.value= fecha;
-    selectEditarCategoria.value= categoria;
-    selectEditarTipo.value= tipo
+    inputEditarDescripcion.value = descripcion;
+    inputEditarMonto.value = monto;
+    inputEditarFecha.value = fecha;
+    selectEditarCategoria.value = categoria;
+    selectEditarTipo.value = tipo
 
-  
+
     balance.classList.add('d-none');
     cardEditarOperacion.classList.remove('d-none')
     console.log(arr)
-  
+
   }
-  
+
 
   agregarEditadoBtn.addEventListener('click', () => {
 
@@ -203,19 +218,19 @@ operacionAgregada = arr => {
       monto: inputEditarMonto.value,
       tipo: selectEditarTipo.value,
       categoria: selectEditarCategoria.value,
-      fecha: inputEditarFecha.value  
+      fecha: inputEditarFecha.value
     }
-  
+
     console.log(operacionEditada);
     balance.classList.remove('d-none');
     cardEditarOperacion.classList.add('d-none')
-    
+
   })
-  
-  
+
+
   const cancelarEdicionBtn = document.getElementById('cancelar-editar-btn')
-  
-  cancelarEdicionBtn.addEventListener('click', () =>{
+
+  cancelarEdicionBtn.addEventListener('click', () => {
     balance.classList.remove('d-none');
     cardEditarOperacion.classList.add('d-none')
   })
@@ -223,7 +238,7 @@ operacionAgregada = arr => {
 
 
 
-  
+
 
 
 //                                            *********************************************************************
@@ -232,25 +247,21 @@ operacionAgregada = arr => {
 
 
 const totalBalance = arr => {
-  const resultGanancias = arr.filter(operacion => operacion.tipo === 'ganancia').reduce((prev, current) => 
-  prev + Number(current.monto), 0)
- const totalGanancia = document.getElementById('total-ganancia').innerHTML = `<p class="fs-5">Ganancias</p>
+  const resultGanancias = arr.filter(operacion => operacion.tipo === 'ganancia').reduce((prev, current) =>
+    prev + Number(current.monto), 0)
+  const totalGanancia = document.getElementById('total-ganancia').innerHTML += `<p class="fs-5">Ganancias</p>
  <div class="total-ganancias" style="color:rgb(109, 213, 6);">+$${resultGanancias}</div>`
 
 
-  const resultGastos = arr.filter(operacion => operacion.tipo === 'gasto').reduce((prev, current) => 
-  prev + Number(current.monto), 0)
-  const totalGastos = document.getElementById('total-gastos').innerHTML = `<p class="fs-5">Gastos</p>
+  const resultGastos = arr.filter(operacion => operacion.tipo === 'gasto').reduce((prev, current) =>
+    prev + Number(current.monto), 0)
+  const totalGastos = document.getElementById('total-gastos').innerHTML += `<p class="fs-5">Gastos</p>
   <div class="total-gastos" style="color:rgb(209, 7, 7);">-$${resultGastos}</div>`
-  const totalBalance = document.getElementById('total-balance').innerHTML = `<h4>Total</h4>
+  const totalBalance = document.getElementById('total-balance').innerHTML += `<h4>Total</h4>
   <div class="total-total fw-bold fs-4">$${resultGanancias - resultGastos}</div>`
 
-  
+  // Falta local storage para no tener que refrescar la página
 }
-
-
-
-
 
 //                             ***********************************************    
 //                                          SECCION FILTROS   
@@ -264,23 +275,22 @@ let arrTipoFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
 const selectFilterTipo = document.getElementById("select-filter-tipo");
 
 selectFilterTipo.addEventListener('change', e => {
-  if(e.target.value !== 'todos'){
+  if (e.target.value !== 'todos') {
     const arrFiltroTipo = arrOperaciones.filter(operacion => operacion.tipo == e.target.value)
     localStorage.setItem('arrTipoFiltro', arrFiltroTipo)
-    localStorage.setItem('arrTipoFiltro',JSON.stringify(arrFiltroTipo))
+    localStorage.setItem('arrTipoFiltro', JSON.stringify(arrFiltroTipo))
 
     operacionAgregada(arrFiltroTipo);
-}else{
+  } else {
 
     operacionAgregada(arrOperaciones);
-}
+  }
 })
 
 //           ****** FILTRO POR CATEGORIA *******
 
 
-let arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias')) || [
-  {
+let arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias')) || [{
     categoria: 'Comida',
     id: uuidv4(),
   },
@@ -295,7 +305,7 @@ let arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias')) || [
   {
     categoria: 'Educacion',
     id: uuidv4(),
-  }, 
+  },
   {
     categoria: 'Transporte',
     id: uuidv4(),
@@ -306,36 +316,34 @@ let arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias')) || [
   }
 ]
 
-const generarFiltrosCategorias = () => {
+const generarFiltrosCategorias = (arr) => {
   const selects = document.getElementsByClassName('categoria-select')
-  
   for (let i = 0; i < selects.length; i++) {
     const select = selects[i];
-    if(select.classList.contains('filtro-categoria')){
+    if (select.classList.contains('filtro-categoria')) {
       select.innerHTML = '<option value="todas">Todas</option>'
     }
-    for(let j = 0; j < arrCategoriasIniciales.length; j++) {
-      select.innerHTML += `<option value=${arrCategoriasIniciales[j].categoria}>${arrCategoriasIniciales[j].categoria}</option>`
+    for (let j = 0; j < arr.length; j++) {
+      select.innerHTML += `<option value=${arr[j].categoria}>${arr[j].categoria}</option>`
     }
   }
 }
-generarFiltrosCategorias()
 
 const selectFilterCategorias = document.getElementById("select-filter-categorias");
 
 let arrCategoriaFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
 
 selectFilterCategorias.addEventListener('input', e => {
-  if(e.target.value !== 'todas'){
-    const arrFiltroCategorias= arrOperaciones.filter(operacion => operacion.categoria === e.target.value)
+  if (e.target.value !== 'todas') {
+    const arrFiltroCategorias = arrOperaciones.filter(operacion => operacion.categoria === e.target.value)
     localStorage.setItem('arrCategiriaFiltro', arrFiltroCategorias)
-    localStorage.setItem('arrCategiriaFiltro',JSON.stringify(arrFiltroCategorias))
+    localStorage.setItem('arrCategiriaFiltro', JSON.stringify(arrFiltroCategorias))
 
     operacionAgregada(arrFiltroCategorias);
-  }else{
+  } else {
 
     operacionAgregada(arrOperaciones);
-}
+  }
 })
 
 
@@ -417,15 +425,18 @@ const categoriaNuevaBtn = document.getElementById('agregar-categoria-nueva');
 const inputNombreCategoria = document.getElementById('nombre-input');
 const ListaDeCategorias = document.getElementById('lista-categorias')
 
-categoriaNuevaBtn.addEventListener('click', ()=> {
+categoriaNuevaBtn.addEventListener('click', () => {
 
-  const nuevaCategoria = {categoria: inputNombreCategoria.value , id: uuidv4()}
+  const nuevaCategoria = {
+    categoria: inputNombreCategoria.value,
+    id: uuidv4()
+  }
 
   arrCategoriasIniciales.push(nuevaCategoria)
 
-  inputNombreCategoria.value='';
+  inputNombreCategoria.value = '';
 
-  ListaDeCategorias.innerHTML +=` <div class="d-flex justify-content-between mt-3 mb-2">
+  ListaDeCategorias.innerHTML += ` <div class="d-flex justify-content-between mt-3 mb-2">
   <div style="color:#00947e; background-color: #ebfffc;">${nuevaCategoria.categoria}</div>
     <div>
       <a href="#" class="btn-editar-categoria me-2" data-id=${nuevaCategoria.id}>Editar</a>
@@ -433,36 +444,44 @@ categoriaNuevaBtn.addEventListener('click', ()=> {
     </div>
   </div>`
 
-localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
-const categoriaEditada = JSON.parse(localStorage.getItem('categorias'))
+  localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
+  const categoriaEditada = JSON.parse(localStorage.getItem('categorias'))
 
-generarFiltrosCategorias(categoriaEditada)
+  generarFiltrosCategorias(categoriaEditada)
 })
 
-const generarCategorias = () => {
+const pintarCategorias = (arr) => {
 
-    for(let i = 0; i < arrCategoriasIniciales.length; i++) {
-      
-      ListaDeCategorias.innerHTML +=` <div class="d-flex justify-content-between mt-3 mb-2">
-                                        <div style="color:#00947e; background-color: #ebfffc;">${arrCategoriasIniciales[i].categoria}</div>
+  ListaDeCategorias.innerHTML='';
+
+  for (let i = 0; i < arr.length; i++) {
+
+    ListaDeCategorias.innerHTML += ` <div class="d-flex justify-content-between mt-3 mb-2">
+                                        <div style="color:#00947e; background-color: #ebfffc;">${arr[i].categoria}</div>
                                         <div>
-                                          <a href="#" class="btn-editar-categoria me-2" data-id=${arrCategoriasIniciales[i].id} >Editar</a>
-                                          <a href="#" class="btn-eliminar-categoria" data-id=${arrCategoriasIniciales[i].id} >Eliminar</a> 
+                                          <a href="#" class="btn-editar-categoria me-2" data-id=${arr[i].id} >Editar</a>
+                                          <a href="#" class="btn-eliminar-categoria" data-id=${arr[i].id} >Eliminar</a> 
                                         </div>
                                       </div>`
+  }
+  localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
+  console.log(arrCategoriasIniciales);
       
     }
     localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
 
-      const btnsEliminarCategoria = document.querySelectorAll('.btn-eliminar-categoria');
-      btnsEliminarCategoria.forEach(btn => {
-        btn.addEventListener('click', e => {
-          console.log(e.dataset.id);
-      })
-      })
-      
-      
-}
+  const btnsEliminarCategoria = document.querySelectorAll('.btn-eliminar-categoria');
+  btnsEliminarCategoria.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const arrCategoriaEliminada = arrCategoriasIniciales.filter(categoria => categoria.id !== e.target.dataset.id)
+      localStorage.setItem('categorias', JSON.stringify(arrCategoriaEliminada))
+      arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias'))
+      console.log(arrCategoriasIniciales);
+      generarFiltrosCategorias(arrCategoriaEliminada)
+      pintarCategorias(arrCategoriaEliminada)
+      console.log(arrCategoriaEliminada);
+    })
+  })
 
 
 
@@ -471,11 +490,11 @@ const generarCategorias = () => {
 
 
 const inicializar = () => {
-  fechaInput.valueAsDate = new Date ()
-  generarCategorias(arrCategoriasIniciales)
+  fechaInput.valueAsDate = new Date()
+  generarFiltrosCategorias(arrCategoriasIniciales)
+  pintarCategorias(arrCategoriasIniciales)
   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
 }
-
 window.onload = inicializar
