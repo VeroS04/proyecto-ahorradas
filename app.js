@@ -153,7 +153,7 @@ operacionAgregada = arr => {
     operaciones.innerHTML = str;
   })
 
-  //                             BOTON ELIMINAR OPERACION
+  //                    ************* BOTON ELIMINAR OPERACION ****************
 
   const btnsEliminar = document.querySelectorAll('.btn-eliminar');
 
@@ -169,6 +169,8 @@ operacionAgregada = arr => {
 
   //                             BOTON EDITAR OPERACION
 
+  //                     *************  BOTON EDITAR OPERACION  *****************
+  
   const editarBtns = document.querySelectorAll('.btn-editar')
 
   editarBtns.forEach(btn => {
@@ -329,7 +331,7 @@ const generarFiltrosCategorias = (arr) => {
 
 const selectFilterCategorias = document.getElementById("select-filter-categorias");
 
-let arrCategiriaFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
+let arrCategoriaFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
 
 selectFilterCategorias.addEventListener('input', e => {
   if (e.target.value !== 'todas') {
@@ -372,16 +374,45 @@ if(e.target.value === 'mayor-monto'){
   ordenCategorias = arrOperaciones.sort((a, b) => a.descripcion.localeCompare(b.descripcion))
 }else if(e.target.value === 'z-a'){
   ordenCategorias = arrOperaciones.sort((a, b) => b.descripcion.localeCompare(a.descripcion))
-}
+}  
+//probar con b.descripcion.toLowercase().LocaleCompare
+
+// }else if(e.target.value === 'mas-reciente'){
+//   ordenCategorias = arrOperaciones.sort((a,b) =>
+//    new Date(a.fecha) - new Date(b.fecha))
+//   console.log(arrOperaciones)
+// }
+
+
 operacionAgregada(ordenCategorias)
 })
 
 
-//****** Falta ver tema local storage 
 
-//                 ***************** FILTRO DESDE ***************
 
-//**** Falta que los filtros funcionen juntos
+
+                // ***************** FILTRO DESDE ***************
+
+// const filtroDesde = document.getElementById('date');
+// let ordenDesde;
+// filtroDesde.addEventListener('click', e => {
+//   if(e.target.value === 'fecha')
+//   console.log(filtroDesde)
+// })
+
+
+//Para obtener el dia y el mes de cada operacion entrar a la propiedad fecha de c/ objeto.
+//fecha está en string. Comparar el mes y el día. Usar el slice / desde donde va a cortar y hasta donde va a cortar. 
+//2022 posicion 0 los guiones son posicion también corto desde la posicion 4 hasta la posicion 7. Luego cortando desde la 7 en adelante
+//asAdate para setear los values. target.value.AsDate (la fecha del input).
+//comparar el día y el mes con el sort (ordenarme valores y para obener el valor voy a desmenuzar lo que me trae de la fecha)
+
+
+
+
+
+
+//**** Falta que los filtros funcionen juntos(meter todas dentro de una misma funcion para sean acumulativos)
 
 
 
@@ -435,6 +466,9 @@ const pintarCategorias = (arr) => {
   }
   localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
   console.log(arrCategoriasIniciales);
+      
+    }
+    localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
 
   const btnsEliminarCategoria = document.querySelectorAll('.btn-eliminar-categoria');
   btnsEliminarCategoria.forEach(btn => {
@@ -448,7 +482,6 @@ const pintarCategorias = (arr) => {
       console.log(arrCategoriaEliminada);
     })
   })
-}
 
 
 
@@ -464,5 +497,4 @@ const inicializar = () => {
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
 }
-
 window.onload = inicializar
