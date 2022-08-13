@@ -1,3 +1,4 @@
+// botones y selects
 const btnBalance = document.getElementById("btn-balance");
 const btnCategorias = document.getElementById("btn-categorias");
 const btnReportes = document.getElementById("btn-reportes");
@@ -13,21 +14,24 @@ const reportes = document.getElementById("reportes");
 const containerNuevaOperacion = document.getElementById("container-nueva-operacion");
 const filtros = document.getElementById("filtros");
 const cardBalance = document.getElementById("card-balance");
+const cardEditarOperacion = document.getElementById('container-editar-operacion')
+const sinOperaciones = document.getElementById("sin-operaciones");
+const operaciones = document.getElementById("operaciones")
+const conOperaciones = document.getElementById("con-operaciones");
+
 const descripcionInput = document.getElementById("descripcion-input");
 const montoInput = document.getElementById("monto-input");
 const tipoSelect = document.getElementById("tipo-select");
 const categoriaSelect = document.getElementById("categoria-select");
 const fechaInput = document.getElementById("fecha-input");
 const containerFiltros = document.getElementById("container-filtros");
-const sinOperaciones = document.getElementById("sin-operaciones");
-const conOperaciones = document.getElementById("con-operaciones");
-const operaciones = document.getElementById("operaciones")
+
 const inputEditarDescripcion = document.getElementById("input-edit-descripcion");
 const inputEditarMonto = document.getElementById("input-edit-monto");
 const selectEditarTipo = document.getElementById("select-edit-tipo");
 const selectEditarCategoria = document.getElementById("select-edit-categoria");
 const inputEditarFecha = document.getElementById("input-edit-fecha");
-const cardEditarOperacion = document.getElementById('container-editar-operacion')
+
 
 // ************ SECCION EVENTOS ************
 
@@ -75,8 +79,10 @@ ocultarFiltros.addEventListener("click", () => {
 //                                                                     SECCION OPERACIONES
 //                                                             ************************************
 
+// Arreglo original donde se guardan las operaciones
 let arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
 
+// Esta funcion muestra la foto si no hay operacion y la oculta si se agrega una operacion(se pintan las operaciones)
 const listaOperaciones = (arr) => {
   if (!arr.length) {
     sinOperaciones.classList.remove('d-none');
@@ -86,7 +92,7 @@ const listaOperaciones = (arr) => {
     conOperaciones.classList.remove('d-none');
   }
 }
-
+// Se agrega operaciones en el div con operaciones y se oculta el div sin operaciones
 agregarBtn.addEventListener('click', () => {
 
   const operacion = {
@@ -117,6 +123,7 @@ agregarBtn.addEventListener('click', () => {
 
 })
 
+// Esta funcion pinta las operaciones que se agregan en el div operaciones
 operacionAgregada = arr => {
   document.getElementById('operaciones').innerHTML = ''
   let str = ''
@@ -155,6 +162,8 @@ operacionAgregada = arr => {
 
   //                    ************* BOTON ELIMINAR OPERACION ****************
 
+  // Crea un arreglo nuevo sin la operacion seleccionada
+
   const btnsEliminar = document.querySelectorAll('.btn-eliminar');
 
   btnsEliminar.forEach(btn => {
@@ -166,8 +175,6 @@ operacionAgregada = arr => {
       listaOperaciones(arrOperaciones)
     })
   })
-
-  //                             BOTON EDITAR OPERACION
 
   //                     *************  BOTON EDITAR OPERACION  *****************
   
@@ -236,15 +243,11 @@ operacionAgregada = arr => {
   })
 }
 
-
-
-
-
-
 //                                            *********************************************************************
 //                                                                     SECCION BALANCE
 //                                            *********************************************************************
 
+// Funcion que realiza las sumas(ganacia y gasto) y el balance(ganancia - gasto)
 
 const totalBalance = arr => {
   const resultGanancias = arr.filter(operacion => operacion.tipo === 'ganancia').reduce((prev, current) =>
@@ -252,15 +255,13 @@ const totalBalance = arr => {
   const totalGanancia = document.getElementById('total-ganancia').innerHTML += `<p class="fs-5">Ganancias</p>
  <div class="total-ganancias" style="color:rgb(109, 213, 6);">+$${resultGanancias}</div>`
 
-
   const resultGastos = arr.filter(operacion => operacion.tipo === 'gasto').reduce((prev, current) =>
     prev + Number(current.monto), 0)
   const totalGastos = document.getElementById('total-gastos').innerHTML += `<p class="fs-5">Gastos</p>
   <div class="total-gastos" style="color:rgb(209, 7, 7);">-$${resultGastos}</div>`
+
   const totalBalance = document.getElementById('total-balance').innerHTML += `<h4>Total</h4>
   <div class="total-total fw-bold fs-4">$${resultGanancias - resultGastos}</div>`
-
-  // Falta local storage para no tener que refrescar la página
 }
 
 //                             ***********************************************    
