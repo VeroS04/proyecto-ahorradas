@@ -1,3 +1,5 @@
+//BOTONES Y SELECTS
+
 const btnBalance = document.getElementById("btn-balance");
 const btnCategorias = document.getElementById("btn-categorias");
 const btnReportes = document.getElementById("btn-reportes");
@@ -6,30 +8,36 @@ const cancelarBtn = document.getElementById("cancelar-btn");
 const agregarBtn = document.getElementById("agregar-btn");
 const ocultarFiltros = document.getElementById("ocultar-filtros");
 const agregarEditadoBtn = document.getElementById("agregar-editado-btn");
+const selectEditarTipo = document.getElementById("select-edit-tipo");
 
+// PAGINAS Y FORMULARIOS
 const balance = document.getElementById("balance");
 const categorias = document.getElementById("categorias");
 const reportes = document.getElementById("reportes");
 const containerNuevaOperacion = document.getElementById("container-nueva-operacion");
 const filtros = document.getElementById("filtros");
 const cardBalance = document.getElementById("card-balance");
+const containerFiltros = document.getElementById("container-filtros");
+const sinOperaciones = document.getElementById("sin-operaciones");
+const conOperaciones = document.getElementById("con-operaciones");
+const operaciones = document.getElementById("operaciones");
+const cardEditarOperacion = document.getElementById('container-editar-operacion');
+
+// INPUTS
+
 const descripcionInput = document.getElementById("descripcion-input");
 const montoInput = document.getElementById("monto-input");
 const tipoSelect = document.getElementById("tipo-select");
 const categoriaSelect = document.getElementById("categoria-select");
 const fechaInput = document.getElementById("fecha-input");
-const containerFiltros = document.getElementById("container-filtros");
-const sinOperaciones = document.getElementById("sin-operaciones");
-const conOperaciones = document.getElementById("con-operaciones");
-const operaciones = document.getElementById("operaciones")
 const inputEditarDescripcion = document.getElementById("input-edit-descripcion");
 const inputEditarMonto = document.getElementById("input-edit-monto");
-const selectEditarTipo = document.getElementById("select-edit-tipo");
 const selectEditarCategoria = document.getElementById("select-edit-categoria");
 const inputEditarFecha = document.getElementById("input-edit-fecha");
-const cardEditarOperacion = document.getElementById('container-editar-operacion')
 
-// ************ SECCION EVENTOS ************
+// ************ SECCION EVENTOS NAV ************
+
+// Boton a balance que oculta categorias, reportes y formulario de nueva operacion 
 
 btnBalance.addEventListener("click", () => {
   balance.classList.remove("d-none");
@@ -38,12 +46,16 @@ btnBalance.addEventListener("click", () => {
   containerNuevaOperacion.classList.add("d-none");
 });
 
+// Boton a categorias que oculta balance, reportes y formulario de nueva operacion 
+
 btnCategorias.addEventListener("click", () => {
   categorias.classList.remove("d-none");
   balance.classList.add("d-none");
   reportes.classList.add("d-none");
   containerNuevaOperacion.classList.add("d-none");
 });
+
+// Boton a reportes que oculta balance, categorias y formulario de nueva operacion 
 
 btnReportes.addEventListener("click", () => {
   reportes.classList.remove("d-none");
@@ -52,10 +64,14 @@ btnReportes.addEventListener("click", () => {
   containerNuevaOperacion.classList.add("d-none");
 });
 
+// Boton a formulario de nueva operacion que oculta balance, categorias y reportes
+
 btnNuevaOperacion.addEventListener("click", () => {
   containerNuevaOperacion.classList.remove("d-none");
   balance.classList.add("d-none");
 });
+
+// Boton que cancela formulario de nueva operacion y deja en vista a balance
 
 cancelarBtn.addEventListener("click", () => {
   balance.classList.remove("d-none");
@@ -67,16 +83,15 @@ ocultarFiltros.addEventListener("click", () => {
 });
 
 
-
-
-
-
 //                                                             ************************************
 //                                                                     SECCION OPERACIONES
 //                                                             ************************************
 
+// Arreglo original donde se guardan las operaciones
 let arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
 
+
+// Función que oculta la imagen de sin operaciones si hay operaciones nuevas
 const listaOperaciones = (arr) => {
   if (!arr.length) {
     sinOperaciones.classList.remove('d-none');
@@ -86,6 +101,8 @@ const listaOperaciones = (arr) => {
     conOperaciones.classList.remove('d-none');
   }
 }
+
+// Botón que agrega una operacion nueva que se crea con la funcion operacionAgregada
 
 agregarBtn.addEventListener('click', () => {
 
@@ -116,6 +133,9 @@ agregarBtn.addEventListener('click', () => {
   operacionAgregada(arrOperaciones)
 
 })
+
+
+// Función que crea el div con las operaciones 
 
 operacionAgregada = arr => {
   document.getElementById('operaciones').innerHTML = ''
@@ -244,7 +264,7 @@ operacionAgregada = arr => {
 //                                                                     SECCION BALANCE
 //                                            *********************************************************************
 
-
+// Función que pinta las ganacias, los gastos y el balance
 const totalBalance = arr => {
   const resultGanancias = arr.filter(operacion => operacion.tipo === 'ganancia').reduce((prev, current) =>
     prev + Number(current.monto), 0)
@@ -256,15 +276,10 @@ const totalBalance = arr => {
     prev + Number(current.monto), 0)
   const totalGastos = document.getElementById('total-gastos').innerHTML = `<p class="fs-5">Gastos</p>
   <div class="total-gastos" style="color:rgb(209, 7, 7);">-$${resultGastos}</div>`
+
   const totalDeBalance = document.getElementById('total-balance').innerHTML = `<h4>Total</h4>
   <div class="total-total fw-bold fs-4">$${resultGanancias - resultGastos}</div>`
 }
-
-
-
-// ************    SECCION FILTROS   ************
-
-
 
 
 //                             ***********************************************    
@@ -294,6 +309,7 @@ selectFilterTipo.addEventListener('change', e => {
 
 //           ****** FILTRO POR CATEGORIA *******
 
+// Arreglo donde se guardan las categorias predeterminadas y donde se suman nuevas
 
 let arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias')) || [{
     categoria: 'Comida',
@@ -321,6 +337,8 @@ let arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias')) || [
   }
 ]
 
+// Función que genera las categorias tomando el objeto que esta en el arreglo de categorias iniciales
+
 const generarFiltrosCategorias = (arr) => {
   const selects = document.getElementsByClassName('categoria-select')
 
@@ -339,6 +357,8 @@ const generarFiltrosCategorias = (arr) => {
 const selectFilterCategorias = document.getElementById("select-filter-categorias");
 
 let arrCategoriaFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
+
+// Función que realiza el filtro por categoria 
 
 selectFilterCategorias.addEventListener('input', e => {
   if (e.target.value !== 'todas') {
@@ -416,6 +436,8 @@ const categoriaNuevaBtn = document.getElementById('agregar-categoria-nueva');
 const inputNombreCategoria = document.getElementById('nombre-input');
 const ListaDeCategorias = document.getElementById('lista-categorias')
 
+// Botón que agrega una categoria nueva
+
 categoriaNuevaBtn.addEventListener('click', () => {
 
   const nuevaCategoria = {
@@ -441,6 +463,8 @@ categoriaNuevaBtn.addEventListener('click', () => {
   generarFiltrosCategorias(categoriaEditada)
 })
 
+// Función que pinta la categoria nueva
+
 const pintarCategorias = (arr) => {
 
   ListaDeCategorias.innerHTML='';
@@ -458,7 +482,10 @@ const pintarCategorias = (arr) => {
   }
   localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
 
+  //                    ***** BOTON ELIMINAR CATEGORIA *****
+
   const btnsEliminarCategoria = document.querySelectorAll('.btn-eliminar-categoria');
+  
   btnsEliminarCategoria.forEach(btn => {
     btn.addEventListener('click', e => {
       const arrCategoriaEliminada = arrCategoriasIniciales.filter(categoria => categoria.id !== e.target.dataset.id)
