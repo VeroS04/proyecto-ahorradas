@@ -7,7 +7,6 @@ const btnNuevaOperacion = document.getElementById("btn-nueva-operacion");
 const cancelarBtn = document.getElementById("cancelar-btn");
 const agregarBtn = document.getElementById("agregar-btn");
 const ocultarFiltros = document.getElementById("ocultar-filtros");
-const agregarEditadoBtn = document.getElementById("agregar-editado-btn");
 const selectEditarTipo = document.getElementById("select-edit-tipo");
 
 // PAGINAS Y FORMULARIOS
@@ -22,6 +21,8 @@ const sinOperaciones = document.getElementById("sin-operaciones");
 const conOperaciones = document.getElementById("con-operaciones");
 const operaciones = document.getElementById("operaciones");
 const cardEditarOperacion = document.getElementById('container-editar-operacion');
+const cardEditarcategoria = document.getElementById('card-editar-categorias');
+const cardCategoria = document.getElementById('card-categorias');
 
 // INPUTS
 
@@ -170,63 +171,37 @@ operacionAgregada = arr => {
                 </span>
             </div>`
 
-    operaciones.innerHTML = str;
-    totalBalance(arrOperaciones)
-  })
-
-  //                             BOTON ELIMINAR OPERACION
-
-  const btnsEliminar = document.querySelectorAll('.btn-eliminar');
-
-  btnsEliminar.forEach(btn => {
-    btn.addEventListener('click', e => {
-      const arregloSinOperacion = arrOperaciones.filter(operacion => operacion.id !== e.target.dataset.id)
-      localStorage.setItem('arrOperaciones', JSON.stringify(arregloSinOperacion))
-      arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
-      operacionAgregada(arrOperaciones)
-      listaOperaciones(arrOperaciones)
-    })
-  })
+   
+  });
+  operaciones.innerHTML = str;
+  totalBalance(arrOperaciones)
 
   //                             BOTON EDITAR OPERACION
-
+  
+  const agregarEditadoBtn = document.getElementById("agregar-editado-btn");
   const editarBtns = document.querySelectorAll('.btn-editar')
 
   editarBtns.forEach(btn => {
     btn.addEventListener('click', e => {
       let arrEditarOperacion = arrOperaciones.filter(operacion => operacion.id === e.target.dataset.id)
-      localStorage.setItem('arrOperaciones', JSON.stringify(arrEditarOperacion))
-      arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
-
       editarOperacion(arrEditarOperacion)
-      listaOperaciones(arrOperaciones)
+    });
+  });
 
-    })
-  })
+  const editarOperacion = (arr) => {
+    if (arr.length == 0) return
+    const { descripcion, categoria, fecha, monto, tipo} = arr[0];
 
-
-  const editarOperacion = arr => {
-    const {
-      id,
-      descripcion,
-      monto,
-      tipo,
-      categoria,
-      fecha
-    } = arr[0]
-
+    balance.classList.add('d-none');
+    cardEditarOperacion.classList.remove('d-none');
     inputEditarDescripcion.value = descripcion;
     inputEditarMonto.value = monto;
     inputEditarFecha.value = fecha;
     selectEditarCategoria.value = categoria;
     selectEditarTipo.value = tipo
-
-
-    balance.classList.add('d-none');
-    cardEditarOperacion.classList.remove('d-none')
-    console.log(arr)
-
-  }
+    console.log(arr);
+    
+  };
 
 
   agregarEditadoBtn.addEventListener('click', () => {
@@ -239,11 +214,22 @@ operacionAgregada = arr => {
       categoria: selectEditarCategoria.value,
       fecha: inputEditarFecha.value
     }
-
-    console.log(operacionEditada);
     balance.classList.remove('d-none');
     cardEditarOperacion.classList.add('d-none')
 
+    const nuevaOperacionEditada = arrOperaciones.map((operacion) =>
+        operacion.id === arrOperaciones[0].id
+        ? operacionEditada
+        : operacion
+        )
+        localStorage.setItem('arrOperaciones',JSON.stringify(nuevaOperacionEditada))
+        arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
+        
+        operacionAgregada(arrOperaciones);
+        listaOperaciones(arrOperaciones);
+        totalBalance(arrOperaciones);
+
+      console.log(operacionEditada);
   })
 
 
@@ -252,6 +238,20 @@ operacionAgregada = arr => {
   cancelarEdicionBtn.addEventListener('click', () => {
     balance.classList.remove('d-none');
     cardEditarOperacion.classList.add('d-none')
+  })
+
+   //                             BOTON ELIMINAR OPERACION
+
+  const btnsEliminar = document.querySelectorAll('.btn-eliminar');
+
+  btnsEliminar.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const arregloSinOperacion = arrOperaciones.filter(operacion => operacion.id !== e.target.dataset.id)
+      localStorage.setItem('arrOperaciones', JSON.stringify(arregloSinOperacion))
+      arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'))
+      operacionAgregada(arrOperaciones)
+      listaOperaciones(arrOperaciones)
+    })
   })
 }
 
@@ -482,10 +482,65 @@ const pintarCategorias = (arr) => {
   }
   localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
 
-  //                    ***** BOTON ELIMINAR CATEGORIA *****
+  //               ***** BOTON EDITAR CATEGORIA *****
+
+  const btnsEditarCategoria =  document.querySelectorAll('.btn-editar-categoria');
+  const btnCategoriaEditada =  document.getElementById('agregar-categoria-editada');
+  const btnCancelarCategoria =  document.getElementById('cancelar-categoria-editada');
+  const inputEditadoNombre =  document.getElementById('editado-nombre-input');
+
+  btnsEditarCategoria.forEach(btn => {
+    btn.addEventListener('click', e => {
+      let arrEditarategoria = arrCategoriasIniciales.filter(categoria => categoria.id === e.target.dataset.id)
+      editarCategoria(arrEditarategoria)
+    });
+  });
+
+  const editarCategoria = (arr) => {
+    if (arr.length == 0) return
+    const {categoria} = arr[0];
+
+    inputEditadoNombre.value = categoria;
+
+    cardEditarcategoria.classList.remove('d-none')
+    cardCategoria.classList.add('d-none')
+    console.log(arr);
+    
+  };
+
+
+  btnCategoriaEditada.addEventListener('click', () => {
+
+    const categoriaEditada = {
+      id: uuidv4(),
+      categoria: inputEditadoNombre.value,
+    }
+
+    const nuevaCategoriaEditada = arrCategoriasIniciales.map((categoria) =>
+        categoria.id === arrCategoriasIniciales[0].id
+        ? categoriaEditada
+        : categoria
+        )
+        localStorage.setItem('arrCategoriasIniciales',JSON.stringify(nuevaCategoriaEditada))
+        arrCategoriasIniciales = JSON.parse(localStorage.getItem('arrCategoriasIniciales'))
+
+        cardEditarcategoria.classList.add('d-none')
+        cardCategoria.classList.remove('d-none')
+        
+        pintarCategorias(arrCategoriasIniciales);
+        generarFiltrosCategorias(arrCategoriasIniciales)
+
+      console.log(categoriaEditada);
+  })
+
+  btnCancelarCategoria.addEventListener('click', () => {
+    cardEditarcategoria.classList.add('d-none')
+    cardCategoria.classList.remove('d-none')
+  })
+
+  //               ***** BOTON ELIMINAR CATEGORIA *****
 
   const btnsEliminarCategoria = document.querySelectorAll('.btn-eliminar-categoria');
-  
   btnsEliminarCategoria.forEach(btn => {
     btn.addEventListener('click', e => {
       const arrCategoriaEliminada = arrCategoriasIniciales.filter(categoria => categoria.id !== e.target.dataset.id)
