@@ -250,7 +250,7 @@
       <!--  ******************* INICIO DE SECCION CATEGORIAS ********************** -->
 
       <section class="d-none" id="categorias">
-        <div class="card shadow p-3 rounded border border-1 my-card-categorias">
+        <div class="card shadow p-3 rounded border border-1 my-card-categorias" id="card-categorias">
           <h1 class="mb-5">Categorias</h1>
           <form>
             <div class="mb-3">
@@ -259,6 +259,23 @@
                 <input type="text" class="form-control input-nombre-categoria mb-4" id="nombre-input">
                 <div class="buttom-agregar">
                   <button type="submit" class="btn btn-success" id="agregar-categoria-nueva">Agregar</button>
+                </div>
+              </div>
+              <div id="lista-categorias" class="d-flex flex-column">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card shadow p-3 rounded border border-1 my-card-categorias d-none"  id="card-editar-categorias">
+          <h1 class="mb-5">Editar Categorias</h1>
+          <form>
+            <div class="mb-3">
+              <label for="nombre-input" class="form-label mb-3 fw-bold fs-6">Nombre</label>
+              <div class="ml-2">
+                <input type="text" class="form-control input-nombre-categoria mb-4" id="editado-nombre-input">
+                <div class="buttom-agregar text-end">
+                  <button type="submit" class="btn btn-light" id="cancelar-categoria-editada">Cancelar</button>
+                  <button type="submit" class="btn btn-success" id="agregar-categoria-editada">Agregar</button>
                 </div>
               </div>
               <div id="lista-categorias" class="d-flex flex-column">
