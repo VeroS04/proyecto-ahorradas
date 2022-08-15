@@ -151,9 +151,10 @@ operacionAgregada = arr => {
             </div>`
 
     operaciones.innerHTML = str;
+    totalBalance(arrOperaciones)
   })
 
-  //                    ************* BOTON ELIMINAR OPERACION ****************
+  //                             BOTON ELIMINAR OPERACION
 
   const btnsEliminar = document.querySelectorAll('.btn-eliminar');
 
@@ -169,8 +170,6 @@ operacionAgregada = arr => {
 
   //                             BOTON EDITAR OPERACION
 
-  //                     *************  BOTON EDITAR OPERACION  *****************
-  
   const editarBtns = document.querySelectorAll('.btn-editar')
 
   editarBtns.forEach(btn => {
@@ -249,23 +248,29 @@ operacionAgregada = arr => {
 const totalBalance = arr => {
   const resultGanancias = arr.filter(operacion => operacion.tipo === 'ganancia').reduce((prev, current) =>
     prev + Number(current.monto), 0)
-  const totalGanancia = document.getElementById('total-ganancia').innerHTML += `<p class="fs-5">Ganancias</p>
+  const totalGanancia = document.getElementById('total-ganancia').innerHTML = `<p class="fs-5">Ganancias</p>
  <div class="total-ganancias" style="color:rgb(109, 213, 6);">+$${resultGanancias}</div>`
 
 
   const resultGastos = arr.filter(operacion => operacion.tipo === 'gasto').reduce((prev, current) =>
     prev + Number(current.monto), 0)
-  const totalGastos = document.getElementById('total-gastos').innerHTML += `<p class="fs-5">Gastos</p>
+  const totalGastos = document.getElementById('total-gastos').innerHTML = `<p class="fs-5">Gastos</p>
   <div class="total-gastos" style="color:rgb(209, 7, 7);">-$${resultGastos}</div>`
-  const totalBalance = document.getElementById('total-balance').innerHTML += `<h4>Total</h4>
+  const totalDeBalance = document.getElementById('total-balance').innerHTML = `<h4>Total</h4>
   <div class="total-total fw-bold fs-4">$${resultGanancias - resultGastos}</div>`
-
-  // Falta local storage para no tener que refrescar la página
 }
+
+
+
+// ************    SECCION FILTROS   ************
+
+
+
 
 //                             ***********************************************    
 //                                          SECCION FILTROS   
 //                             ***********************************************
+
 
 
 //          ***** FILTRO POR GASTO/GANANCIA *****
@@ -318,6 +323,7 @@ let arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias')) || [
 
 const generarFiltrosCategorias = (arr) => {
   const selects = document.getElementsByClassName('categoria-select')
+
   for (let i = 0; i < selects.length; i++) {
     const select = selects[i];
     if (select.classList.contains('filtro-categoria')) {
@@ -329,6 +335,7 @@ const generarFiltrosCategorias = (arr) => {
   }
 }
 
+
 const selectFilterCategorias = document.getElementById("select-filter-categorias");
 
 let arrCategoriaFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [];
@@ -336,8 +343,8 @@ let arrCategoriaFiltro = JSON.parse(localStorage.getItem('arrOperaciones')) || [
 selectFilterCategorias.addEventListener('input', e => {
   if (e.target.value !== 'todas') {
     const arrFiltroCategorias = arrOperaciones.filter(operacion => operacion.categoria === e.target.value)
-    localStorage.setItem('arrCategiriaFiltro', arrFiltroCategorias)
-    localStorage.setItem('arrCategiriaFiltro', JSON.stringify(arrFiltroCategorias))
+    localStorage.setItem('arrCategoriaFiltro', arrFiltroCategorias)
+    localStorage.setItem('arrCategoriaFiltro', JSON.stringify(arrFiltroCategorias))
 
     operacionAgregada(arrFiltroCategorias);
   } else {
@@ -356,17 +363,6 @@ filtroOrdenarPor.addEventListener('input', e => {
 if(e.target.value === 'mayor-monto'){
   ordenCategorias = arrOperaciones.sort((a, b) => Number(a.monto) > Number(b.monto) ? -1 : Number(a.monto) < Number(b.monto) ? 1 : 0)
 
-  // const ordenCategorias = arrOperaciones.sort((a, b) => {
-  //   if(Number(a.monto) > Number(b.monto)){
-  //     return -1;
-  //   }else if(Number(a.monto) < Number(b.monto)){
-  //   return 1;
-  //   }
-  //   else{
-  //   return 0;
-  //   }
-  // })
-  
 }else if(e.target.value === 'menor-monto'){
   ordenCategorias = arrOperaciones.sort((a, b) => Number(a.monto) > Number(b.monto) ? 1 : Number(a.monto) < Number(b.monto) ? -1 : 0)
   
@@ -374,7 +370,8 @@ if(e.target.value === 'mayor-monto'){
   ordenCategorias = arrOperaciones.sort((a, b) => a.descripcion.localeCompare(b.descripcion))
 }else if(e.target.value === 'z-a'){
   ordenCategorias = arrOperaciones.sort((a, b) => b.descripcion.localeCompare(a.descripcion))
-}  
+}
+
 //probar con b.descripcion.toLowercase().LocaleCompare
 
 // }else if(e.target.value === 'mas-reciente'){
@@ -388,10 +385,9 @@ operacionAgregada(ordenCategorias)
 })
 
 
+//****** Falta ver tema local storage 
 
-
-
-                // ***************** FILTRO DESDE ***************
+               // ***************** FILTRO DESDE ***************
 
 // const filtroDesde = document.getElementById('date');
 // let ordenDesde;
@@ -407,12 +403,7 @@ operacionAgregada(ordenCategorias)
 //asAdate para setear los values. target.value.AsDate (la fecha del input).
 //comparar el día y el mes con el sort (ordenarme valores y para obener el valor voy a desmenuzar lo que me trae de la fecha)
 
-
-
-
-
-
-//**** Falta que los filtros funcionen juntos(meter todas dentro de una misma funcion para sean acumulativos)
+//**** Falta que los filtros funcionen juntos
 
 
 
@@ -463,12 +454,9 @@ const pintarCategorias = (arr) => {
                                           <a href="#" class="btn-eliminar-categoria" data-id=${arr[i].id} >Eliminar</a> 
                                         </div>
                                       </div>`
+
   }
   localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
-  console.log(arrCategoriasIniciales);
-      
-    }
-    localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales))
 
   const btnsEliminarCategoria = document.querySelectorAll('.btn-eliminar-categoria');
   btnsEliminarCategoria.forEach(btn => {
@@ -476,17 +464,12 @@ const pintarCategorias = (arr) => {
       const arrCategoriaEliminada = arrCategoriasIniciales.filter(categoria => categoria.id !== e.target.dataset.id)
       localStorage.setItem('categorias', JSON.stringify(arrCategoriaEliminada))
       arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias'))
-      console.log(arrCategoriasIniciales);
-      generarFiltrosCategorias(arrCategoriaEliminada)
       pintarCategorias(arrCategoriaEliminada)
+      generarFiltrosCategorias(arrCategoriaEliminada)
       console.log(arrCategoriaEliminada);
     })
   })
-
-
-
-
-
+}
 
 
 const inicializar = () => {
@@ -497,4 +480,5 @@ const inicializar = () => {
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
 }
+
 window.onload = inicializar
