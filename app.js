@@ -390,32 +390,35 @@ if(e.target.value === 'mayor-monto'){
   ordenCategorias = arrOperaciones.sort((a, b) => a.descripcion.localeCompare(b.descripcion))
 }else if(e.target.value === 'z-a'){
   ordenCategorias = arrOperaciones.sort((a, b) => b.descripcion.localeCompare(a.descripcion))
-}
 
-//probar con b.descripcion.toLowercase().LocaleCompare
 
-// }else if(e.target.value === 'mas-reciente'){
-//   ordenCategorias = arrOperaciones.sort((a,b) =>
-//    new Date(a.fecha) - new Date(b.fecha))
-//   console.log(arrOperaciones)
-// }
-
+}else if(e.target.value === 'mas-reciente'){
+  ordenCategorias = arrOperaciones.sort((a,b) =>
+   new Date(b.fecha) - new Date(a.fecha))
+  console.log(ordenCategorias)
+}else if(e.target.value === 'menos-reciente'){
+  ordenCategorias = arrOperaciones.sort((a,b) =>
+   new Date(a.fecha) - new Date(b.fecha))
+};
 
 operacionAgregada(ordenCategorias)
+//funcionan más y menos reciente, pero si le doy primero el click a Más reciente
+//no funciona, si empiezo con otros sí
 })
-
-
-//****** Falta ver tema local storage 
 
                // ***************** FILTRO DESDE ***************
 
-// const filtroDesde = document.getElementById('date');
-// let ordenDesde;
-// filtroDesde.addEventListener('click', e => {
-//   if(e.target.value === 'fecha')
-//   console.log(filtroDesde)
+const filtroDesde = document.getElementById('date');
+
+// filtroDesde.addEventListener('change', (e) => {
+//   let ordenDesde = arrOperaciones.filter((operacion) =>{
+//     operacion.fecha >= e.target.value
+//   })
+//   console.log(arrOperaciones)
+
 // })
 
+//funcion(arrOperaciones)
 
 //Para obtener el dia y el mes de cada operacion entrar a la propiedad fecha de c/ objeto.
 //fecha está en string. Comparar el mes y el día. Usar el slice / desde donde va a cortar y hasta donde va a cortar. 
@@ -556,6 +559,7 @@ const pintarCategorias = (arr) => {
 
 const inicializar = () => {
   fechaInput.valueAsDate = new Date()
+  filtroDesde.valueAsDate = new Date()
   generarFiltrosCategorias(arrCategoriasIniciales)
   pintarCategorias(arrCategoriasIniciales)
   operacionAgregada(arrOperaciones);
