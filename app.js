@@ -395,36 +395,28 @@ if(e.target.value === 'mayor-monto'){
 }else if(e.target.value === 'mas-reciente'){
   ordenCategorias = arrOperaciones.sort((a,b) =>
    new Date(b.fecha) - new Date(a.fecha))
-  console.log(ordenCategorias)
+  
 }else if(e.target.value === 'menos-reciente'){
   ordenCategorias = arrOperaciones.sort((a,b) =>
    new Date(a.fecha) - new Date(b.fecha))
 };
 
 operacionAgregada(ordenCategorias)
-//funcionan más y menos reciente, pero si le doy primero el click a Más reciente
-//no funciona, si empiezo con otros sí
+//****** funcionan más y menos reciente, pero si le doy primero el click a Más reciente
+//no funciona, si empiezo con el otro sí
 })
 
                // ***************** FILTRO DESDE ***************
 
 const filtroDesde = document.getElementById('date');
 
-// filtroDesde.addEventListener('change', (e) => {
-//   let ordenDesde = arrOperaciones.filter((operacion) =>{
-//     operacion.fecha >= e.target.value
-//   })
-//   console.log(arrOperaciones)
+filtroDesde.addEventListener('change', (e) => {
+ const ordenDesde = arrOperaciones.filter(operacion => new Date(operacion.fecha) >= new Date(e.target.value))
+  console.log(ordenDesde)
 
-// })
+operacionAgregada(ordenDesde)
+})
 
-//funcion(arrOperaciones)
-
-//Para obtener el dia y el mes de cada operacion entrar a la propiedad fecha de c/ objeto.
-//fecha está en string. Comparar el mes y el día. Usar el slice / desde donde va a cortar y hasta donde va a cortar. 
-//2022 posicion 0 los guiones son posicion también corto desde la posicion 4 hasta la posicion 7. Luego cortando desde la 7 en adelante
-//asAdate para setear los values. target.value.AsDate (la fecha del input).
-//comparar el día y el mes con el sort (ordenarme valores y para obener el valor voy a desmenuzar lo que me trae de la fecha)
 
 //**** Falta que los filtros funcionen juntos
 
