@@ -47,6 +47,7 @@ btnBalance.addEventListener("click", () => {
   categorias.classList.add("d-none");
   reportes.classList.add("d-none");
   containerNuevaOperacion.classList.add("d-none");
+  cardEditarOperacion.classList.add("d-none");
 });
 
 // Boton a categorias que oculta balance, reportes y formulario de nueva operacion 
@@ -56,6 +57,7 @@ btnCategorias.addEventListener("click", () => {
   balance.classList.add("d-none");
   reportes.classList.add("d-none");
   containerNuevaOperacion.classList.add("d-none");
+  cardEditarOperacion.classList.add("d-none");
 });
 
 // Boton a reportes que oculta balance, categorias y formulario de nueva operacion 
@@ -65,6 +67,7 @@ btnReportes.addEventListener("click", () => {
   categorias.classList.add("d-none");
   balance.classList.add("d-none");
   containerNuevaOperacion.classList.add("d-none");
+  cardEditarOperacion.classList.add("d-none");
   if (!arrOperaciones.length){
     reporteSinOperacion.classList.remove('d-none')
     reporteConOperacion.classList.add('d-none')

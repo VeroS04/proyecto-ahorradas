@@ -48,29 +48,18 @@ a {
     text-decoration: none;
 }
 
-.container-balance-filtro {
-    margin: 0% 13%;
-}
-
-.container {
-    padding: 6% 0% 0% 0%;
-}
-
-.contenedor-card {
-    display: flex;
-    align-items: center;
-}
-
 .my-card {
     padding: 5%;
+    width: 80%;
 }
 
 .my-operaciones {
     padding: 3%;
+    width: 100%;
 }
 
-.my-card-categorias,
-.my-card-reportes {
+.my-categorias,
+.my-reportes {
     width: 40%;
     margin: auto;
     margin-top: 6%;
@@ -101,3 +90,21 @@ a {
   .red::before{
     content: '-$';
   }
+
+@media screen and (max-width: 991px) and (min-width: 200px){
+    .nav-hamburguesa {
+        background-color: #48C9B0;
+        color: #fff;
+        transition: 1.5s;
+    }
+
+    .container-responsive {
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .my-card, .contenedor-card, .my-operaciones {
+        width: 100%;
+    }
+    
+}
