@@ -76,6 +76,7 @@ btnReportes.addEventListener("click", () => {
     reporteSinOperacion.classList.add('d-none')
   }
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales)
+  totalPorMes(arrOperaciones)
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -576,12 +577,46 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
     const totalPorCategoriaBalance = document.getElementById('total-categoria-balance').innerHTML += `<div class="mb-4 mt-4 text-end">$${totalGananciaCategoria - totalGastoCategoria}</div>`;
     
 
-    console.log(totalGananciaCategoria);
+   
     // console.log(`la categoria de: ${categoria.categoria} tiene estas operaciones ${JSON.stringify(porCategoria)}`);
   })
   // console.log(arrOperaciones);
   // console.log(arrCategoriasIniciales);
 }
+
+
+
+const totalPorMes = arr => {
+  
+  const mesesSinRepetir = [...new Set(arr.map(operacion => 
+    operacion.fecha.split('-')[1]))].sort()
+    
+    console.log(mesesSinRepetir)
+  
+  for(let i = 0; i < mesesSinRepetir.length; i ++){
+  const operacionesPorMes = arr.filter(operacion =>
+  operacion.fecha.split('-')[1] === mesesSinRepetir[i])
+  const porTipoGanancia = operacionesPorMes.filter(operacion => operacion.tipo === 'ganancia').reduce((prev, current) =>
+  prev + Number(current.monto), 0)
+  const porTipoGasto = operacionesPorMes.filter(operacion => operacion.tipo === 'gasto').reduce((prev, current) =>
+  prev + Number(current.monto), 0)
+
+  const totalMesMeses = document.getElementById('total-mes-meses').innerHTML += `<div class="mb-4 mt-4 text-end">${mesesSinRepetir[i]} </div>`;
+  const totalMesGanancia =  document.getElementById('total-mes-ganancias').innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${porTipoGanancia}</div>`;
+  const totalMesGastos = document.getElementById('total-mes-gastos').innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">+$${porTipoGasto}</div>`;
+  const totalMesBalance = document.getElementById('total-mes-balance').innerHTML += `<div class="mb-4 mt-4 text-end">+$${porTipoGanancia - porTipoGasto  }</div>`;
+
+  
+  //console.log(`Este sería del mes${mesesSinRepetir[i]} tenemos el total de gasto de: ${porTipoGasto}`)
+  //console.log(`Este sería del mes${mesesSinRepetir[i]} tenemos el total de ganancia: ${porTipoGanancia}`)
+  }
+  }
+ 
+
+
+
+
+
 
 
 const inicializar = () => {
