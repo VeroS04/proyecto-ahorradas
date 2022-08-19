@@ -14,7 +14,6 @@ const balance = document.getElementById("balance");
 const categorias = document.getElementById("categorias");
 const reportes = document.getElementById("reportes");
 const containerNuevaOperacion = document.getElementById("container-nueva-operacion");
-const filtros = document.getElementById("filtros");
 const cardBalance = document.getElementById("card-balance");
 const containerFiltros = document.getElementById("container-filtros");
 const sinOperaciones = document.getElementById("sin-operaciones");
@@ -23,6 +22,9 @@ const operaciones = document.getElementById("operaciones");
 const cardEditarOperacion = document.getElementById('container-editar-operacion');
 const cardEditarcategoria = document.getElementById('card-editar-categorias');
 const cardCategoria = document.getElementById('card-categorias');
+const reporteSinOperacion = document.getElementById('reporte-sin-operacion');
+const reporteConOperacion = document.getElementById('reporte-con-operaciones');
+const PorCategoriaLista = document.getElementById('total-por-categoria');
 
 // INPUTS
 
@@ -63,6 +65,14 @@ btnReportes.addEventListener("click", () => {
   categorias.classList.add("d-none");
   balance.classList.add("d-none");
   containerNuevaOperacion.classList.add("d-none");
+  if (!arrOperaciones.length){
+    reporteSinOperacion.classList.remove('d-none')
+    reporteConOperacion.classList.add('d-none')
+  }else{
+    reporteConOperacion.classList.remove('d-none')
+    reporteSinOperacion.classList.add('d-none')
+  }
+  totalesPorCategoria(arrOperaciones, arrCategoriasIniciales)
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -546,6 +556,28 @@ const pintarCategorias = (arr) => {
       console.log(arrCategoriaEliminada);
     })
   })
+}
+
+//                                            *********************************************************************
+//                                                                     SECCION REPORTES
+//                                            *********************************************************************
+
+const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
+  arrCategoriasIniciales.forEach(categoria => {
+    const porCategoria = arrOperaciones.filter(operacion => operacion.categoria === categoria.categoria)
+    const totalGananciaCategoria = porCategoria.filter(operacion => operacion.tipo === 'ganancia').reduce((count, current) => count + current.monto, 0);
+    const totalGastoCategoria = porCategoria.filter(operacion => operacion.tipo === 'gasto').reduce((count, current) => count + current.monto, 0);
+    const totalPorCategoria = document.getElementById('total-categoria-categoria').innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`;
+    const totalPorCategoriaGanancia = document.getElementById('total-categoria-ganancias').innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${totalGananciaCategoria}</div>`;
+    const totalPorCategoriaGasto = document.getElementById('total-categoria-gastos').innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">-$${totalGastoCategoria}</div>`;
+    const totalPorCategoriaBalance = document.getElementById('total-categoria-balance').innerHTML += `<div class="mb-4 mt-4 text-end">$${totalGananciaCategoria - totalGastoCategoria}</div>`;
+    
+
+    console.log(totalGananciaCategoria);
+    // console.log(`la categoria de: ${categoria.categoria} tiene estas operaciones ${JSON.stringify(porCategoria)}`);
+  })
+  // console.log(arrOperaciones);
+  // console.log(arrCategoriasIniciales);
 }
 
 
