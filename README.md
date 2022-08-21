@@ -15,3 +15,5 @@
 ![gift](https://c.tenor.com/fdy0A6R32EQAAAAC/broke-simpsons.gif)
 
 > A continuación desarrollamos el pseudocódigo y el diagrama de flujo del botón *Reportes*.
+![diagrama-ahorradas](https://user-images.githubusercontent.com/102563956/185792195-0ffb7d39-d06f-48ba-8108-9ac62d39fbc9.jpg)
+
