@@ -77,19 +77,23 @@ a {
 
 .green{
     color: green;
-  }
+}
   
-  .green::before{
+.green::before{
     content: '+$';
-  }
+}
   
-  .red{
+.red{
     color: red;
-  }
+}
   
-  .red::before{
+.red::before{
     content: '-$';
-  }
+}
+
+.contenedor-operaciones {
+    margin: auto;
+}
 
 @media screen and (max-width: 991px) and (min-width: 200px){
     .nav-hamburguesa {
