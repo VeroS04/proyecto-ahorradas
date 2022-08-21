@@ -190,53 +190,46 @@ operacionAgregada = (arr) => {
 
   editarBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
+
+      balance.classList.add("d-none");
+      cardEditarOperacion.classList.remove("d-none");
+
       let arrEditarOperacion = arrOperaciones.filter(
-        (operacion) => operacion.id === e.target.dataset.id
-      );
-      editarOperacion(arrEditarOperacion);
+      (operacion) => operacion.id === e.target.dataset.id);
+
+      arrEditarOperacion.forEach((operacion) => {
+        inputEditarDescripcion.value = operacion.descripcion;
+        inputEditarMonto.value= operacion.monto;
+        selectEditarCategoria.value= operacion.categoria;
+        selectEditarTipo.value= operacion.tipo;
+        inputEditarFecha.value= operacion.fecha
+      })
+
+      agregarEditadoBtn.addEventListener("click", () => {
+        const operacionEditada = arrOperaciones.filter((operacion) => operacion.id === arrEditarOperacion[0].id)
+
+        const operacionFiltrada = operacionEditada[0];
+        operacionFiltrada.descripcion= inputEditarDescripcion.value;
+        operacionFiltrada.monto= inputEditarMonto.value;
+        operacionFiltrada.tipo= selectEditarTipo.value;
+        operacionFiltrada.categoria= selectEditarCategoria.value;
+        operacionFiltrada.fecha= inputEditarFecha.value;
+
+        const nuevaOperacionEditada = arrOperaciones.map((operacion) =>
+        operacion.id === arrOperaciones[0].id ? operacionFiltrada : operacion);
+  
+        localStorage.setItem("arrOperaciones", JSON.stringify(nuevaOperacionEditada));
+        arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones"));
+
+        balance.classList.remove("d-none");
+        cardEditarOperacion.classList.add("d-none");
+  
+        operacionAgregada(arrOperaciones);
+        listaOperaciones(arrOperaciones);
+        totalBalance(arrOperaciones);
+  
+      });
     });
-  });
-
-  const editarOperacion = (arr) => {
-    if (arr.length == 0) return;
-    const { descripcion, categoria, fecha, monto, tipo } = arr[0];
-
-    balance.classList.add("d-none");
-    cardEditarOperacion.classList.remove("d-none");
-    inputEditarDescripcion.value = descripcion;
-    inputEditarMonto.value = monto;
-    inputEditarFecha.value = fecha;
-    selectEditarCategoria.value = categoria;
-    selectEditarTipo.value = tipo;
-    console.log(arr);
-  };
-
-  agregarEditadoBtn.addEventListener("click", () => {
-    const operacionEditada = {
-      id: uuidv4(),
-      descripcion: inputEditarDescripcion.value,
-      monto: inputEditarMonto.value,
-      tipo: selectEditarTipo.value,
-      categoria: selectEditarCategoria.value,
-      fecha: inputEditarFecha.value,
-    };
-    balance.classList.remove("d-none");
-    cardEditarOperacion.classList.add("d-none");
-
-    const nuevaOperacionEditada = arrOperaciones.map((operacion) =>
-      operacion.id === arrOperaciones[0].id ? operacionEditada : operacion
-    );
-    localStorage.setItem(
-      "arrOperaciones",
-      JSON.stringify(nuevaOperacionEditada)
-    );
-    arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones"));
-
-    operacionAgregada(arrOperaciones);
-    listaOperaciones(arrOperaciones);
-    totalBalance(arrOperaciones);
-
-    console.log(operacionEditada);
   });
 
   const cancelarEdicionBtn = document.getElementById("cancelar-editar-btn");
@@ -517,56 +510,53 @@ const pintarCategorias = (arr) => {
 
   btnsEditarCategoria.forEach((btn) => {
     btn.addEventListener("click", (e) => {
+
+      cardEditarcategoria.classList.remove("d-none");
+      cardCategoria.classList.add("d-none");
       let arrEditarategoria = arrCategoriasIniciales.filter(
         (categoria) => categoria.id === e.target.dataset.id
       );
-      editarCategoria(arrEditarategoria);
+      
+      arrEditarategoria.forEach((categoria) => {
+        inputEditadoNombre.value = categoria.categoria
+      })
+
+      btnCategoriaEditada.addEventListener("click", () => {
+
+        const cambioCategoria = arrCategoriasIniciales.filter(
+          (categoria) => categoria.id === arrEditarategoria[0].id
+        );
+
+        const filtrada = cambioCategoria[0];
+        filtrada.categoria = inputEditadoNombre.value;
+        const accionEditar = arrCategoriasIniciales.map((categoria) =>
+          categoria.id === arrEditarategoria[0].id ? filtrada : categoria
+        );
+
+        localStorage.setItem(
+          "arrCategoriasIniciales",
+          JSON.stringify(accionEditar)
+        );
+        arrCategoriasIniciales = JSON.parse(
+          localStorage.getItem("arrCategoriasIniciales")
+        );
+    
+        cardEditarcategoria.classList.add("d-none");
+        cardCategoria.classList.remove("d-none");
+    
+        pintarCategorias(arrCategoriasIniciales);
+        generarFiltrosCategorias(arrCategoriasIniciales);
+    
+      });
     });
   });
-
-  const editarCategoria = (arr) => {
-    if (arr.length == 0) return;
-    const { categoria } = arr[0];
-
-    inputEditadoNombre.value = categoria;
-
-    cardEditarcategoria.classList.remove("d-none");
-    cardCategoria.classList.add("d-none");
-    console.log(arr);
-  };
-
-  btnCategoriaEditada.addEventListener("click", () => {
-    const categoriaEditada = {
-      id: uuidv4(),
-      categoria: inputEditadoNombre.value,
-    };
-
-    const nuevaCategoriaEditada = arrCategoriasIniciales.map((categoria) =>
-      categoria.id === arrCategoriasIniciales[0].id
-        ? categoriaEditada
-        : categoria
-    );
-    localStorage.setItem(
-      "arrCategoriasIniciales",
-      JSON.stringify(nuevaCategoriaEditada)
-    );
-    arrCategoriasIniciales = JSON.parse(
-      localStorage.getItem("arrCategoriasIniciales")
-    );
-
-    cardEditarcategoria.classList.add("d-none");
-    cardCategoria.classList.remove("d-none");
-
-    pintarCategorias(arrCategoriasIniciales);
-    generarFiltrosCategorias(arrCategoriasIniciales);
-
-    console.log(categoriaEditada);
-  });
+ 
 
   btnCancelarCategoria.addEventListener("click", () => {
     cardEditarcategoria.classList.add("d-none");
     cardCategoria.classList.remove("d-none");
   });
+
 
   //               ***** BOTON ELIMINAR CATEGORIA *****
 
