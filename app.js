@@ -83,6 +83,7 @@ btnReportes.addEventListener("click", () => {
   }
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
   totalPorMes(arrOperaciones);
+  reportesResumen(arrOperaciones)
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -583,13 +584,17 @@ const pintarCategorias = (arr) => {
 
 //Resumen
 
-const reportesResumen = (arrOperaciones) => {
+// Funcion que realiza un filtrado de las operaciones y devuelve las categorias y meses con mayor ganancia y 
+// las categorias y meses con mayor con mayor gasto
+
+const reportesResumen = () => {
   const resumenMayorGanancia = arrOperaciones.filter(
     (operacion) => operacion.tipo === "ganancia"
   );
   const totalMayorGanancia = resumenMayorGanancia.sort(
     (a, b) => b.monto - a.monto
   );
+  console.log(totalMayorGanancia);
 
   document.getElementById(
     "categoria-mayor-ganancia"
@@ -603,9 +608,9 @@ const reportesResumen = (arrOperaciones) => {
   const resumenMayorGasto = arrOperaciones.filter(
     (operacion) => operacion.tipo === "gasto"
   );
-
+  console.log(resumenMayorGasto);
   const totalMayorGasto = resumenMayorGasto.sort((a, b) => b.monto - a.monto);
-
+  
   document.getElementById(
     "categoria-mayor-gasto"
   ).innerHTML = `<h6>Categoria con mayor gasto</h6>
@@ -615,9 +620,15 @@ const reportesResumen = (arrOperaciones) => {
 </div> 
     <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${totalMayorGasto[0].monto}</div>`;
 
-  console.log(resumenMayorGanancia);
-  console.log(resumenMayorGasto);
+  console.log(totalMayorGanancia);
+
 };
+
+
+//Totales por categoria
+
+// Funcion que filtra las categorias y operaciones y devuelve las categorias que tienen operaciones y 
+// la suma total de sus ganancias y gastos y su balance
 
 const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
   let arrConMonto = [];
@@ -654,12 +665,15 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
   });
 };
 
+// Totales por Mes
+
+// Funcion que filtra las operaciones y devuelve los meses que tienen operaciones y 
+// la suma total de sus ganancias y gastos y su balance
+
 const totalPorMes = (arr) => {
   const mesesSinRepetir = [
     ...new Set(arr.map((operacion) => operacion.fecha.split("-")[1])),
   ].sort();
-
-
 
   for (let i = 0; i < mesesSinRepetir.length; i++) {
     const operacionesPorMes = arr.filter(
@@ -697,7 +711,6 @@ const inicializar = () => {
   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
-  reportesResumen(arrOperaciones);
 };
 
 window.onload = inicializar;

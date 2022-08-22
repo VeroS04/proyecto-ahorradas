@@ -265,29 +265,31 @@
             </div>
           </form>
         </div>
-        <div class="card shadow p-3 rounded border border-1 my-card-categorias d-none"  id="card-editar-categorias">
-          <h1 class="mb-5">Editar Categorias</h1>
-          <form>
-            <div class="mb-3">
-              <label for="nombre-input" class="form-label mb-3 fw-bold fs-6">Nombre</label>
-              <div class="ml-2">
-                <input type="text" class="form-control input-nombre-categoria mb-4" id="editado-nombre-input">
-                <div class="buttom-agregar text-end">
-                  <button type="submit" class="btn btn-light" id="cancelar-categoria-editada">Cancelar</button>
-                  <button type="submit" class="btn btn-success" id="agregar-categoria-editada">Editar</button>
+        <div class="d-none container-responsive" id="card-editar-categorias">
+          <div class="card shadow p-3 rounded border border-1 my-card my-categorias">
+            <h1 class="mb-5">Editar Categorias</h1>
+            <form>
+              <div class="mb-3">
+                <label for="nombre-input" class="form-label mb-3 fw-bold fs-6">Nombre</label>
+                <div class="ml-2">
+                  <input type="text" class="form-control input-nombre-categoria mb-4" id="editado-nombre-input">
+                  <div class="buttom-agregar text-end">
+                    <button type="submit" class="btn btn-light" id="cancelar-categoria-editada">Cancelar</button>
+                    <button type="submit" class="btn btn-success" id="agregar-categoria-editada">Editar</button>
+                  </div>
+                </div>
+                <div id="lista-categorias" class="d-flex flex-column">
                 </div>
               </div>
-              <div id="lista-categorias" class="d-flex flex-column">
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </section>
 
       <!--  ******************** INICIO DE SECCION REPORTES ************************* -->
 
-      <section class="d-none container-responsive my-reportes" id="reportes">
-        <div class="card my-card my-reportes shadow p-3 bg-body rounded border border-1">
+      <section class="d-none container-responsive" id="reportes">
+        <div class="card shadow p-3 rounded border border-1 my-card my-reportes" id="card-reportes">
           <h1 class="card-title fw-bold mb-5">Reportes</h1>
           <div id="reporte-sin-operacion"  class="d-none">
             <div class="img-operaciones d-flex justify-content-center mb-3">
@@ -302,20 +304,14 @@
             <div class="resumen p-3 mb-5">
               <h5 class="card-title fw-bold mb-5">Resumen</h5>
               <div id="categoria-mayor-ganancia" class="d-flex justify-content-between">
-                
-
               </div>
-              <div id="categoria-mayor-gasto" class="d-flex justify-content-between">
-                
+              <div id="categoria-mayor-gasto" class="d-flex justify-content-between">               
               </div>
-              <div id="categoria-mayor-balance" class="d-flex justify-content-between">
-                
+              <div id="categoria-mayor-balance" class="d-flex justify-content-between">               
               </div>
-              <div id="mes-mayor-ganancia" class="d-flex justify-content-between">
-                
+              <div id="mes-mayor-ganancia" class="d-flex justify-content-between">               
               </div>
-              <div id="mes-mayor-gasto" class="d-flex justify-content-between">
-                
+              <div id="mes-mayor-gasto" class="d-flex justify-content-between">              
               </div>
             </div>
             <div id="total-por-categoria" class="total-categoria mb-5 p-3">
@@ -350,8 +346,7 @@
                 <div id="total-mes-balance">
                   <h6>Balance</h6>
                 </div>
-              </div>
-              
+              </div>          
               </div>
             </div>
           </div>
