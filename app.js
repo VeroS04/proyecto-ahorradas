@@ -190,44 +190,49 @@ operacionAgregada = (arr) => {
 
   editarBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-
       balance.classList.add("d-none");
       cardEditarOperacion.classList.remove("d-none");
 
       let arrEditarOperacion = arrOperaciones.filter(
-      (operacion) => operacion.id === e.target.dataset.id);
+        (operacion) => operacion.id === e.target.dataset.id
+      );
 
       arrEditarOperacion.forEach((operacion) => {
         inputEditarDescripcion.value = operacion.descripcion;
-        inputEditarMonto.value= operacion.monto;
-        selectEditarCategoria.value= operacion.categoria;
-        selectEditarTipo.value= operacion.tipo;
-        inputEditarFecha.value= operacion.fecha
-      })
+        inputEditarMonto.value = operacion.monto;
+        selectEditarCategoria.value = operacion.categoria;
+        selectEditarTipo.value = operacion.tipo;
+        inputEditarFecha.value = operacion.fecha;
+      });
 
       agregarEditadoBtn.addEventListener("click", () => {
-        const operacionEditada = arrOperaciones.filter((operacion) => operacion.id === arrEditarOperacion[0].id)
+        const operacionEditada = arrOperaciones.filter(
+          (operacion) => operacion.id === arrEditarOperacion[0].id
+        );
 
         const operacionFiltrada = operacionEditada[0];
-        operacionFiltrada.descripcion= inputEditarDescripcion.value;
-        operacionFiltrada.monto= inputEditarMonto.value;
-        operacionFiltrada.tipo= selectEditarTipo.value;
-        operacionFiltrada.categoria= selectEditarCategoria.value;
-        operacionFiltrada.fecha= inputEditarFecha.value;
+        operacionFiltrada.descripcion = inputEditarDescripcion.value;
+        operacionFiltrada.monto = inputEditarMonto.value;
+        operacionFiltrada.tipo = selectEditarTipo.value;
+        operacionFiltrada.categoria = selectEditarCategoria.value;
+        operacionFiltrada.fecha = inputEditarFecha.value;
 
         const nuevaOperacionEditada = arrOperaciones.map((operacion) =>
-        operacion.id === arrOperaciones[0].id ? operacionFiltrada : operacion);
-  
-        localStorage.setItem("arrOperaciones", JSON.stringify(nuevaOperacionEditada));
+          operacion.id === arrOperaciones[0].id ? operacionFiltrada : operacion
+        );
+
+        localStorage.setItem(
+          "arrOperaciones",
+          JSON.stringify(nuevaOperacionEditada)
+        );
         arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones"));
 
         balance.classList.remove("d-none");
         cardEditarOperacion.classList.add("d-none");
-  
+
         operacionAgregada(arrOperaciones);
         listaOperaciones(arrOperaciones);
         totalBalance(arrOperaciones);
-  
       });
     });
   });
@@ -510,19 +515,17 @@ const pintarCategorias = (arr) => {
 
   btnsEditarCategoria.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-
       cardEditarcategoria.classList.remove("d-none");
       cardCategoria.classList.add("d-none");
       let arrEditarategoria = arrCategoriasIniciales.filter(
         (categoria) => categoria.id === e.target.dataset.id
       );
-      
+
       arrEditarategoria.forEach((categoria) => {
-        inputEditadoNombre.value = categoria.categoria
-      })
+        inputEditadoNombre.value = categoria.categoria;
+      });
 
       btnCategoriaEditada.addEventListener("click", () => {
-
         const cambioCategoria = arrCategoriasIniciales.filter(
           (categoria) => categoria.id === arrEditarategoria[0].id
         );
@@ -540,23 +543,20 @@ const pintarCategorias = (arr) => {
         arrCategoriasIniciales = JSON.parse(
           localStorage.getItem("arrCategoriasIniciales")
         );
-    
+
         cardEditarcategoria.classList.add("d-none");
         cardCategoria.classList.remove("d-none");
-    
+
         pintarCategorias(arrCategoriasIniciales);
         generarFiltrosCategorias(arrCategoriasIniciales);
-    
       });
     });
   });
- 
 
   btnCancelarCategoria.addEventListener("click", () => {
     cardEditarcategoria.classList.add("d-none");
     cardCategoria.classList.remove("d-none");
   });
-
 
   //               ***** BOTON ELIMINAR CATEGORIA *****
 
@@ -581,37 +581,77 @@ const pintarCategorias = (arr) => {
 //                                                                     SECCION REPORTES
 //                                            *********************************************************************
 
+//Resumen
+
+const reportesResumen = (arrOperaciones) => {
+  const resumenMayorGanancia = arrOperaciones.filter(
+    (operacion) => operacion.tipo === "ganancia"
+  );
+  const totalMayorGanancia = resumenMayorGanancia.sort(
+    (a, b) => b.monto - a.monto
+  );
+
+  document.getElementById(
+    "categoria-mayor-ganancia"
+  ).innerHTML = `<h6>Categoria con mayor ganancia</h6>
+<div>
+  <div class="color">${totalMayorGanancia[0].categoria}
+  </div>
+</div> 
+    <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${totalMayorGanancia[0].monto}</div>`;
+
+  const resumenMayorGasto = arrOperaciones.filter(
+    (operacion) => operacion.tipo === "gasto"
+  );
+
+  const totalMayorGasto = resumenMayorGasto.sort((a, b) => b.monto - a.monto);
+
+  document.getElementById(
+    "categoria-mayor-gasto"
+  ).innerHTML = `<h6>Categoria con mayor gasto</h6>
+<div>
+  <div class="color">${totalMayorGasto[0].categoria}
+  </div>
+</div> 
+    <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${totalMayorGasto[0].monto}</div>`;
+
+  console.log(resumenMayorGanancia);
+  console.log(resumenMayorGasto);
+};
+
 const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
+  let arrConMonto = [];
   arrCategoriasIniciales.forEach((categoria) => {
     const porCategoria = arrOperaciones.filter(
       (operacion) => operacion.categoria === categoria.categoria
     );
-    const totalGananciaCategoria = porCategoria
-      .filter((operacion) => operacion.tipo === "ganancia")
-      .reduce((count, current) => count + current.monto, 0);
-    const totalGastoCategoria = porCategoria
-      .filter((operacion) => operacion.tipo === "gasto")
-      .reduce((count, current) => count + current.monto, 0);
-    const totalPorCategoria = (document.getElementById(
-      "total-categoria-categoria"
-    ).innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`);
-    const totalPorCategoriaGanancia = (document.getElementById(
-      "total-categoria-ganancias"
-    ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${totalGananciaCategoria}</div>`);
-    const totalPorCategoriaGasto = (document.getElementById(
-      "total-categoria-gastos"
-    ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">-$${totalGastoCategoria}</div>`);
-    const totalPorCategoriaBalance = (document.getElementById(
-      "total-categoria-balance"
-    ).innerHTML += `<div class="mb-4 mt-4 text-end">$${
-      totalGananciaCategoria - totalGastoCategoria
-    }</div>`);
+    porCategoria.forEach((operacion) => {
+      if (operacion.monto !== 0) {
+        arrConMonto.push(operacion);
+      }
 
-    //console.log(totalGananciaCategoria);
-    // console.log(`la categoria de: ${categoria.categoria} tiene estas operaciones ${JSON.stringify(porCategoria)}`);
+      const totalGananciaCategoria = porCategoria
+        .filter((operacion) => operacion.tipo === "ganancia")
+        .reduce((count, current) => count + current.monto, 0);
+      const totalGastoCategoria = porCategoria
+        .filter((operacion) => operacion.tipo === "gasto")
+        .reduce((count, current) => count + current.monto, 0);
+      const totalPorCategoria = (document.getElementById(
+        "total-categoria-categoria"
+      ).innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`);
+      const totalPorCategoriaGanancia = (document.getElementById(
+        "total-categoria-ganancias"
+      ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${totalGananciaCategoria}</div>`);
+      const totalPorCategoriaGasto = (document.getElementById(
+        "total-categoria-gastos"
+      ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">-$${totalGastoCategoria}</div>`);
+      const totalPorCategoriaBalance = (document.getElementById(
+        "total-categoria-balance"
+      ).innerHTML += `<div class="mb-4 mt-4 text-end">$${
+        totalGananciaCategoria - totalGastoCategoria
+      }</div>`);
+    });
   });
-  // console.log(arrOperaciones);
-  // console.log(arrCategoriasIniciales);
 };
 
 const totalPorMes = (arr) => {
@@ -619,7 +659,7 @@ const totalPorMes = (arr) => {
     ...new Set(arr.map((operacion) => operacion.fecha.split("-")[1])),
   ].sort();
 
-  //console.log(mesesSinRepetir)
+
 
   for (let i = 0; i < mesesSinRepetir.length; i++) {
     const operacionesPorMes = arr.filter(
@@ -649,27 +689,6 @@ const totalPorMes = (arr) => {
   }
 };
 
-//Resumen
-
-const reportesResumen = (arrOperaciones) => {
-  const resumenMayorGanancia = arrOperaciones.filter(
-    (operacion) => operacion.tipo === "ganancia"
-  );
-const totalMayorGanancia = resumenMayorGanancia.sort ((a,b) => b.monto - a.monto)
-
-  const resumenMayorGasto = arrOperaciones.filter(
-    (operacion) => operacion.tipo === "gasto"
-  );
-const totalMayorGasto = resumenMayorGasto.sort ((a,b) => a.monto - b.monto)
-
-  console.log(resumenMayorGanancia);
-  console.log(resumenMayorGasto);
-};
-
-reportesResumen(arrOperaciones);
-
-//
-
 const inicializar = () => {
   fechaInput.valueAsDate = new Date();
   filtroDesde.valueAsDate = new Date();
@@ -678,6 +697,7 @@ const inicializar = () => {
   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
+  reportesResumen(arrOperaciones);
 };
 
 window.onload = inicializar;

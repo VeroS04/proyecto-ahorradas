@@ -72,7 +72,7 @@ a {
 .color {
     background-color: #e2dbed;
     color: #00947e;
-    padding: 0.5%;
+    /* padding: 0.5%; */
 }
 
 .green{
@@ -94,6 +94,11 @@ a {
 .contenedor-operaciones {
     margin: auto;
 }
+
+.my-reportes{
+width: 80%;
+}
+
 
 @media screen and (max-width: 991px) and (min-width: 200px){
     .nav-hamburguesa {
