@@ -81,7 +81,6 @@ btnReportes.addEventListener("click", () => {
     reporteConOperacion.classList.remove("d-none");
     reporteSinOperacion.classList.add("d-none");
   }
-  
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -156,7 +155,14 @@ operacionAgregada = (arr) => {
   document.getElementById("operaciones").innerHTML = "";
   let str = "";
   arr.forEach((operacion) => {
-    const { id, descripcion, categoria, fecha, tipo, monto } = operacion;
+    const {
+      id,
+      descripcion,
+      categoria,
+      fecha,
+      tipo,
+      monto
+    } = operacion;
 
     str += `<div class="mi-flex d-flex flex-row mt-4" >
               <div class="col-3">
@@ -321,8 +327,7 @@ selectFilterTipo.addEventListener("change", (e) => {
 
 // Arreglo donde se guardan las categorias predeterminadas y donde se suman nuevas
 
-let arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias")) || [
-  {
+let arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias")) || [{
     categoria: "Comida",
     id: uuidv4(),
   },
@@ -397,19 +402,19 @@ let ordenCategorias;
 filtroOrdenarPor.addEventListener("input", (e) => {
   if (e.target.value === "mayor-monto") {
     ordenCategorias = arrOperaciones.sort((a, b) =>
-      Number(a.monto) > Number(b.monto)
-        ? -1
-        : Number(a.monto) < Number(b.monto)
-        ? 1
-        : 0
+      Number(a.monto) > Number(b.monto) ?
+      -1 :
+      Number(a.monto) < Number(b.monto) ?
+      1 :
+      0
     );
   } else if (e.target.value === "menor-monto") {
     ordenCategorias = arrOperaciones.sort((a, b) =>
-      Number(a.monto) > Number(b.monto)
-        ? 1
-        : Number(a.monto) < Number(b.monto)
-        ? -1
-        : 0
+      Number(a.monto) > Number(b.monto) ?
+      1 :
+      Number(a.monto) < Number(b.monto) ?
+      -1 :
+      0
     );
   } else if (e.target.value === "a-z") {
     ordenCategorias = arrOperaciones.sort((a, b) =>
@@ -442,8 +447,6 @@ filtroDesde.addEventListener("change", (e) => {
   const ordenDesde = arrOperaciones.filter(
     (operacion) => new Date(operacion.fecha) >= new Date(e.target.value)
   );
-  console.log(ordenDesde);
-
   operacionAgregada(ordenDesde);
 });
 
@@ -571,7 +574,6 @@ const pintarCategorias = (arr) => {
       arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias"));
       pintarCategorias(arrCategoriaEliminada);
       generarFiltrosCategorias(arrCategoriaEliminada);
-      console.log(arrCategoriaEliminada);
     });
   });
 };
@@ -592,8 +594,6 @@ const reportesResumen = () => {
   const totalMayorGanancia = resumenMayorGanancia.sort(
     (a, b) => b.monto - a.monto
   );
-  //console.log(totalMayorGanancia);
-
   document.getElementById(
     "categoria-mayor-ganancia"
   ).innerHTML = `<h6>Categoria con mayor ganancia</h6>
@@ -606,9 +606,8 @@ const reportesResumen = () => {
   const resumenMayorGasto = arrOperaciones.filter(
     (operacion) => operacion.tipo === "gasto"
   );
-  //console.log(resumenMayorGasto);
   const totalMayorGasto = resumenMayorGasto.sort((a, b) => b.monto - a.monto);
-  
+
   document.getElementById(
     "categoria-mayor-gasto"
   ).innerHTML = `<h6>Categoria con mayor gasto</h6>
@@ -617,37 +616,29 @@ const reportesResumen = () => {
   </div>
 </div> 
     <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${totalMayorGasto[0].monto}</div>`;
-
-  //console.log(totalMayorGanancia);
-
 };
 
-const mesMayorGananciaYGasto = arr =>{
-  const resumenMayorMonto = arrOperaciones.sort((a,b) =>
-  (b.monto - a.monto))
+const mesMayorGananciaYGasto = () => {
+  const resumenMayorMonto = arrOperaciones.sort((a, b) =>
+    (b.monto - a.monto))
 
-const gananciaMayor = resumenMayorMonto.filter((operacion) =>
-operacion.tipo ==='ganancia')
-document.getElementById('mes-mayor-ganancia').innerHTML = `<h6>Mes con mayor ganancia</h6>
+  const gananciaMayor = resumenMayorMonto.filter((operacion) =>
+    operacion.tipo === 'ganancia')
+  document.getElementById('mes-mayor-ganancia').innerHTML = `<h6>Mes con mayor ganancia</h6>
 <div>
   <div class="color">${gananciaMayor[0].fecha.split('-')[1]}
   </div>
 </div> 
     <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${gananciaMayor[0].monto}</div>`;
 
-const gastoMayor = resumenMayorMonto.filter((operacion) =>
-operacion.tipo ==='gasto')
-document.getElementById('mes-mayor-gasto').innerHTML =`<h6>Mes con mayor gasto</h6>
+  const gastoMayor = resumenMayorMonto.filter((operacion) =>
+    operacion.tipo === 'gasto')
+  document.getElementById('mes-mayor-gasto').innerHTML = `<h6>Mes con mayor gasto</h6>
 <div>
   <div class="color">${gastoMayor[0].fecha.split('-')[1]}
   </div>
 </div> 
     <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$${gastoMayor[0].monto}</div>`;
-
-    
-//console.log(gananciaMayor[0].monto)
-//console.log(gastoMayor[0].monto)
-
 };
 
 
