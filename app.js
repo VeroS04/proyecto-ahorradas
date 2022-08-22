@@ -81,9 +81,7 @@ btnReportes.addEventListener("click", () => {
     reporteConOperacion.classList.remove("d-none");
     reporteSinOperacion.classList.add("d-none");
   }
-  totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
-  totalPorMes(arrOperaciones);
-  reportesResumen(arrOperaciones)
+  
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -711,6 +709,9 @@ const inicializar = () => {
   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
+  totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
+  totalPorMes(arrOperaciones);
+  reportesResumen(arrOperaciones)
 };
 
 window.onload = inicializar;
