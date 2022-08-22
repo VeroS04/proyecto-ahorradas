@@ -580,7 +580,7 @@ const pintarCategorias = (arr) => {
 //                                                                     SECCION REPORTES
 //                                            *********************************************************************
 
-//Resumen
+//*** Resumen
 
 // Funcion que realiza un filtrado de las operaciones y devuelve las categorias y meses con mayor ganancia y 
 // las categorias y meses con mayor con mayor gasto
@@ -592,7 +592,7 @@ const reportesResumen = () => {
   const totalMayorGanancia = resumenMayorGanancia.sort(
     (a, b) => b.monto - a.monto
   );
-  console.log(totalMayorGanancia);
+  //console.log(totalMayorGanancia);
 
   document.getElementById(
     "categoria-mayor-ganancia"
@@ -606,7 +606,7 @@ const reportesResumen = () => {
   const resumenMayorGasto = arrOperaciones.filter(
     (operacion) => operacion.tipo === "gasto"
   );
-  console.log(resumenMayorGasto);
+  //console.log(resumenMayorGasto);
   const totalMayorGasto = resumenMayorGasto.sort((a, b) => b.monto - a.monto);
   
   document.getElementById(
@@ -618,7 +618,35 @@ const reportesResumen = () => {
 </div> 
     <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${totalMayorGasto[0].monto}</div>`;
 
-  console.log(totalMayorGanancia);
+  //console.log(totalMayorGanancia);
+
+};
+
+const mesMayorGananciaYGasto = arr =>{
+  const resumenMayorMonto = arrOperaciones.sort((a,b) =>
+  (b.monto - a.monto))
+
+const gananciaMayor = resumenMayorMonto.filter((operacion) =>
+operacion.tipo ==='ganancia')
+document.getElementById('mes-mayor-ganancia').innerHTML = `<h6>Mes con mayor ganancia</h6>
+<div>
+  <div class="color">${gananciaMayor[0].fecha.split('-')[1]}
+  </div>
+</div> 
+    <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${gananciaMayor[0].monto}</div>`;
+
+const gastoMayor = resumenMayorMonto.filter((operacion) =>
+operacion.tipo ==='gasto')
+document.getElementById('mes-mayor-gasto').innerHTML =`<h6>Mes con mayor gasto</h6>
+<div>
+  <div class="color">${gastoMayor[0].fecha.split('-')[1]}
+  </div>
+</div> 
+    <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$${gastoMayor[0].monto}</div>`;
+
+    
+//console.log(gananciaMayor[0].monto)
+//console.log(gastoMayor[0].monto)
 
 };
 
@@ -626,7 +654,7 @@ const reportesResumen = () => {
 //Totales por categoria
 
 // Funcion que filtra las categorias y operaciones y devuelve las categorias que tienen operaciones y 
-// la suma total de sus ganancias y gastos y su balance
+// la suma total de sus ganancias y gastos y el balance
 
 const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
   let arrConMonto = [];
@@ -711,7 +739,8 @@ const inicializar = () => {
   totalBalance(arrOperaciones);
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
   totalPorMes(arrOperaciones);
-  reportesResumen(arrOperaciones)
+  reportesResumen(arrOperaciones);
+  mesMayorGananciaYGasto(arrOperaciones);
 };
 
 window.onload = inicializar;
