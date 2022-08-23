@@ -527,7 +527,7 @@ const pintarCategorias = (arr) => {
         inputEditadoNombre.value = categoria.categoria;
       });
 
-      btnCategoriaEditada.addEventListener("click", () => {
+      btnCategoriaEditada.addEventListener("click", (e) => {
         const cambioCategoria = arrCategoriasIniciales.filter(
           (categoria) => categoria.id === arrEditarategoria[0].id
         );
@@ -537,7 +537,7 @@ const pintarCategorias = (arr) => {
         const accionEditar = arrCategoriasIniciales.map((categoria) =>
           categoria.id === arrEditarategoria[0].id ? filtrada : categoria
         );
-
+console.log(cambioCategoria)
         localStorage.setItem(
           "arrCategoriasIniciales",
           JSON.stringify(accionEditar)
@@ -551,6 +551,7 @@ const pintarCategorias = (arr) => {
 
         pintarCategorias(arrCategoriasIniciales);
         generarFiltrosCategorias(arrCategoriasIniciales);
+
       });
     });
   });
