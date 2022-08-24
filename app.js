@@ -81,6 +81,8 @@ btnReportes.addEventListener("click", () => {
     reporteConOperacion.classList.remove("d-none");
     reporteSinOperacion.classList.add("d-none");
   }
+  reportesResumen(arrOperaciones);
+  mesMayorGananciaYGasto(arrOperaciones)
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -587,7 +589,7 @@ const pintarCategorias = (arr) => {
 // Funcion que realiza un filtrado de las operaciones y devuelve las categorias y meses con mayor ganancia y 
 // las categorias y meses con mayor con mayor gasto
 
-const reportesResumen = () => {
+const reportesResumen = (arr) => {
   const resumenMayorGanancia = arrOperaciones.filter(
     (operacion) => operacion.tipo === "ganancia"
   );
@@ -626,7 +628,7 @@ const mesMayorGananciaYGasto = () => {
     operacion.tipo === 'ganancia')
   document.getElementById('mes-mayor-ganancia').innerHTML = `<h6>Mes con mayor ganancia</h6>
 <div>
-  <div class="color">${gananciaMayor[0].fecha.split('-')[1]}
+  <div class="color">${new Date(gananciaMayor[0].fecha).getMonth() + 1}/${new Date(gananciaMayor[0].fecha).getFullYear()}
   </div>
 </div> 
     <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${gananciaMayor[0].monto}</div>`;
@@ -635,12 +637,11 @@ const mesMayorGananciaYGasto = () => {
     operacion.tipo === 'gasto')
   document.getElementById('mes-mayor-gasto').innerHTML = `<h6>Mes con mayor gasto</h6>
 <div>
-  <div class="color">${gastoMayor[0].fecha.split('-')[1]}
+  <div class="color">${new Date(gastoMayor[0].fecha).getMonth() + 1}/${new Date(gastoMayor[0].fecha).getFullYear()}
   </div>
 </div> 
     <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$${gastoMayor[0].monto}</div>`;
 };
-
 
 //Totales por categoria
 
@@ -660,10 +661,10 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
 
       const totalGananciaCategoria = porCategoria
         .filter((operacion) => operacion.tipo === "ganancia")
-        .reduce((count, current) => count + current.monto, 0);
+        .reduce((count, current) => count + Number(current.monto), 0);
       const totalGastoCategoria = porCategoria
         .filter((operacion) => operacion.tipo === "gasto")
-        .reduce((count, current) => count + current.monto, 0);
+        .reduce((count, current) => count + Number(current.monto), 0);
       const totalPorCategoria = (document.getElementById(
         "total-categoria-categoria"
       ).innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`);
@@ -689,12 +690,16 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
 
 const totalPorMes = (arr) => {
   const mesesSinRepetir = [
-    ...new Set(arr.map((operacion) => operacion.fecha.split("-")[1])),
+    ...new Set(arr.map((operacion) => `${new Date(operacion.fecha).getMonth() + 1}/${new Date(
+      operacion.fecha
+    ).getFullYear()}`)),
   ].sort();
 
   for (let i = 0; i < mesesSinRepetir.length; i++) {
     const operacionesPorMes = arr.filter(
-      (operacion) => operacion.fecha.split("-")[1] === mesesSinRepetir[i]
+      (operacion) => `${new Date(operacion.fecha).getMonth() + 1}/${new Date(
+          operacion.fecha
+        ).getFullYear()}` === mesesSinRepetir[i]
     );
     const porTipoGanancia = operacionesPorMes
       .filter((operacion) => operacion.tipo === "ganancia")
@@ -730,8 +735,6 @@ const inicializar = () => {
   totalBalance(arrOperaciones);
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
   totalPorMes(arrOperaciones);
-  reportesResumen(arrOperaciones);
-  mesMayorGananciaYGasto(arrOperaciones);
 };
 
 window.onload = inicializar;
