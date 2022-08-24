@@ -107,8 +107,11 @@ ocultarFiltros.addEventListener("click", () => {
 //                                                                     SECCION OPERACIONES
 //                                                             ************************************
 
-// Arreglo original donde se guardan las operaciones
 let arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones")) || [];
+// const arrOperaciones = [];
+// const obtenerOperaciones = () => {
+//   return JSON.parse(localStorage.getItem('arrOperaciones')) || [];
+// }
 
 // Función que oculta la imagen de sin operaciones si hay operaciones nuevas
 const listaOperaciones = (arr) => {
@@ -453,6 +456,68 @@ filtroDesde.addEventListener("change", (e) => {
 });
 
 //**** Falta que los filtros funcionen juntos
+
+
+
+// const filtros = (e) => {
+//   const porCategoria = selectFilterCategorias.value;
+//   const porTipo = selectFilterTipo.value;
+//   const porOrden =  filtroOrdenarPor.value
+
+//   let arrOperaciones = obtenerOperaciones();
+
+//   if (porCategoria !== 'todas') {
+//     arrOperaciones = arrOperaciones.filter(operacion => operacion.categoria === porCategoria)
+//   }
+
+//   if (porTipo !== 'todos') {
+//     arrOperaciones = arrOperaciones.filter(operacion => operacion.tipo === porTipo)
+//   }
+
+//   if (porOrden === 'mas-reciente') {
+//     arrOperaciones = arrOperaciones.sort((a, b) =>
+//       new Date(a.fecha) - new Date(b.fecha))
+//   }
+//   if (porOrden === 'menos-reciente') {
+//     arrOperaciones = arrOperaciones.sort((a, b) =>
+//       new Date(b.fecha) - new Date(a.fecha))
+//   }
+
+//   if (porOrden === "menor-monto") {
+//     arrOperaciones = arrOperaciones.sort(
+//       (a, b) => Number(a.monto) - Number(b.monto)
+//     );
+//   }
+//   if (porOrden === "mayor-monto") {
+//     arrOperaciones = arrOperaciones.sort(
+//       (a, b) => Number(b.monto) - Number(a.monto)
+//     );
+//   }
+//   if (porOrden === 'a/z') {
+//     arrOperaciones = arrOperaciones.sort((a, b) => {
+//       if (a.descripcion.toLowerCase() < b.descripcion.toLowerCase()) {
+//         return -1
+//       }
+//     })
+//   }
+//   if (porOrden === 'z/a') {
+//     arrOperaciones = arrOperaciones.sort((a, b) => {
+//       if (a.descripcion.toLowerCase() > b.descripcion.toLowerCase()) {
+//         return -1
+//       }
+//     })
+//   }
+
+//   operacionAgregada(arrOperaciones)
+//   listaOperaciones(arr)
+// }
+
+
+// selectFilterCategorias.addEventListener('change', filtros)
+// selectFilterTipo.addEventListener('change', filtros)
+// filtroOrdenarPor.addEventListener('change', filtros)
+
+
 
 //                                            *********************************************************************
 //                                                                     SECCION CATEGORIA
