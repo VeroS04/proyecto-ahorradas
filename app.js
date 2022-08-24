@@ -108,10 +108,10 @@ ocultarFiltros.addEventListener("click", () => {
 //                                                             ************************************
 
 let arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones")) || [];
-// const arrOperaciones = [];
-// const obtenerOperaciones = () => {
-//   return JSON.parse(localStorage.getItem('arrOperaciones')) || [];
-// }
+// let arrOperaciones = [];
+const obtenerOperaciones = () => {
+  return JSON.parse(localStorage.getItem('arrOperaciones')) || [];
+}
 
 // Función que oculta la imagen de sin operaciones si hay operaciones nuevas
 const listaOperaciones = (arr) => {
@@ -310,23 +310,23 @@ const totalBalance = (arr) => {
 
 //          ***** FILTRO POR GASTO/GANANCIA *****
 
-let arrTipoFiltro = JSON.parse(localStorage.getItem("arrOperaciones")) || [];
+// let arrTipoFiltro = JSON.parse(localStorage.getItem("arrOperaciones")) || [];
 
 const selectFilterTipo = document.getElementById("select-filter-tipo");
 
-selectFilterTipo.addEventListener("change", (e) => {
-  if (e.target.value !== "todos") {
-    const arrFiltroTipo = arrOperaciones.filter(
-      (operacion) => operacion.tipo == e.target.value
-    );
-    localStorage.setItem("arrTipoFiltro", arrFiltroTipo);
-    localStorage.setItem("arrTipoFiltro", JSON.stringify(arrFiltroTipo));
+// selectFilterTipo.addEventListener("change", (e) => {
+//   if (e.target.value !== "todos") {
+//     const arrFiltroTipo = arrOperaciones.filter(
+//       (operacion) => operacion.tipo == e.target.value
+//     );
+//     localStorage.setItem("arrTipoFiltro", arrFiltroTipo);
+//     localStorage.setItem("arrTipoFiltro", JSON.stringify(arrFiltroTipo));
 
-    operacionAgregada(arrFiltroTipo);
-  } else {
-    operacionAgregada(arrOperaciones);
-  }
-});
+//     operacionAgregada(arrFiltroTipo);
+//   } else {
+//     operacionAgregada(arrOperaciones);
+//   }
+// });
 
 //           ****** FILTRO POR CATEGORIA *******
 
@@ -378,144 +378,144 @@ const selectFilterCategorias = document.getElementById(
   "select-filter-categorias"
 );
 
-let arrCategoriaFiltro =
-  JSON.parse(localStorage.getItem("arrOperaciones")) || [];
+// let arrCategoriaFiltro =
+//   JSON.parse(localStorage.getItem("arrOperaciones")) || [];
 
-// Función que realiza el filtro por categoria
+// // Función que realiza el filtro por categoria
 
-selectFilterCategorias.addEventListener("input", (e) => {
-  if (e.target.value !== "todas") {
-    const arrFiltroCategorias = arrOperaciones.filter(
-      (operacion) => operacion.categoria === e.target.value
-    );
-    localStorage.setItem("arrCategoriaFiltro", arrFiltroCategorias);
-    localStorage.setItem(
-      "arrCategoriaFiltro",
-      JSON.stringify(arrFiltroCategorias)
-    );
+// selectFilterCategorias.addEventListener("input", (e) => {
+//   if (e.target.value !== "todas") {
+//     const arrFiltroCategorias = arrOperaciones.filter(
+//       (operacion) => operacion.categoria === e.target.value
+//     );
+//     localStorage.setItem("arrCategoriaFiltro", arrFiltroCategorias);
+//     localStorage.setItem(
+//       "arrCategoriaFiltro",
+//       JSON.stringify(arrFiltroCategorias)
+//     );
 
-    operacionAgregada(arrFiltroCategorias);
-  } else {
-    operacionAgregada(arrOperaciones);
-  }
-});
+//     operacionAgregada(arrFiltroCategorias);
+//   } else {
+//     operacionAgregada(arrOperaciones);
+//   }
+//});
 
 //         ****************   FILTRO ORDENAR POR ********************
 
 const filtroOrdenarPor = document.getElementById("filtro-ordenar-por");
-let ordenCategorias;
-filtroOrdenarPor.addEventListener("input", (e) => {
-  if (e.target.value === "mayor-monto") {
-    ordenCategorias = arrOperaciones.sort((a, b) =>
-      Number(a.monto) > Number(b.monto) ?
-      -1 :
-      Number(a.monto) < Number(b.monto) ?
-      1 :
-      0
-    );
-  } else if (e.target.value === "menor-monto") {
-    ordenCategorias = arrOperaciones.sort((a, b) =>
-      Number(a.monto) > Number(b.monto) ?
-      1 :
-      Number(a.monto) < Number(b.monto) ?
-      -1 :
-      0
-    );
-  } else if (e.target.value === "a-z") {
-    ordenCategorias = arrOperaciones.sort((a, b) =>
-      a.descripcion.localeCompare(b.descripcion)
-    );
-  } else if (e.target.value === "z-a") {
-    ordenCategorias = arrOperaciones.sort((a, b) =>
-      b.descripcion.localeCompare(a.descripcion)
-    );
-  } else if (e.target.value === "mas-reciente") {
-    ordenCategorias = arrOperaciones.sort(
-      (a, b) => new Date(b.fecha) - new Date(a.fecha)
-    );
-  } else if (e.target.value === "menos-reciente") {
-    ordenCategorias = arrOperaciones.sort(
-      (a, b) => new Date(a.fecha) - new Date(b.fecha)
-    );
-  }
+// let ordenCategorias;
+// filtroOrdenarPor.addEventListener("input", (e) => {
+//   if (e.target.value === "mayor-monto") {
+//     ordenCategorias = arrOperaciones.sort((a, b) =>
+//       Number(a.monto) > Number(b.monto) ?
+//       -1 :
+//       Number(a.monto) < Number(b.monto) ?
+//       1 :
+//       0
+//     );
+//   } else if (e.target.value === "menor-monto") {
+//     ordenCategorias = arrOperaciones.sort((a, b) =>
+//       Number(a.monto) > Number(b.monto) ?
+//       1 :
+//       Number(a.monto) < Number(b.monto) ?
+//       -1 :
+//       0
+//     );
+//   } else if (e.target.value === "a-z") {
+//     ordenCategorias = arrOperaciones.sort((a, b) =>
+//       a.descripcion.localeCompare(b.descripcion)
+//     );
+//   } else if (e.target.value === "z-a") {
+//     ordenCategorias = arrOperaciones.sort((a, b) =>
+//       b.descripcion.localeCompare(a.descripcion)
+//     );
+//   } else if (e.target.value === "mas-reciente") {
+//     ordenCategorias = arrOperaciones.sort(
+//       (a, b) => new Date(b.fecha) - new Date(a.fecha)
+//     );
+//   } else if (e.target.value === "menos-reciente") {
+//     ordenCategorias = arrOperaciones.sort(
+//       (a, b) => new Date(a.fecha) - new Date(b.fecha)
+//     );
+//   }
 
-  operacionAgregada(ordenCategorias);
-  //****** funcionan más y menos reciente, pero si le doy primero el click a Más reciente
-  //no funciona, si empiezo con el otro sí
-});
+//   operacionAgregada(ordenCategorias);
+//   //****** funcionan más y menos reciente, pero si le doy primero el click a Más reciente
+//   //no funciona, si empiezo con el otro sí
+// });
 
 // ***************** FILTRO DESDE ***************
 
 const filtroDesde = document.getElementById("date");
 
-filtroDesde.addEventListener("change", (e) => {
-  const ordenDesde = arrOperaciones.filter(
-    (operacion) => new Date(operacion.fecha) >= new Date(e.target.value)
-  );
-  operacionAgregada(ordenDesde);
-});
+// filtroDesde.addEventListener("change", (e) => {
+//   const ordenDesde = arrOperaciones.filter(
+//     (operacion) => new Date(operacion.fecha) >= new Date(e.target.value)
+//   );
+//   operacionAgregada(ordenDesde);
+// });
 
 //**** Falta que los filtros funcionen juntos
 
 
 
-// const filtros = (e) => {
-//   const porCategoria = selectFilterCategorias.value;
-//   const porTipo = selectFilterTipo.value;
-//   const porOrden =  filtroOrdenarPor.value
+const filtros = (e) => {
+  const porCategoria = selectFilterCategorias.value;
+  const porTipo = selectFilterTipo.value;
+  const porOrden =  filtroOrdenarPor.value
 
-//   let arrOperaciones = obtenerOperaciones();
+  let arrOperaciones = obtenerOperaciones();
 
-//   if (porCategoria !== 'todas') {
-//     arrOperaciones = arrOperaciones.filter(operacion => operacion.categoria === porCategoria)
-//   }
+  if (porCategoria !== 'todas') {
+    arrOperaciones = arrOperaciones.filter(operacion => operacion.categoria === porCategoria)
+  }
 
-//   if (porTipo !== 'todos') {
-//     arrOperaciones = arrOperaciones.filter(operacion => operacion.tipo === porTipo)
-//   }
+  if (porTipo !== 'todos') {
+    arrOperaciones = arrOperaciones.filter(operacion => operacion.tipo === porTipo)
+  }
 
-//   if (porOrden === 'mas-reciente') {
-//     arrOperaciones = arrOperaciones.sort((a, b) =>
-//       new Date(a.fecha) - new Date(b.fecha))
-//   }
-//   if (porOrden === 'menos-reciente') {
-//     arrOperaciones = arrOperaciones.sort((a, b) =>
-//       new Date(b.fecha) - new Date(a.fecha))
-//   }
+  if (porOrden === 'mas-reciente') {
+    arrOperaciones = arrOperaciones.sort((a, b) =>
+      new Date(b.fecha) - new Date(a.fecha))
+  }
+  if (porOrden === 'menos-reciente') {
+    arrOperaciones = arrOperaciones.sort((a, b) =>
+      new Date(a.fecha) - new Date(b.fecha))
+  }
 
-//   if (porOrden === "menor-monto") {
-//     arrOperaciones = arrOperaciones.sort(
-//       (a, b) => Number(a.monto) - Number(b.monto)
-//     );
-//   }
-//   if (porOrden === "mayor-monto") {
-//     arrOperaciones = arrOperaciones.sort(
-//       (a, b) => Number(b.monto) - Number(a.monto)
-//     );
-//   }
-//   if (porOrden === 'a/z') {
-//     arrOperaciones = arrOperaciones.sort((a, b) => {
-//       if (a.descripcion.toLowerCase() < b.descripcion.toLowerCase()) {
-//         return -1
-//       }
-//     })
-//   }
-//   if (porOrden === 'z/a') {
-//     arrOperaciones = arrOperaciones.sort((a, b) => {
-//       if (a.descripcion.toLowerCase() > b.descripcion.toLowerCase()) {
-//         return -1
-//       }
-//     })
-//   }
+  if (porOrden === "menor-monto") {
+    arrOperaciones = arrOperaciones.sort(
+      (a, b) => Number(a.monto) - Number(b.monto)
+    );
+  }
+  if (porOrden === "mayor-monto") {
+    arrOperaciones = arrOperaciones.sort(
+      (a, b) => Number(b.monto) - Number(a.monto)
+    );
+  }
+  if (porOrden === 'a/z') {
+    arrOperaciones = arrOperaciones.sort((a, b) => {
+      if (a.descripcion.toUpperCase() < b.descripcion.toLowerCase()) {
+        return -1
+      }
+    })
+  }
+  if (porOrden === 'z/a') {
+    arrOperaciones = arrOperaciones.sort((a, b) => {
+      if (a.descripcion.toLowerCase() > b.descripcion.toLowerCase()) {
+        return -1
+      }
+    })
+  }
 
-//   operacionAgregada(arrOperaciones)
-//   listaOperaciones(arr)
-// }
+  operacionAgregada(arrOperaciones)
+  listaOperaciones(arrOperaciones)
+}
 
 
-// selectFilterCategorias.addEventListener('change', filtros)
-// selectFilterTipo.addEventListener('change', filtros)
-// filtroOrdenarPor.addEventListener('change', filtros)
+selectFilterCategorias.addEventListener('change', filtros)
+selectFilterTipo.addEventListener('change', filtros)
+filtroOrdenarPor.addEventListener('change', filtros)
 
 
 
@@ -801,6 +801,7 @@ const inicializar = () => {
   totalBalance(arrOperaciones);
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
   totalPorMes(arrOperaciones);
+  obtenerOperaciones(arrOperaciones)
 };
 
 window.onload = inicializar;
