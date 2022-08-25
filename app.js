@@ -193,7 +193,7 @@ operacionAgregada = (arr) => {
   operaciones.innerHTML = str;
   totalBalance(arrOperaciones);
 
-  //                             BOTON EDITAR OPERACION
+ //                             BOTON EDITAR OPERACION
 
   const agregarEditadoBtn = document.getElementById("agregar-editado-btn");
   const editarBtns = document.querySelectorAll(".btn-editar");
@@ -205,31 +205,24 @@ operacionAgregada = (arr) => {
         (operacion) => operacion.id === e.target.dataset.id
       ); 
 
+      arrEditarOperacion.forEach((element) => {
+        id = element.id
+        inputEditarDescripcion.value= element.descripcion
+        inputEditarMonto.value= element.monto
+        selectEditarTipo.value= element.tipo
+        selectEditarCategoria.value= element.categoria
+        inputEditarFecha.value= element.fecha
+      })
+
       balance.classList.add("d-none");
       cardEditarOperacion.classList.remove("d-none");
-            
-      obtenerOperacionEditar(arrEditarOperacion)
-      console.log(arrEditarOperacion);
-     });
+    });
   });
 
-  const obtenerOperacionEditar = (arr) => {
-    
-    arr.forEach((operacion) => {
-      id = operacion.id
-      inputEditarDescripcion.value = operacion.descripcion;
-      inputEditarMonto.value = operacion.monto;
-      selectEditarCategoria.value = operacion.categoria;
-      selectEditarTipo.value = operacion.tipo;
-      inputEditarFecha.value = operacion.fecha;
-    });
-  }
-
-  const accionEditarOperacion = () => {
-    agregarEditadoBtn.addEventListener("click", () => {
-      arrOperaciones.forEach((operacion) => {
-        const id = operacion.id
-      })
+  agregarEditadoBtn.addEventListener("click", () => {
+    arrOperaciones.forEach((operacion) => {
+      const id = operacion.id
+    })
 
     const operacionAEditar = {
       id: id,
@@ -240,14 +233,14 @@ operacionAgregada = (arr) => {
       fecha: inputEditarFecha.value
     }
 
+    const agregarOperacionaEditada = arrOperaciones.map((arrOperaciones) =>
+      arrOperaciones.id === id
+      ? operacionAEditar
+      : arrOperaciones
+    )
 
-    const nuevaOperacionEditada = arrOperaciones.map((operacion) =>
-      operacion.id === arrOperaciones[0].id ? operacionAEditar : operacion
-    );
-
-    localStorage.setItem("arrOperaciones",JSON.stringify(nuevaOperacionEditada)
-    );
-    arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones"));
+    localStorage.setItem('arrOperaciones',JSON.stringify(agregarOperacionaEditada));
+    arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'));
 
     balance.classList.remove("d-none");
     cardEditarOperacion.classList.add("d-none");
@@ -255,11 +248,8 @@ operacionAgregada = (arr) => {
     operacionAgregada(arrOperaciones);
     listaOperaciones(arrOperaciones);
     totalBalance(arrOperaciones);
-
-   });
-  }
-  accionEditarOperacion(arrOperaciones)
-
+  });
+  
   const cancelarEdicionBtn = document.getElementById("cancelar-editar-btn");
 
   cancelarEdicionBtn.addEventListener("click", () => {
@@ -639,15 +629,6 @@ btnCancelarCategoria.addEventListener("click", () => {
   cardEditarcategoria.classList.add("d-none");
   cardCategoria.classList.remove("d-none");
 });
-
-
-
-
-
-
-
-
-
 
 //                                            *********************************************************************
 //                                                                     SECCION REPORTES
