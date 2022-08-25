@@ -362,9 +362,10 @@ let arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias")) || [
 
 const generarFiltrosCategorias = (arr) => {
   const selects = document.getElementsByClassName("categoria-select");
-
+  
   for (let i = 0; i < selects.length; i++) {
     const select = selects[i];
+    select.innerHTML = '';
     if (select.classList.contains("filtro-categoria")) {
       select.innerHTML = '<option value="todas">Todas</option>';
     }
@@ -685,6 +686,18 @@ const reportesResumen = (arr) => {
 </div> 
     <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${totalMayorGasto[0].monto}</div>`;
 };
+
+//*********** Falta Categoria con Mayor Balance**********
+
+//const categoriaMayorBalance = 
+//document.getElementById('categoria-mayor-balance').innerHTML = 
+// `<h6>Categoria con mayor Balance</h6>
+// <div>
+
+
+ //console.log(categoriaMayorBalance);
+
+
 
 const mesMayorGananciaYGasto = () => {
   const resumenMayorMonto = arrOperaciones.sort((a, b) =>
