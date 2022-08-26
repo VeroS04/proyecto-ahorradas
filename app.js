@@ -81,8 +81,8 @@ btnReportes.addEventListener("click", () => {
     reporteConOperacion.classList.remove("d-none");
     reporteSinOperacion.classList.add("d-none");
   }
-  reportesResumen(arrOperaciones);
-  mesMayorGananciaYGasto(arrOperaciones)
+  reportesResumen(JSON.parse(localStorage.getItem("arrOperaciones")));
+  mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -110,8 +110,8 @@ ocultarFiltros.addEventListener("click", () => {
 let arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones")) || [];
 // let arrOperaciones = [];
 const obtenerOperaciones = () => {
-  return JSON.parse(localStorage.getItem('arrOperaciones')) || [];
-}
+  return JSON.parse(localStorage.getItem("arrOperaciones")) || [];
+};
 
 // Función que oculta la imagen de sin operaciones si hay operaciones nuevas
 const listaOperaciones = (arr) => {
@@ -160,14 +160,7 @@ operacionAgregada = (arr) => {
   document.getElementById("operaciones").innerHTML = "";
   let str = "";
   arr.forEach((operacion) => {
-    const {
-      id,
-      descripcion,
-      categoria,
-      fecha,
-      tipo,
-      monto
-    } = operacion;
+    const { id, descripcion, categoria, fecha, tipo, monto } = operacion;
 
     str += `<div class="mi-flex d-flex flex-row mt-4" aria-label="operacion">
               <div class="col-3">
@@ -193,26 +186,25 @@ operacionAgregada = (arr) => {
   operaciones.innerHTML = str;
   totalBalance(arrOperaciones);
 
- //                             BOTON EDITAR OPERACION
+  //                             BOTON EDITAR OPERACION
 
   const agregarEditadoBtn = document.getElementById("agregar-editado-btn");
   const editarBtns = document.querySelectorAll(".btn-editar");
 
   editarBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      
       const arrEditarOperacion = arrOperaciones.filter(
         (operacion) => operacion.id === e.target.dataset.id
-      ); 
+      );
 
       arrEditarOperacion.forEach((element) => {
-        id = element.id
-        inputEditarDescripcion.value= element.descripcion
-        inputEditarMonto.value= element.monto
-        selectEditarTipo.value= element.tipo
-        selectEditarCategoria.value= element.categoria
-        inputEditarFecha.value= element.fecha
-      })
+        id = element.id;
+        inputEditarDescripcion.value = element.descripcion;
+        inputEditarMonto.value = element.monto;
+        selectEditarTipo.value = element.tipo;
+        selectEditarCategoria.value = element.categoria;
+        inputEditarFecha.value = element.fecha;
+      });
 
       balance.classList.add("d-none");
       cardEditarOperacion.classList.remove("d-none");
@@ -221,8 +213,8 @@ operacionAgregada = (arr) => {
 
   agregarEditadoBtn.addEventListener("click", () => {
     arrOperaciones.forEach((operacion) => {
-      const id = operacion.id
-    })
+      const id = operacion.id;
+    });
 
     const operacionAEditar = {
       id: id,
@@ -230,17 +222,18 @@ operacionAgregada = (arr) => {
       monto: inputEditarMonto.value,
       tipo: selectEditarTipo.value,
       categoria: selectEditarCategoria.value,
-      fecha: inputEditarFecha.value
-    }
+      fecha: inputEditarFecha.value,
+    };
 
     const agregarOperacionaEditada = arrOperaciones.map((arrOperaciones) =>
-      arrOperaciones.id === id
-      ? operacionAEditar
-      : arrOperaciones
-    )
+      arrOperaciones.id === id ? operacionAEditar : arrOperaciones
+    );
 
-    localStorage.setItem('arrOperaciones',JSON.stringify(agregarOperacionaEditada));
-    arrOperaciones = JSON.parse(localStorage.getItem('arrOperaciones'));
+    localStorage.setItem(
+      "arrOperaciones",
+      JSON.stringify(agregarOperacionaEditada)
+    );
+    arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones"));
 
     balance.classList.remove("d-none");
     cardEditarOperacion.classList.add("d-none");
@@ -249,7 +242,7 @@ operacionAgregada = (arr) => {
     listaOperaciones(arrOperaciones);
     totalBalance(arrOperaciones);
   });
-  
+
   const cancelarEdicionBtn = document.getElementById("cancelar-editar-btn");
 
   cancelarEdicionBtn.addEventListener("click", () => {
@@ -335,7 +328,8 @@ const selectFilterTipo = document.getElementById("select-filter-tipo");
 
 // Arreglo donde se guardan las categorias predeterminadas y donde se suman nuevas
 
-let arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias")) || [{
+let arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias")) || [
+  {
     categoria: "Comida",
     id: uuidv4(),
   },
@@ -365,10 +359,10 @@ let arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias")) || [
 
 const generarFiltrosCategorias = (arr) => {
   const selects = document.getElementsByClassName("categoria-select");
-  
+
   for (let i = 0; i < selects.length; i++) {
     const select = selects[i];
-    select.innerHTML = '';
+    select.innerHTML = "";
     if (select.classList.contains("filtro-categoria")) {
       select.innerHTML = '<option value="todas">Todas</option>';
     }
@@ -404,87 +398,55 @@ const selectFilterCategorias = document.getElementById(
 //   }
 //});
 
-//         ****************   FILTRO ORDENAR POR ********************
 
-const filtroOrdenarPor = document.getElementById("filtro-ordenar-por");
-// let ordenCategorias;
-// filtroOrdenarPor.addEventListener("input", (e) => {
-//   if (e.target.value === "mayor-monto") {
-//     ordenCategorias = arrOperaciones.sort((a, b) =>
-//       Number(a.monto) > Number(b.monto) ?
-//       -1 :
-//       Number(a.monto) < Number(b.monto) ?
-//       1 :
-//       0
-//     );
-//   } else if (e.target.value === "menor-monto") {
-//     ordenCategorias = arrOperaciones.sort((a, b) =>
-//       Number(a.monto) > Number(b.monto) ?
-//       1 :
-//       Number(a.monto) < Number(b.monto) ?
-//       -1 :
-//       0
-//     );
-//   } else if (e.target.value === "a-z") {
-//     ordenCategorias = arrOperaciones.sort((a, b) =>
-//       a.descripcion.localeCompare(b.descripcion)
-//     );
-//   } else if (e.target.value === "z-a") {
-//     ordenCategorias = arrOperaciones.sort((a, b) =>
-//       b.descripcion.localeCompare(a.descripcion)
-//     );
-//   } else if (e.target.value === "mas-reciente") {
-//     ordenCategorias = arrOperaciones.sort(
-//       (a, b) => new Date(b.fecha) - new Date(a.fecha)
-//     );
-//   } else if (e.target.value === "menos-reciente") {
-//     ordenCategorias = arrOperaciones.sort(
-//       (a, b) => new Date(a.fecha) - new Date(b.fecha)
-//     );
-//   }
 
-//   operacionAgregada(ordenCategorias);
-//   //****** funcionan más y menos reciente, pero si le doy primero el click a Más reciente
-//   //no funciona, si empiezo con el otro sí
-// });
 
 // ***************** FILTRO DESDE ***************
 
+
 const filtroDesde = document.getElementById("date");
-
 // filtroDesde.addEventListener("change", (e) => {
-//   const ordenDesde = arrOperaciones.filter(
-//     (operacion) => new Date(operacion.fecha) >= new Date(e.target.value)
-//   );
-//   operacionAgregada(ordenDesde);
-// });
 
-//**** Falta que los filtros funcionen juntos
+//     const ordenDesde = arrOperaciones.filter(
+//       (operacion) => new Date(operacion.fecha) >= new Date(e.target.value)
+//     );
+//     operacionAgregada(ordenDesde);
+//   });
 
 
+
+//         ****************   FILTRO ORDENAR POR ********************
+
+const filtroOrdenarPor = document.getElementById("filtro-ordenar-por");
 
 const filtros = (e) => {
   const porCategoria = selectFilterCategorias.value;
   const porTipo = selectFilterTipo.value;
-  const porOrden =  filtroOrdenarPor.value
+  const porOrden = filtroOrdenarPor.value;
 
   let arrOperaciones = obtenerOperaciones();
 
-  if (porCategoria !== 'todas') {
-    arrOperaciones = arrOperaciones.filter(operacion => operacion.categoria === porCategoria)
+  if (porCategoria !== "todas") {
+    arrOperaciones = arrOperaciones.filter(
+      (operacion) => operacion.categoria === porCategoria
+    );
   }
 
-  if (porTipo !== 'todos') {
-    arrOperaciones = arrOperaciones.filter(operacion => operacion.tipo === porTipo)
+  if (porTipo !== "todos") {
+    arrOperaciones = arrOperaciones.filter(
+      (operacion) => operacion.tipo === porTipo
+    );
   }
 
-  if (porOrden === 'mas-reciente') {
-    arrOperaciones = arrOperaciones.sort((a, b) =>
-      new Date(b.fecha) - new Date(a.fecha))
+  if (porOrden === "mas-reciente") {
+    arrOperaciones = arrOperaciones.sort(
+      (a, b) => new Date(b.fecha) - new Date(a.fecha)
+    );
   }
-  if (porOrden === 'menos-reciente') {
-    arrOperaciones = arrOperaciones.sort((a, b) =>
-      new Date(a.fecha) - new Date(b.fecha))
+  if (porOrden === "menos-reciente") {
+    arrOperaciones = arrOperaciones.sort(
+      (a, b) => new Date(a.fecha) - new Date(b.fecha)
+    );
   }
 
   if (porOrden === "menor-monto") {
@@ -497,31 +459,28 @@ const filtros = (e) => {
       (a, b) => Number(b.monto) - Number(a.monto)
     );
   }
-  if (porOrden === 'a/z') {
+  if (porOrden === "a-z") {
     arrOperaciones = arrOperaciones.sort((a, b) => {
-      if (a.descripcion.toUpperCase() < b.descripcion.toLowerCase()) {
-        return -1
+      if (a.descripcion.toLowerCase() < b.descripcion.toLowerCase()) {
+        return -1;
       }
-    })
+    });
   }
-  if (porOrden === 'z/a') {
+  if (porOrden === "z-a") {
     arrOperaciones = arrOperaciones.sort((a, b) => {
       if (a.descripcion.toLowerCase() > b.descripcion.toLowerCase()) {
-        return -1
+        return -1;
       }
-    })
+    });
   }
 
-  operacionAgregada(arrOperaciones)
-  listaOperaciones(arrOperaciones)
-}
+  operacionAgregada(arrOperaciones);
+  listaOperaciones(arrOperaciones);
+};
 
-
-selectFilterCategorias.addEventListener('change', filtros)
-selectFilterTipo.addEventListener('change', filtros)
-filtroOrdenarPor.addEventListener('change', filtros)
-
-
+selectFilterCategorias.addEventListener("change", filtros);
+selectFilterTipo.addEventListener("change", filtros);
+filtroOrdenarPor.addEventListener("change", filtros);
 
 //                                            *********************************************************************
 //                                                                     SECCION CATEGORIA
@@ -529,101 +488,114 @@ filtroOrdenarPor.addEventListener('change', filtros)
 
 const categoriaNuevaBtn = document.getElementById("agregar-categoria-nueva");
 const inputNombreCategoria = document.getElementById("nombre-input");
-const inputNombreEditadoCategoria = document.getElementById("editado-nombre-input");
+const inputNombreEditadoCategoria = document.getElementById(
+  "editado-nombre-input"
+);
 const ListaDeCategorias = document.getElementById("lista-categorias");
-const btnCancelarCategoria = document.getElementById("cancelar-categoria-editada");
+const btnCancelarCategoria = document.getElementById(
+  "cancelar-categoria-editada"
+);
 
 // Botón que agrega una categoria nueva
 
-const inputAgregarCategoria = document.getElementById('input-agregar-categoria');
-const btnAgregarCategoria = document.getElementById('agregar-categoria-editada');
+const inputAgregarCategoria = document.getElementById(
+  "input-agregar-categoria"
+);
+const btnAgregarCategoria = document.getElementById(
+  "agregar-categoria-editada"
+);
 
-categoriaNuevaBtn.addEventListener('click', () => {
-    if(inputNombreCategoria.value.trim().length === 0){
-        return
-    };
+categoriaNuevaBtn.addEventListener("click", () => {
+  if (inputNombreCategoria.value.trim().length === 0) {
+    return;
+  }
 
-    const categoriaAdicional = {
-        categoria: inputNombreCategoria.value,
-        id: uuidv4()
-    };
-    arrCategoriasIniciales.push(categoriaAdicional);
+  const categoriaAdicional = {
+    categoria: inputNombreCategoria.value,
+    id: uuidv4(),
+  };
+  arrCategoriasIniciales.push(categoriaAdicional);
 
-    inputNombreCategoria.value = '';
-    localStorage.setItem('categorias', JSON.stringify(arrCategoriasIniciales));
-    objetoCategorias = JSON.parse(localStorage.getItem('categorias'));
+  inputNombreCategoria.value = "";
+  localStorage.setItem("categorias", JSON.stringify(arrCategoriasIniciales));
+  objetoCategorias = JSON.parse(localStorage.getItem("categorias"));
 
-    pintarCategorias(arrCategoriasIniciales);
-    generarFiltrosCategorias(arrCategoriasIniciales);
- 
+  pintarCategorias(arrCategoriasIniciales);
+  generarFiltrosCategorias(arrCategoriasIniciales);
 });
 
-const pintarCategorias = arr =>{
-  let str = '';
-    arr.forEach((arrCategoriasIniciales) =>{
-      const {id, categoria} = arrCategoriasIniciales;
-        str +=` <div class="d-flex justify-content-between mt-3 mb-2">
+const pintarCategorias = (arr) => {
+  let str = "";
+  arr.forEach((arrCategoriasIniciales) => {
+    const { id, categoria } = arrCategoriasIniciales;
+    str += ` <div class="d-flex justify-content-between mt-3 mb-2">
                  <div style="color:#00947e; background-color: #ebfffc;">${categoria}</div>
                   <div>
                     <a href="#" class="btn-editar-categoria me-2" data-id=${id}>Editar</a>
                     <a href="#" class="btn-eliminar-categoria" data-id=${id}>Eliminar</a> 
                   </div>
                 </div>`;
-    });
-            
+  });
+
   ListaDeCategorias.innerHTML = str;
 
-  const btnEliminarCategoria = document.querySelectorAll('.btn-eliminar-categoria');
-  const btnEditarCategoria = document.querySelectorAll('.btn-editar-categoria');
+  const btnEliminarCategoria = document.querySelectorAll(
+    ".btn-eliminar-categoria"
+  );
+  const btnEditarCategoria = document.querySelectorAll(".btn-editar-categoria");
 
-  btnEliminarCategoria.forEach(btn =>{
-    btn.addEventListener('click', (e) =>{
-      const eliminarCategoria = arrCategoriasIniciales.filter(categoria => categoria.id !== e.target.dataset.id)
+  btnEliminarCategoria.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const eliminarCategoria = arrCategoriasIniciales.filter(
+        (categoria) => categoria.id !== e.target.dataset.id
+      );
       console.log(eliminarCategoria);
-      localStorage.setItem('categorias',JSON.stringify(eliminarCategoria));
-      arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias'));
+      localStorage.setItem("categorias", JSON.stringify(eliminarCategoria));
+      arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias"));
       pintarCategorias(arrCategoriasIniciales);
-      generarFiltrosCategorias(arrCategoriasIniciales)
-    })
-  })
+      generarFiltrosCategorias(arrCategoriasIniciales);
+    });
+  });
 
-  btnEditarCategoria.forEach(btn => {
-    btn.addEventListener('click', (e)=>{
+  btnEditarCategoria.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
       cardEditarcategoria.classList.remove("d-none");
       cardCategoria.classList.add("d-none");
-      const editarCategorias = arrCategoriasIniciales.filter(categoria => categoria.id === e.target.dataset.id)
-      editarCategorias.forEach((element) =>{
-        id = element.id
-        inputNombreEditadoCategoria.value = element.categoria                
-      })
-    })
-  })  
-   
+      const editarCategorias = arrCategoriasIniciales.filter(
+        (categoria) => categoria.id === e.target.dataset.id
+      );
+      editarCategorias.forEach((element) => {
+        id = element.id;
+        inputNombreEditadoCategoria.value = element.categoria;
+      });
+    });
+  });
 };
 
-btnAgregarCategoria.addEventListener('click', () =>{
-  arrCategoriasIniciales.forEach((element)=>{
-    const id = element.id
-  })
+btnAgregarCategoria.addEventListener("click", () => {
+  arrCategoriasIniciales.forEach((element) => {
+    const id = element.id;
+  });
   const categoriaEditada = {
     id: id,
     categoria: inputNombreEditadoCategoria.value,
-  }
+  };
 
   cardEditarcategoria.classList.add("d-none");
   cardCategoria.classList.remove("d-none");
 
-  const agregarCategoriaEditada = arrCategoriasIniciales.map((arrCategoriasIniciales) =>
-  arrCategoriasIniciales.id === id
-  ? categoriaEditada
-  : arrCategoriasIniciales
-  )
+  const agregarCategoriaEditada = arrCategoriasIniciales.map(
+    (arrCategoriasIniciales) =>
+      arrCategoriasIniciales.id === id
+        ? categoriaEditada
+        : arrCategoriasIniciales
+  );
 
-  localStorage.setItem('categorias',JSON.stringify(agregarCategoriaEditada));
-  arrCategoriasIniciales = JSON.parse(localStorage.getItem('categorias'));
+  localStorage.setItem("categorias", JSON.stringify(agregarCategoriaEditada));
+  arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias"));
   generarFiltrosCategorias(arrCategoriasIniciales);
-  pintarCategorias(arrCategoriasIniciales); 
-})
+  pintarCategorias(arrCategoriasIniciales);
+});
 
 btnCancelarCategoria.addEventListener("click", () => {
   cardEditarcategoria.classList.add("d-none");
@@ -636,78 +608,93 @@ btnCancelarCategoria.addEventListener("click", () => {
 
 //*** Resumen
 
-// Funcion que realiza un filtrado de las operaciones y devuelve las categorias y meses con mayor ganancia y 
+// Funcion que realiza un filtrado de las operaciones y devuelve las categorias y meses con mayor ganancia y
 // las categorias y meses con mayor con mayor gasto
 
 const reportesResumen = (arr) => {
-  const resumenMayorGanancia = arrOperaciones.filter(
-    (operacion) => operacion.tipo === "ganancia"
-  );
-  const totalMayorGanancia = resumenMayorGanancia.sort(
-    (a, b) => b.monto - a.monto
-  );
-  document.getElementById(
-    "categoria-mayor-ganancia"
-  ).innerHTML = `<h6>Categoria con mayor ganancia</h6>
+  const resumenMayorGanancia = arr
+    .filter((operacion) => operacion.tipo === "ganancia")
+    .sort((a, b) => b.monto - a.monto);
+  if (resumenMayorGanancia.length > 0) {
+    document.getElementById(
+      "categoria-mayor-ganancia"
+    ).innerHTML = `<h6>Categoria con mayor ganancia</h6>
+  <div>
+    <div class="color">${resumenMayorGanancia[0].categoria}
+    </div>
+  </div> 
+      <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${resumenMayorGanancia[0].monto}</div>`;
+  }
+
+  const resumenMayorGasto = arr
+    .filter((operacion) => operacion.tipo === "gasto")
+    .sort((a, b) => b.monto - a.monto);
+  if (resumenMayorGasto.length > 0) {
+    document.getElementById(
+      "categoria-mayor-gasto"
+    ).innerHTML = `<h6>Categoria con mayor gasto</h6>
 <div>
-  <div class="color">${totalMayorGanancia[0].categoria}
+  <div class="color">${resumenMayorGasto[0].categoria}
   </div>
 </div> 
-    <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${totalMayorGanancia[0].monto}</div>`;
-
-  const resumenMayorGasto = arrOperaciones.filter(
-    (operacion) => operacion.tipo === "gasto"
-  );
-  const totalMayorGasto = resumenMayorGasto.sort((a, b) => b.monto - a.monto);
-
-  document.getElementById(
-    "categoria-mayor-gasto"
-  ).innerHTML = `<h6>Categoria con mayor gasto</h6>
-<div>
-  <div class="color">${totalMayorGasto[0].categoria}
-  </div>
-</div> 
-    <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${totalMayorGasto[0].monto}</div>`;
+    <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${resumenMayorGasto[0].monto}</div>`;
+  }
 };
 
 //*********** Falta Categoria con Mayor Balance**********
 
-//const categoriaMayorBalance = 
-//document.getElementById('categoria-mayor-balance').innerHTML = 
+//document.getElementById('categoria-mayor-balance').innerHTML =
 // `<h6>Categoria con mayor Balance</h6>
 // <div>
 
+//console.log();
 
- //console.log(categoriaMayorBalance);
+const mesMayorGananciaYGasto = (arr) => {
+  const resumenMayorMonto = arr.sort((a, b) => b.monto - a.monto);
+  
+
+  const gananciaMayor = resumenMayorMonto.filter(
+    (operacion) => operacion.tipo === "ganancia"
+  );
+  if (gananciaMayor.length > 0){
+    document.getElementById(
+      "mes-mayor-ganancia"
+    ).innerHTML = `<h6>Mes con mayor ganancia</h6>
+  <div>
+    <div class="color">${
+      new Date(gananciaMayor[0].fecha).getMonth() + 1
+    }/${new Date(gananciaMayor[0].fecha).getFullYear()}
+    </div>
+  </div> 
+      <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${
+        gananciaMayor[0].monto
+      }</div>`;
+  }
 
 
-
-const mesMayorGananciaYGasto = () => {
-  const resumenMayorMonto = arrOperaciones.sort((a, b) =>
-    (b.monto - a.monto))
-
-  const gananciaMayor = resumenMayorMonto.filter((operacion) =>
-    operacion.tipo === 'ganancia')
-  document.getElementById('mes-mayor-ganancia').innerHTML = `<h6>Mes con mayor ganancia</h6>
-<div>
-  <div class="color">${new Date(gananciaMayor[0].fecha).getMonth() + 1}/${new Date(gananciaMayor[0].fecha).getFullYear()}
-  </div>
-</div> 
-    <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${gananciaMayor[0].monto}</div>`;
-
-  const gastoMayor = resumenMayorMonto.filter((operacion) =>
-    operacion.tipo === 'gasto')
-  document.getElementById('mes-mayor-gasto').innerHTML = `<h6>Mes con mayor gasto</h6>
-<div>
-  <div class="color">${new Date(gastoMayor[0].fecha).getMonth() + 1}/${new Date(gastoMayor[0].fecha).getFullYear()}
-  </div>
-</div> 
-    <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$${gastoMayor[0].monto}</div>`;
+  const gastoMayor = resumenMayorMonto.filter(
+    (operacion) => operacion.tipo === "gasto"
+  );
+  if (gastoMayor.length > 0){
+    document.getElementById(
+      "mes-mayor-gasto"
+    ).innerHTML = `<h6>Mes con mayor gasto</h6>
+  <div>
+    <div class="color">${new Date(gastoMayor[0].fecha).getMonth() + 1}/${new Date(
+      gastoMayor[0].fecha
+    ).getFullYear()}
+    </div>
+  </div> 
+      <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$${
+        gastoMayor[0].monto
+      }</div>`;
+  }
+ 
 };
 
 //Totales por categoria
 
-// Funcion que filtra las categorias y operaciones y devuelve las categorias que tienen operaciones y 
+// Funcion que filtra las categorias y operaciones y devuelve las categorias que tienen operaciones y
 // la suma total de sus ganancias y gastos y el balance
 
 const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
@@ -747,19 +734,25 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
 
 // Totales por Mes
 
-// Funcion que filtra las operaciones y devuelve los meses que tienen operaciones y 
+// Funcion que filtra las operaciones y devuelve los meses que tienen operaciones y
 // la suma total de sus ganancias y gastos y su balance
 
 const totalPorMes = (arr) => {
   const mesesSinRepetir = [
-    ...new Set(arr.map((operacion) => `${new Date(operacion.fecha).getMonth() + 1}/${new Date(
-      operacion.fecha
-    ).getFullYear()}`)),
+    ...new Set(
+      arr.map(
+        (operacion) =>
+          `${new Date(operacion.fecha).getMonth() + 1}/${new Date(
+            operacion.fecha
+          ).getFullYear()}`
+      )
+    ),
   ].sort();
 
   for (let i = 0; i < mesesSinRepetir.length; i++) {
     const operacionesPorMes = arr.filter(
-      (operacion) => `${new Date(operacion.fecha).getMonth() + 1}/${new Date(
+      (operacion) =>
+        `${new Date(operacion.fecha).getMonth() + 1}/${new Date(
           operacion.fecha
         ).getFullYear()}` === mesesSinRepetir[i]
     );
@@ -797,7 +790,7 @@ const inicializar = () => {
   totalBalance(arrOperaciones);
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
   totalPorMes(arrOperaciones);
-  obtenerOperaciones(arrOperaciones)
+  obtenerOperaciones(arrOperaciones);
 };
 
 window.onload = inicializar;
