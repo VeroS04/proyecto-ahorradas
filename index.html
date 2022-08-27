@@ -26,7 +26,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end nav-hamburguesa" id="navbarNav">
-            <ul class="navbar-nav nav-hamburguesa p-2 mt-5" id="nav-hamburguesa">
+            <ul class="navbar-nav p-2" id="nav-hamburguesa">
               <li class="nav-item h4">
                 <a class="nav-link active btns-nav" aria-current="page" href="#" id="btn-balance" aria-label="boton a balance">
                   <i class="fa-solid fa-chart-line"></i>
@@ -126,11 +126,11 @@
             </div>
               <!--  *** INICIO DE OPERACIONES *** -->
 
-            <div class="col-sm-12 col-md-8 container-responsive">
-              <div class="card my-operaciones shadow p-3 mb-5 mt-5 bg-body rounded border border-1" id="card-operaciones" aria-label="lista de operaciones">
-                <div class="operaciones-title d-flex justify-content-between">
-                  <h5 class="card-title fs-4 fw-bold">Operaciones</h5>
-                  <button type="button" class="btn btn-nueva-operacion" id="btn-nueva-operacion" aria-label="boton para nueva operacion">
+            <div class="col-sm-12 col-md-8 contenedor-operaciones">
+              <div class="card my-operaciones container-responsive shadow p-3 mb-5 mt-5 bg-body rounded border border-1" id="card-operaciones" aria-label="lista de operaciones">
+                <div class="operaciones-title">
+                  <h5 class="card-title fs-4 fw-bold mt-3">Operaciones</h5>
+                  <button type="button" class="btn btn-nueva-operacion mt-3" id="btn-nueva-operacion" aria-label="boton para nueva operacion">
                     + Nueva operación
                   </button>
                 </div>
@@ -144,7 +144,7 @@
                   </div>
                 </div>
                 <div id="con-operaciones" class="d-none mb-5 mt-5">
-                  <div class="d-flex justify-content-between">
+                  <div class="descripcion-operaciones">
                     <div class="col-3">Descripción</div>
                     <div class="col-2">Categoría</div>
                     <div class="col-2 text-end">Fecha</div>
@@ -162,8 +162,8 @@
       
                           <!--  ************************* INICIO CONTAINER NUEVA OPERACION ********************-->
 
-      <div class="d-none mt-5" id="container-nueva-operacion">
-        <div class="col-md-6 mt-5 contenedor-operaciones">
+      <div class="d-none mt-5 container-responsive my-operaciones" id="container-nueva-operacion">
+        <div class="col-md-6 mt-5 contenedor-operaciones-nuevas">
           <form class="card my-card contenedor-operaciones shadow-lg px-5 py-4 mt-5 bg-body rounded">
             <h2 class="mt-5">Nueva operación</h2>
             <div class="mb-3">
@@ -204,8 +204,8 @@
 
       <!--  ************************* INICIO CONTAINER EDITAR OPERACION ********************-->
 
-      <div class="d-none mt-5" id="container-editar-operacion">
-        <div class="col-md-6 mt-5 contenedor-operaciones">
+      <div class="d-none mt-5 container-responsive my-operaciones" id="container-editar-operacion">
+        <div class="col-md-6 mt-5 contenedor-operaciones-nuevas">
           <form class="shadow-lg p-4 mb-5 bg-body rounded my-card contenedor-operaciones">
             <h2 class="mt-3 mb-4">Editar operación</h2>
             <div class="mb-3">
@@ -249,7 +249,7 @@
 
       <!--  ******************* INICIO DE SECCION CATEGORIAS ********************** -->
 
-      <section class="d-none container-responsive" id="categorias">
+      <section class="d-none container-responsive mt-5" id="categorias">
         <div class="card shadow p-3 rounded border border-1 my-card my-categorias" id="card-categorias" aria-label="formulario para nueva categoria">
           <h1 class="mb-5">Categorias</h1>
           <form>
@@ -315,8 +315,8 @@
             </div>
             <div id="total-por-categoria" class="total-categoria mb-2 p-3" aria-label="vista de totales por categoria">
                <h5 class="card-title fw-bold mb-5">Total por categoría</h5>
-             <div class="mt-4 d-flex justify-content-between">
-                <div id="total-categoria-categoria">
+             <div class="mt-4 d-flex justify-content-between contenedor-total-categoria">
+                <div id="total-categoria-categoria" class="total-categoria-categorias">
                   <h6>Categoria</h6>
                 </div>
                 <div id="total-categoria-ganancias">
@@ -332,8 +332,8 @@
             </div> 
             <div class="total-mes p-3 mb-5" aria-label="vista de totales por mes">
               <h5 class="card-title fw-bold">Total por mes</h5>
-              <div class="mt-4 d-flex justify-content-between">
-                <div id="total-mes-meses">
+              <div class="mt-4 d-flex justify-content-between contenedor-total-mes">
+                <div id="total-mes-meses" class="total-mes-meses">
                   <h6>Mes</h6>
                 </div>
                 <div id="total-mes-ganancias">
@@ -346,7 +346,6 @@
                   <h6>Balance</h6>
                 </div>
               </div>          
-              </div>
             </div>
           </div>
         </div>

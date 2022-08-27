@@ -65,12 +65,17 @@ a {
     margin-top: 6%;
 }
 
+.descripcion-operaciones {
+    display: flex;
+    justify-content: space-between;
+}
+
 .input-nombre-categoria {
     margin-right: 1%;
 }
 
 .color {
-    background-color: #e2dbed;
+    background-color: #ebfffc;
     color: #00947e;
 }
 
@@ -90,11 +95,17 @@ a {
     content: '-$';
 }
 
-.contenedor-operaciones {
+.op-monto {
+    text-align: end;
+}
+
+.contenedor-operaciones-nuevas{
     margin: auto;
 }
 
-@media screen and (max-width: 991px) and (min-width: 200px){
+
+
+@media screen and (max-width: 991px) and (min-width: 770px){
     .nav-hamburguesa {
         background-color: #48C9B0;
         color: #fff;
@@ -108,5 +119,151 @@ a {
     }
     .my-card, .contenedor-card, .my-operaciones {
         width: 100%;
+    }
+
+    .contenedor-operaciones {
+        width: 100%;
+    }
+    .my-categorias,
+    .my-reportes {
+        margin-top: 20%;
+    }
+}
+
+
+@media screen and (max-width: 769px) and (min-width: 336px){
+
+    .my-nav{
+        width: 100%;
+    }
+
+    .my-nav-title {
+        font-size: 2em;
+    }
+
+    .nav-hamburguesa {
+        background-color: #48C9B0;
+        color: #fff;
+        transition: 1.5s;
+    }
+
+    .container-responsive {
+        width: 100%;
+        margin-top: 10%;
+    }
+
+    .my-card, .contenedor-card, .my-operaciones {
+        width: 100%;
+    }
+
+    .my-categorias,
+    .my-reportes {
+        margin-top: 25%;
+    }
+
+    .operaciones-title {
+        display: block;
+    }
+
+    .descripcion-operaciones {
+        display: none;
+    }
+    .lista-op {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .op-descripcion {
+        width: 50%;
+    }
+    .op-categoria {
+        width: 50%;
+        text-align: end;
+    }
+    .op-fecha {
+        display: none;
+    }
+    .op-monto {
+        width: 50%;
+        text-align: start;
+        margin-top: 4%;
+    }
+    .op-acciones {
+        width: 50%;
+        margin-top: 4%;
+    }
+}
+
+@media screen and (max-width: 335px){
+
+    .my-nav{
+        width: 100%;
+    }
+
+    .my-nav-title {
+        font-size: 2em;
+    }
+
+    .nav-hamburguesa {
+        background-color: #48C9B0;
+        color: #fff;
+        transition: 1.5s;
+    }
+
+    .container-responsive {
+        width: 100%;
+        margin-top: 10%;
+    }
+
+    .my-card, .contenedor-card, .my-operaciones {
+        width: 100%;
+    }
+
+    .my-categorias,
+    .my-reportes {
+        margin-top: 35%;
+    }
+
+    .operaciones-title {
+        display: block;
+    }
+
+    .descripcion-operaciones {
+        display: none;
+    }
+    .lista-op {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .op-descripcion {
+        width: 50%;
+    }
+    .op-categoria {
+        width: 50%;
+        text-align: end;
+    }
+    .op-fecha {
+        display: none;
+    }
+    .op-monto {
+        width: 50%;
+        text-align: start;
+        margin-top: 4%;
+    }
+    .op-acciones {
+        width: 50%;
+        margin-top: 4%;
+    }
+    .contenedor-total-mes {
+        background-color: #99f5e3;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .total-mes-meses {
+        background-color: #68c8ba;
+        width: 100%;
+        padding: 1%;
     }
 }
