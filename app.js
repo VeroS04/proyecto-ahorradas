@@ -524,6 +524,8 @@ categoriaNuevaBtn.addEventListener("click", () => {
   generarFiltrosCategorias(arrCategoriasIniciales);
 });
 
+ // Fincion que pinta las categorias 
+
 const pintarCategorias = (arr) => {
   let str = "";
   arr.forEach((arrCategoriasIniciales) => {
@@ -539,23 +541,56 @@ const pintarCategorias = (arr) => {
 
   ListaDeCategorias.innerHTML = str;
 
+  // Boton que elimina categoria
+
   const btnEliminarCategoria = document.querySelectorAll(
     ".btn-eliminar-categoria"
   );
   const btnEditarCategoria = document.querySelectorAll(".btn-editar-categoria");
 
+ // Funcion que busca la caegoria seleccionada y las operaciones que tienen esa categoria e inicializa
+ // la funcion que las elimina
+
+  const eliminarCategoria = (arr, e, arrOperaciones) =>{
+    const categoriaAEliminar = arr.find(
+      (categoria) => categoria.id === e.target.dataset.id
+    ).categoria;
+    const categoriaEliminada = arr.filter(
+      (categoria) => categoria.id !== e.target.dataset.id
+    );
+    console.log(categoriaEliminada);
+    console.log(categoriaAEliminar);
+    const operacionEliminada = arrOperaciones.filter(
+      (operacion) => operacion.categoria !== categoriaAEliminar
+    );
+    console.log(operacionEliminada);
+    arrActualizado(categoriaEliminada, operacionEliminada)
+  }
+
+  // Funcion que actualiza los arreglos con la categoria eliminada y las operaciones de esta
+
+  const arrActualizado = (arrCategoria, arrOperacion) => {
+    localStorage.setItem("categorias", JSON.stringify(arrCategoria));
+    arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias"));
+    pintarCategorias(arrCategoriasIniciales);
+    generarFiltrosCategorias(arrCategoriasIniciales);
+    localStorage.setItem("arrOperaciones", JSON.stringify(arrOperacion));
+    arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones"));
+    operacionAgregada(arrOperaciones);
+    listaOperaciones(arrOperaciones);
+  }
+
+  // Boton de eliminar categoria que corre la funcion de eliminar
+
   btnEliminarCategoria.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const eliminarCategoria = arrCategoriasIniciales.filter(
-        (categoria) => categoria.id !== e.target.dataset.id
-      );
-      console.log(eliminarCategoria);
-      localStorage.setItem("categorias", JSON.stringify(eliminarCategoria));
-      arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias"));
-      pintarCategorias(arrCategoriasIniciales);
-      generarFiltrosCategorias(arrCategoriasIniciales);
-    });
-  });
+      e.preventDefault();
+      eliminarCategoria(arrCategoriasIniciales, e, arrOperaciones);
+    })
+  })
+
+
+  // Boton que trae el formulario para editar categoria
 
   btnEditarCategoria.forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -571,6 +606,8 @@ const pintarCategorias = (arr) => {
     });
   });
 };
+
+ // Boton que agrega categoria editada
 
 btnAgregarCategoria.addEventListener("click", () => {
   arrCategoriasIniciales.forEach((element) => {
@@ -601,6 +638,8 @@ btnCancelarCategoria.addEventListener("click", () => {
   cardEditarcategoria.classList.add("d-none");
   cardCategoria.classList.remove("d-none");
 });
+
+pintarCategorias(arrCategoriasIniciales);
 
 //                                            *********************************************************************
 //                                                                     SECCION REPORTES
@@ -784,7 +823,7 @@ const inicializar = () => {
   fechaInput.valueAsDate = new Date();
   filtroDesde.valueAsDate = new Date();
   generarFiltrosCategorias(arrCategoriasIniciales);
-  pintarCategorias(arrCategoriasIniciales);
+
   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
