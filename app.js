@@ -401,28 +401,16 @@ const selectFilterCategorias = document.getElementById(
 
 
 
-// ***************** FILTRO DESDE ***************
-
-
-const filtroDesde = document.getElementById("date");
-// filtroDesde.addEventListener("change", (e) => {
-
-//     const ordenDesde = arrOperaciones.filter(
-//       (operacion) => new Date(operacion.fecha) >= new Date(e.target.value)
-//     );
-//     operacionAgregada(ordenDesde);
-//   });
-
-
-
 //         ****************   FILTRO ORDENAR POR ********************
 
 const filtroOrdenarPor = document.getElementById("filtro-ordenar-por");
+const filtroDesde = document.getElementById("date");
 
 const filtros = (e) => {
   const porCategoria = selectFilterCategorias.value;
   const porTipo = selectFilterTipo.value;
   const porOrden = filtroOrdenarPor.value;
+  const ordenDesde = filtroDesde.value;
 
   let arrOperaciones = obtenerOperaciones();
 
@@ -473,7 +461,13 @@ const filtros = (e) => {
       }
     });
   }
-
+  
+  if(ordenDesde !== new Date()){
+    arrOperaciones = arrOperaciones.filter(operacion =>  
+      (new Date(operacion.fecha) >= new Date(ordenDesde)))
+      
+      console.log(ordenDesde !== new Date())
+    }
   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
 };
@@ -481,6 +475,8 @@ const filtros = (e) => {
 selectFilterCategorias.addEventListener("change", filtros);
 selectFilterTipo.addEventListener("change", filtros);
 filtroOrdenarPor.addEventListener("change", filtros);
+filtroDesde.addEventListener("change", filtros);
+
 
 //                                            *********************************************************************
 //                                                                     SECCION CATEGORIA
@@ -824,7 +820,7 @@ const inicializar = () => {
   filtroDesde.valueAsDate = new Date();
   generarFiltrosCategorias(arrCategoriasIniciales);
 
-  operacionAgregada(arrOperaciones);
+   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
