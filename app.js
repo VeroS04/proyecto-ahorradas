@@ -83,6 +83,8 @@ btnReportes.addEventListener("click", () => {
   }
   reportesResumen(JSON.parse(localStorage.getItem("arrOperaciones")));
   mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
+  // totalesPorCategoria(JSON.parse(localStorage.getItem("arrOperaciones, arrCategoriasIniciales")));
+  // totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -401,7 +403,7 @@ const selectFilterCategorias = document.getElementById(
 
 
 
-//         ****************   FILTRO ORDENAR POR ********************
+//         ****************   FILTROS ********************
 
 const filtroOrdenarPor = document.getElementById("filtro-ordenar-por");
 const filtroDesde = document.getElementById("date");
@@ -674,15 +676,22 @@ const reportesResumen = (arr) => {
 </div> 
     <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${resumenMayorGasto[0].monto}</div>`;
   }
-};
 
 //*********** Falta Categoria con Mayor Balance**********
+//  
+//   document.getElementById('categoria-mayor-balance').innerHTML =
+//   `<h6>Categoria con mayor Balance</h6>
+//    <div>
+//     <div class="color">${resumenMayorGasto[0].categoria}
+//     </div>
+//    </div> 
+//    <div class= "mb-4  align-item-center" style="color">-$${}</div>`;
+//   console.log(resumenMayorGanancia)
+//  }
+};
 
-//document.getElementById('categoria-mayor-balance').innerHTML =
-// `<h6>Categoria con mayor Balance</h6>
-// <div>
 
-//console.log();
+
 
 const mesMayorGananciaYGasto = (arr) => {
   const resumenMayorMonto = arr.sort((a, b) => b.monto - a.monto);
@@ -819,8 +828,7 @@ const inicializar = () => {
   fechaInput.valueAsDate = new Date();
   filtroDesde.valueAsDate = new Date();
   generarFiltrosCategorias(arrCategoriasIniciales);
-
-   operacionAgregada(arrOperaciones);
+  operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
