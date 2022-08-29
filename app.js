@@ -83,8 +83,8 @@ btnReportes.addEventListener("click", () => {
   }
   reportesResumen(JSON.parse(localStorage.getItem("arrOperaciones")));
   mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
-  // totalesPorCategoria(JSON.parse(localStorage.getItem("arrOperaciones, arrCategoriasIniciales")));
-  // totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
+  
+  
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -688,7 +688,8 @@ const reportesResumen = (arr) => {
   }
 
 //*********** Falta Categoria con Mayor Balance**********
-//  
+
+
 //   document.getElementById('categoria-mayor-balance').innerHTML =
 //   `<h6>Categoria con mayor Balance</h6>
 //    <div>
@@ -696,8 +697,8 @@ const reportesResumen = (arr) => {
 //     </div>
 //    </div> 
 //    <div class= "mb-4  align-item-center" style="color">-$${}</div>`;
-//   console.log(resumenMayorGanancia)
-//  }
+//   console.log()
+ 
 };
 
 
@@ -744,47 +745,71 @@ const mesMayorGananciaYGasto = (arr) => {
       }</div>`;
   }
  
+
+totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
 };
+
 
 //Totales por categoria
 
 // Funcion que filtra las categorias y operaciones y devuelve las categorias que tienen operaciones y
 // la suma total de sus ganancias y gastos y el balance
 
-const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
-  let arrConMonto = [];
-  arrCategoriasIniciales.forEach((categoria) => {
-    const porCategoria = arrOperaciones.filter(
-      (operacion) => operacion.categoria === categoria.categoria
-    );
-    porCategoria.forEach((operacion) => {
-      if (operacion.monto !== 0) {
-        arrConMonto.push(operacion);
-      }
+// const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
+//   let arrConMonto = [];
+//   //totalesPorCategoria.innerHTML = "";
+//   arrCategoriasIniciales.forEach((categoria) => {
+//     const porCategoria = arrOperaciones.filter(
+//       (operacion) => operacion.categoria === categoria.categoria
+//     );
+//     porCategoria.forEach((operacion) => {
+     
+//       if (operacion.monto !== 0) {
+//         arrConMonto.push(operacion);
+//       }
 
-      const totalGananciaCategoria = porCategoria
-        .filter((operacion) => operacion.tipo === "ganancia")
-        .reduce((count, current) => count + Number(current.monto), 0);
-      const totalGastoCategoria = porCategoria
-        .filter((operacion) => operacion.tipo === "gasto")
-        .reduce((count, current) => count + Number(current.monto), 0);
-      const totalPorCategoria = (document.getElementById(
-        "total-categoria-categoria"
-      ).innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`);
-      const totalPorCategoriaGanancia = (document.getElementById(
-        "total-categoria-ganancias"
-      ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${totalGananciaCategoria}</div>`);
-      const totalPorCategoriaGasto = (document.getElementById(
-        "total-categoria-gastos"
-      ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">-$${totalGastoCategoria}</div>`);
-      const totalPorCategoriaBalance = (document.getElementById(
-        "total-categoria-balance"
-      ).innerHTML += `<div class="mb-4 mt-4 text-end">$${
-        totalGananciaCategoria - totalGastoCategoria
-      }</div>`);
-    });
-  });
+//       const totalGananciaCategoria = porCategoria
+      
+//         .filter((operacion) => operacion.tipo === "ganancia")
+//         .reduce((count, current) => count + Number(current.monto), 0);
+//       const totalGastoCategoria = porCategoria
+//         .filter((operacion) => operacion.tipo === "gasto")
+//         .reduce((count, current) => count + Number(current.monto), 0);
+//       console.log(porCategoria)  
+//       const totalPorCategoria = (document.getElementById(
+//         "total-categoria-categoria"
+//       ).innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`);
+//       const totalPorCategoriaGanancia = (document.getElementById(
+//         "total-categoria-ganancias"
+//       ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${totalGananciaCategoria}</div>`);
+//       const totalPorCategoriaGasto = (document.getElementById(
+//         "total-categoria-gastos"
+//       ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">-$${totalGastoCategoria}</div>`);
+//       const totalPorCategoriaBalance = (document.getElementById(
+//         "total-categoria-balance"
+//       ).innerHTML += `<div class="mb-4 mt-4 text-end">$${
+//         totalGananciaCategoria - totalGastoCategoria
+//       }</div>`);
+     
+//     });
+//     totalesPorCategoria(JSON.parse(localStorage.getItem("arrOperaciones, arrCategoriasIniciales")));
+//   });
+  
+// };
+
+const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
+  arrCategoriasIniciales.forEach(categoria => {
+    const porCategoria = arrOperaciones.filter(operacion => operacion.categoria === categoria)
+    const porCategoriaGanancia = porCategoria.filter(operacion => operacion.tipo === 'ganancia').reduce((count, current) => count + Number(current.monto), 0)
+    const porCategoriaGasto = porCategoria.filter(operacion => operacion.tipo === 'gasto').reduce((count, current) => count + Number(current.monto), 0)
+    console.log(`La categoria ${categoria.categoria} su gasto es de: ${porCategoriaGasto}`)
+    console.log(`La categoria ${categoria.categoria} su ganacia es de: ${porCategoriaGanancia}`)
+    console.log(`El balance de la categoria  ${categoria.categoria} es de ${porCategoriaGanancia - porCategoriaGasto}`)
+  console.log(porCategoriaGanancia)
+  })
+  
 };
+//totalesPorCategoria(JSON.parse(localStorage.getItem("arrOperaciones, categorias")));
 
 // Totales por Mes
 
@@ -834,6 +859,7 @@ const totalPorMes = (arr) => {
   }
 };
 
+
 const inicializar = () => {
   fechaInput.valueAsDate = new Date();
   filtroDesde.valueAsDate = new Date();
@@ -841,9 +867,9 @@ const inicializar = () => {
   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
+  obtenerOperaciones(arrOperaciones);
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
   totalPorMes(arrOperaciones);
-  obtenerOperaciones(arrOperaciones);
 };
 
 window.onload = inicializar;
