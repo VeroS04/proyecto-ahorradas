@@ -7,8 +7,7 @@
 
 .my-nav {
     height: 13vh;
-    background-color: #48C9B0;
-
+    background-color: #1e5c50;
 }
 
 .my-nav-title {
@@ -35,26 +34,31 @@
 }
 
 .btn-nueva-operacion {
-    background-color: #48C9B0;
+    background-color: #1e5c50;
     border: none;
     color: white;
 }
 
 .btn-nueva-operacion:hover {
-    background-color: #69edd3;
+    background-color: #56b4a1;
 }
 
 a {
     text-decoration: none;
 }
 
-.my-card {
-    padding: 5%;
-    width: 80%;
+.main {
+    background-image: url(./assets/imagenes/fondo-ahorradas1.webp);
+    padding-top: 3%;
 }
 
 .my-operaciones {
-    padding: 3%;
+    padding-bottom: 9.3%;
+    width: 100%;
+}
+
+.my-operaciones-editar {
+    padding-bottom: 13.4%;
     width: 100%;
 }
 

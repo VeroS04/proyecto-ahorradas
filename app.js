@@ -282,7 +282,7 @@ const totalBalance = (arr) => {
   const totalGanancia = (document.getElementById(
     "total-ganancia"
   ).innerHTML = `<p class="fs-5">Ganancias</p>
- <div class="total-ganancias" style="color:rgb(109, 213, 6);" aria-label="suma de ganancias">+$${resultGanancias}</div>`);
+ <div class="total-ganancias fw-bold" style="color:rgb(109, 213, 6);" aria-label="suma de ganancias">+$${resultGanancias}</div>`);
 
   const resultGastos = arr
     .filter((operacion) => operacion.tipo === "gasto")
@@ -290,7 +290,7 @@ const totalBalance = (arr) => {
   const totalGastos = (document.getElementById(
     "total-gastos"
   ).innerHTML = `<p class="fs-5">Gastos</p>
-  <div class="total-gastos" style="color:rgb(209, 7, 7);" aria-label="suma de gastos">-$${resultGastos}</div>`);
+  <div class="total-gastos fw-bold" style="color:rgb(209, 7, 7);" aria-label="suma de gastos">-$${resultGastos}</div>`);
 
   const totalDeBalance = (document.getElementById(
     "total-balance"
@@ -592,7 +592,7 @@ const pintarCategorias = (arr) => {
     btn.addEventListener("click", (e) => {
       cardEditarcategoria.classList.remove("d-none");
       cardCategoria.classList.add("d-none");
-      const editarCategorias = arrCategoriasIniciales.filter(
+      editarCategorias = arrCategoriasIniciales.filter(
         (categoria) => categoria.id === e.target.dataset.id
       );
       editarCategorias.forEach((element) => {
@@ -601,41 +601,51 @@ const pintarCategorias = (arr) => {
       });
     });
   });
-};
+  // Boton que agrega categoria editada
 
- // Boton que agrega categoria editada
+  btnAgregarCategoria.addEventListener("click", () => {
 
-btnAgregarCategoria.addEventListener("click", () => {
-  arrCategoriasIniciales.forEach((element) => {
-    const id = element.id;
+    cardEditarcategoria.classList.add("d-none");
+    cardCategoria.classList.remove("d-none");
+
+    const cambiarCategoria = arrCategoriasIniciales.filter(
+      (categoria) => categoria.id === editarCategorias[0].id
+    );
+
+    const editarCategoriaDeOperacion = (arr) => {
+      arr.forEach((operacionElegida) => {
+        if(operacionElegida.categoria === editarCategorias[0].categoria){
+          operacionElegida.categoria = inputNombreEditadoCategoria.value
+        }
+      })
+      localStorage.setItem("arrOperaciones", JSON.stringify(arr));
+      const nuevaOperacionEditada = JSON.parse(localStorage.getItem("arrOperaciones"));
+      operacionAgregada(nuevaOperacionEditada)
+    };
+    editarCategoriaDeOperacion(arrOperaciones)
+
+    const agregarCategoriaEditada = cambiarCategoria[0];
+    agregarCategoriaEditada.categoria = inputNombreEditadoCategoria.value;
+    const edicionOperacion = arrCategoriasIniciales.map((categoria) =>
+      categoria.id === editarCategorias[0].id
+        ? agregarCategoriaEditada
+        : categoria
+    );
+    console.log(edicionOperacion);
+
+    localStorage.setItem("categorias", JSON.stringify(edicionOperacion));
+    arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias"));
+    generarFiltrosCategorias(arrCategoriasIniciales);
+    pintarCategorias(arrCategoriasIniciales);
   });
-  const categoriaEditada = {
-    id: id,
-    categoria: inputNombreEditadoCategoria.value,
-  };
 
-  cardEditarcategoria.classList.add("d-none");
-  cardCategoria.classList.remove("d-none");
-
-  const agregarCategoriaEditada = arrCategoriasIniciales.map(
-    (arrCategoriasIniciales) =>
-      arrCategoriasIniciales.id === id
-        ? categoriaEditada
-        : arrCategoriasIniciales
-  );
-
-  localStorage.setItem("categorias", JSON.stringify(agregarCategoriaEditada));
-  arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias"));
-  generarFiltrosCategorias(arrCategoriasIniciales);
-  pintarCategorias(arrCategoriasIniciales);
-});
-
-btnCancelarCategoria.addEventListener("click", () => {
-  cardEditarcategoria.classList.add("d-none");
-  cardCategoria.classList.remove("d-none");
-});
-
+  btnCancelarCategoria.addEventListener("click", () => {
+    cardEditarcategoria.classList.add("d-none");
+    cardCategoria.classList.remove("d-none");
+  });
+};
 pintarCategorias(arrCategoriasIniciales);
+ 
 
 //                                            *********************************************************************
 //                                                                     SECCION REPORTES

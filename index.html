@@ -15,7 +15,7 @@
     <!-- **************************  INICIO DEL NAV *************************-->
 
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark my-nav mb-5" aria-label="navegador">
+      <nav class="navbar navbar-expand-lg navbar-dark my-nav" aria-label="navegador">
         <div class="container-fluid">
           <a class="navbar-brand my-nav-title" href="#">
             <img class="d-inline-block align-text-top" />
@@ -55,7 +55,7 @@
 
     <!-- ****************** INICIO DEL MAIN ***************** -->
 
-    <main>
+    <main class="main">
 
       <!-- ****************** INICIO DE SECCION BALANCE ***************** -->
 
@@ -249,7 +249,7 @@
 
       <!--  ******************* INICIO DE SECCION CATEGORIAS ********************** -->
 
-      <section class="d-none container-responsive mt-5" id="categorias">
+      <section class="d-none container-responsive my-operaciones" id="categorias">
         <div class="card shadow p-3 rounded border border-1 my-card my-categorias" id="card-categorias" aria-label="formulario para nueva categoria">
           <h1 class="mb-5">Categorias</h1>
           <form>
@@ -266,7 +266,7 @@
             </div>
           </form>
         </div>
-        <div class="d-none container-responsive" id="card-editar-categorias" aria-label="formulario para editar categoria">
+        <div class="d-none mt-5 container-responsive my-operaciones-editar" id="card-editar-categorias" aria-label="formulario para editar categoria">
           <div class="card shadow p-3 rounded border border-1 my-card my-categorias">
             <h1 class="mb-5">Editar Categorias</h1>
             <form>
@@ -330,7 +330,7 @@
                 </div>
               </div>
             </div> 
-            <div class="total-mes p-3 mb-5" aria-label="vista de totales por mes">
+            <div class="total-mes p-3" aria-label="vista de totales por mes">
               <h5 class="card-title fw-bold">Total por mes</h5>
               <div class="mt-4 d-flex justify-content-between contenedor-total-mes">
                 <div id="total-mes-meses" class="total-mes-meses">
