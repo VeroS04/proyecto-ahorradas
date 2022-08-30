@@ -687,20 +687,9 @@ const reportesResumen = (arr) => {
     <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${resumenMayorGasto[0].monto}</div>`;
   }
 
-//*********** Falta Categoria con Mayor Balance**********
-
-
-//   document.getElementById('categoria-mayor-balance').innerHTML =
-//   `<h6>Categoria con mayor Balance</h6>
-//    <div>
-//     <div class="color">${resumenMayorGasto[0].categoria}
-//     </div>
-//    </div> 
-//    <div class= "mb-4  align-item-center" style="color">-$${}</div>`;
-//   console.log()
  
 };
-//hacer un arreglo con los balances, 
+
 
 
 
@@ -755,26 +744,6 @@ totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
 // Funcion que filtra las categorias y operaciones y devuelve las categorias que tienen operaciones y
 // la suma total de sus ganancias y gastos y el balance
 
-// const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
-//   let arrConMonto = [];
-//   //totalesPorCategoria.innerHTML = "";
-//   arrCategoriasIniciales.forEach((categoria) => {
-//     const porCategoria = arrOperaciones.filter(
-//       (operacion) => operacion.categoria === categoria.categoria
-//     );
-//     porCategoria.forEach((operacion) => {
-     
-//       if (operacion.monto !== 0) {
-//         arrConMonto.push(operacion);
-//       }
-
-//       
-     
-//     });
-//     totalesPorCategoria(JSON.parse(localStorage.getItem("arrOperaciones, arrCategoriasIniciales")));
-//   });
-  
-// };
 
 const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
   let total = 0
@@ -791,6 +760,7 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
     const porCategoriaGasto = porCategoria.filter(operacion => operacion.tipo === 'gasto').reduce((count, current) => count + Number(current.monto), 0)
     
     console.log(total)
+    if(porCategoriaGanancia > 0 || porCategoriaGasto > 0){
       const totalPorCategoria = document.getElementById(
         "total-categoria-categoria"
       ).innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`;
@@ -808,7 +778,7 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
       return {
         ...categoria, balance: porCategoriaGanancia - porCategoriaGasto
       }
-      
+    } 
   })
   const categoriaMayorBalance = document.getElementById("categoria-mayor-balance");
   const result = conBalance.sort((a, b) => b.balance - a.balance)
