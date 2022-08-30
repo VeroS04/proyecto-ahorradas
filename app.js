@@ -67,6 +67,8 @@ btnCategorias.addEventListener("click", () => {
 });
 
 // Boton a reportes que oculta balance, categorias y formulario de nueva operacion
+// y si hay opreraciones oculta la imagen de sin operaciones y deja ver el resumen,
+// inicializa las funciones reporteResumen y mesMayorGananciaYGasto
 
 btnReportes.addEventListener("click", () => {
   reportes.classList.remove("d-none");
@@ -74,6 +76,7 @@ btnReportes.addEventListener("click", () => {
   balance.classList.add("d-none");
   containerNuevaOperacion.classList.add("d-none");
   cardEditarOperacion.classList.add("d-none");
+
   if (!arrOperaciones.length) {
     reporteSinOperacion.classList.remove("d-none");
     reporteConOperacion.classList.add("d-none");
@@ -83,8 +86,6 @@ btnReportes.addEventListener("click", () => {
   }
   reportesResumen(JSON.parse(localStorage.getItem("arrOperaciones")));
   mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
-  
-  
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -107,15 +108,20 @@ ocultarFiltros.addEventListener("click", () => {
 
 //                                                             ************************************
 //                                                                     SECCION OPERACIONES
-//                                                             ************************************
+//                                                             ************************************ 
+
+// Variable que trae las operaciones creadas o un arreglo vacio
 
 let arrOperaciones = JSON.parse(localStorage.getItem("arrOperaciones")) || [];
-// let arrOperaciones = [];
+
+// Funcion que retornas las operaciones o un arrego vacio que se uiliza para el filtrado acumulativo de operaciones
+
 const obtenerOperaciones = () => {
   return JSON.parse(localStorage.getItem("arrOperaciones")) || [];
 };
 
 // Función que oculta la imagen de sin operaciones si hay operaciones nuevas
+
 const listaOperaciones = (arr) => {
   if (!arr.length) {
     sinOperaciones.classList.remove("d-none");
@@ -156,7 +162,7 @@ agregarBtn.addEventListener("click", () => {
   operacionAgregada(arrOperaciones);
 });
 
-// Función que crea el div con las operaciones
+// Función que crea las operaciones y las pinta en un div 
 
 operacionAgregada = (arr) => {
   document.getElementById("operaciones").innerHTML = "";
@@ -193,6 +199,9 @@ operacionAgregada = (arr) => {
   const agregarEditadoBtn = document.getElementById("agregar-editado-btn");
   const editarBtns = document.querySelectorAll(".btn-editar");
 
+  // Boton que oculta la seccion balance y deja ver el formulario para ediar la operacion, 
+  // recorre las operaciones y crea un id para cada operacion a ser editada
+
   editarBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const arrEditarOperacion = arrOperaciones.filter(
@@ -212,6 +221,8 @@ operacionAgregada = (arr) => {
       cardEditarOperacion.classList.remove("d-none");
     });
   });
+
+  // Boton que agrega la operacion editada
 
   agregarEditadoBtn.addEventListener("click", () => {
     arrOperaciones.forEach((operacion) => {
@@ -256,6 +267,8 @@ operacionAgregada = (arr) => {
 
   const btnsEliminar = document.querySelectorAll(".btn-eliminar");
 
+  // Boton que elimina una operacion, devuelve un array sin la operacion seleccionada 
+
   btnsEliminar.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const arregloSinOperacion = arrOperaciones.filter(
@@ -277,6 +290,7 @@ operacionAgregada = (arr) => {
 //                                            *********************************************************************
 
 // Función que pinta las ganacias, los gastos y el balance
+
 const totalBalance = (arr) => {
   const resultGanancias = arr
     .filter((operacion) => operacion.tipo === "ganancia")
@@ -308,23 +322,7 @@ const totalBalance = (arr) => {
 
 //          ***** FILTRO POR GASTO/GANANCIA *****
 
-// let arrTipoFiltro = JSON.parse(localStorage.getItem("arrOperaciones")) || [];
-
 const selectFilterTipo = document.getElementById("select-filter-tipo");
-
-// selectFilterTipo.addEventListener("change", (e) => {
-//   if (e.target.value !== "todos") {
-//     const arrFiltroTipo = arrOperaciones.filter(
-//       (operacion) => operacion.tipo == e.target.value
-//     );
-//     localStorage.setItem("arrTipoFiltro", arrFiltroTipo);
-//     localStorage.setItem("arrTipoFiltro", JSON.stringify(arrFiltroTipo));
-
-//     operacionAgregada(arrFiltroTipo);
-//   } else {
-//     operacionAgregada(arrOperaciones);
-//   }
-// });
 
 //           ****** FILTRO POR CATEGORIA *******
 
@@ -377,30 +375,6 @@ const generarFiltrosCategorias = (arr) => {
 const selectFilterCategorias = document.getElementById(
   "select-filter-categorias"
 );
-
-// let arrCategoriaFiltro =
-//   JSON.parse(localStorage.getItem("arrOperaciones")) || [];
-
-// // Función que realiza el filtro por categoria
-
-// selectFilterCategorias.addEventListener("input", (e) => {
-//   if (e.target.value !== "todas") {
-//     const arrFiltroCategorias = arrOperaciones.filter(
-//       (operacion) => operacion.categoria === e.target.value
-//     );
-//     localStorage.setItem("arrCategoriaFiltro", arrFiltroCategorias);
-//     localStorage.setItem(
-//       "arrCategoriaFiltro",
-//       JSON.stringify(arrFiltroCategorias)
-//     );
-
-//     operacionAgregada(arrFiltroCategorias);
-//   } else {
-//     operacionAgregada(arrOperaciones);
-//   }
-//});
-
-
 
 
 //         ****************   FILTROS ********************
@@ -467,8 +441,6 @@ const filtros = (e) => {
   if(ordenDesde !== new Date()){
     arrOperaciones = arrOperaciones.filter(operacion =>  
       (new Date(operacion.fecha) >= new Date(ordenDesde)))
-      
-      console.log(ordenDesde !== new Date())
     }
   operacionAgregada(arrOperaciones);
   listaOperaciones(arrOperaciones);
@@ -556,12 +528,9 @@ const pintarCategorias = (arr) => {
     const categoriaEliminada = arr.filter(
       (categoria) => categoria.id !== e.target.dataset.id
     );
-    console.log(categoriaEliminada);
-    console.log(categoriaAEliminar);
     const operacionEliminada = arrOperaciones.filter(
       (operacion) => operacion.categoria !== categoriaAEliminar
     );
-    console.log(operacionEliminada);
     arrActualizado(categoriaEliminada, operacionEliminada)
   }
 
@@ -633,7 +602,6 @@ const pintarCategorias = (arr) => {
         ? agregarCategoriaEditada
         : categoria
     );
-    console.log(edicionOperacion);
 
     localStorage.setItem("categorias", JSON.stringify(edicionOperacion));
     arrCategoriasIniciales = JSON.parse(localStorage.getItem("categorias"));
@@ -655,8 +623,7 @@ pintarCategorias(arrCategoriasIniciales);
 
 //*** Resumen
 
-// Funcion que realiza un filtrado de las operaciones y devuelve las categorias y meses con mayor ganancia y
-// las categorias y meses con mayor con mayor gasto
+// Funcion que realiza un filtrado de las operaciones y devuelve las categorias con mayor ganancia y con mayor con gasto
 
 const reportesResumen = (arr) => {
   const resumenMayorGanancia = arr
@@ -666,11 +633,11 @@ const reportesResumen = (arr) => {
     document.getElementById(
       "categoria-mayor-ganancia"
     ).innerHTML = `<h6>Categoria con mayor ganancia</h6>
-  <div>
-    <div class="color">${resumenMayorGanancia[0].categoria}
-    </div>
-  </div> 
-      <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${resumenMayorGanancia[0].monto}</div>`;
+                  <div>
+                    <div class="color">${resumenMayorGanancia[0].categoria}
+                    </div>
+                  </div> 
+                  <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${resumenMayorGanancia[0].monto}</div>`;
   }
 
   const resumenMayorGasto = arr
@@ -680,29 +647,16 @@ const reportesResumen = (arr) => {
     document.getElementById(
       "categoria-mayor-gasto"
     ).innerHTML = `<h6>Categoria con mayor gasto</h6>
-<div>
-  <div class="color">${resumenMayorGasto[0].categoria}
-  </div>
-</div> 
-    <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${resumenMayorGasto[0].monto}</div>`;
+                  <div>
+                    <div class="color">${resumenMayorGasto[0].categoria}
+                    </div>
+                  </div> 
+                  <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${resumenMayorGasto[0].monto}</div>`;
   }
-
-//*********** Falta Categoria con Mayor Balance**********
-
-
-//   document.getElementById('categoria-mayor-balance').innerHTML =
-//   `<h6>Categoria con mayor Balance</h6>
-//    <div>
-//     <div class="color">${resumenMayorGasto[0].categoria}
-//     </div>
-//    </div> 
-//    <div class= "mb-4  align-item-center" style="color">-$${}</div>`;
-//   console.log()
  
 };
-//hacer un arreglo con los balances, 
 
-
+// Funcion que realiza un filtrado de las operaciones y devuelve los meses con mayor ganancia y con mayor con gasto
 
 const mesMayorGananciaYGasto = (arr) => {
   const resumenMayorMonto = arr.sort((a, b) => b.monto - a.monto);
@@ -715,17 +669,15 @@ const mesMayorGananciaYGasto = (arr) => {
     document.getElementById(
       "mes-mayor-ganancia"
     ).innerHTML = `<h6>Mes con mayor ganancia</h6>
-  <div>
-    <div class="color">${
-      new Date(gananciaMayor[0].fecha).getMonth() + 1
-    }/${new Date(gananciaMayor[0].fecha).getFullYear()}
-    </div>
-  </div> 
-      <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${
-        gananciaMayor[0].monto
-      }</div>`;
+                    <div>
+                      <div class="color">
+                      ${new Date(gananciaMayor[0].fecha).getMonth() + 1}/${new Date(gananciaMayor[0].fecha).getFullYear()}
+                      </div>
+                    </div> 
+                    <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${
+                      gananciaMayor[0].monto}
+                    </div>`;
   }
-
 
   const gastoMayor = resumenMayorMonto.filter(
     (operacion) => operacion.tipo === "gasto"
@@ -734,47 +686,23 @@ const mesMayorGananciaYGasto = (arr) => {
     document.getElementById(
       "mes-mayor-gasto"
     ).innerHTML = `<h6>Mes con mayor gasto</h6>
-  <div>
-    <div class="color">${new Date(gastoMayor[0].fecha).getMonth() + 1}/${new Date(
-      gastoMayor[0].fecha
-    ).getFullYear()}
-    </div>
-  </div> 
-      <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$${
-        gastoMayor[0].monto
-      }</div>`;
+                  <div>
+                    <div class="color">
+                      ${new Date(gastoMayor[0].fecha).getMonth() + 1}/${new Date(gastoMayor[0].fecha).getFullYear()}
+                    </div>
+                  </div> 
+                  <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$
+                    ${gastoMayor[0].monto}
+                  </div>`;
   }
- 
-
-totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
+  totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
 };
 
 
 //Totales por categoria
 
 // Funcion que filtra las categorias y operaciones y devuelve las categorias que tienen operaciones y
-// la suma total de sus ganancias y gastos y el balance
-
-// const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
-//   let arrConMonto = [];
-//   //totalesPorCategoria.innerHTML = "";
-//   arrCategoriasIniciales.forEach((categoria) => {
-//     const porCategoria = arrOperaciones.filter(
-//       (operacion) => operacion.categoria === categoria.categoria
-//     );
-//     porCategoria.forEach((operacion) => {
-     
-//       if (operacion.monto !== 0) {
-//         arrConMonto.push(operacion);
-//       }
-
-//       
-     
-//     });
-//     totalesPorCategoria(JSON.parse(localStorage.getItem("arrOperaciones, arrCategoriasIniciales")));
-//   });
-  
-// };
+// la suma total de sus ganancias, gastos y el balance
 
 const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
   let total = 0
@@ -810,17 +738,20 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
       }
       
   })
+  // Se realiza un sort para sacar la categoria con mayor balance y se pinta en el resumen
+
   const categoriaMayorBalance = document.getElementById("categoria-mayor-balance");
   const result = conBalance.sort((a, b) => b.balance - a.balance)
-  categoriaMayorBalance.innerHTML=
-  `<h6>Categoria con mayor Balance</h6>
-  <div>
-    <div class="color">${result[0].categoria}
-    </div>
-  </div> 
-      <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${result[0].balance}</div>`;
+  categoriaMayorBalance.innerHTML=`<h6>Categoria con mayor Balance</h6>
+                                  <div>
+                                    <div class="color">
+                                      ${result[0].categoria}
+                                    </div>
+                                  </div> 
+                                  <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$
+                                    ${result[0].balance}
+                                  </div>`;
 };
-
 
 // Totales por Mes
 
@@ -829,53 +760,41 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
 
 const totalPorMes = (arr) => {
   const mesesSinRepetir = [
-    ...new Set(
-      arr.map(
-        (operacion) =>
-          `${new Date(operacion.fecha).getMonth() + 1}/${new Date(
-            operacion.fecha
-          ).getFullYear()}`
-      )
-    ),
-  ].sort();
+    ...new Set(arr.map((operacion) =>
+      `${new Date(operacion.fecha).getMonth() + 1}/${new Date(operacion.fecha).getFullYear()}`)),].sort();
 
   for (let i = 0; i < mesesSinRepetir.length; i++) {
     const operacionesPorMes = arr.filter(
       (operacion) =>
-        `${new Date(operacion.fecha).getMonth() + 1}/${new Date(
-          operacion.fecha
-        ).getFullYear()}` === mesesSinRepetir[i]
-    );
-    const porTipoGanancia = operacionesPorMes
-      .filter((operacion) => operacion.tipo === "ganancia")
-      .reduce((prev, current) => prev + Number(current.monto), 0);
-    const porTipoGasto = operacionesPorMes
-      .filter((operacion) => operacion.tipo === "gasto")
-      .reduce((prev, current) => prev + Number(current.monto), 0);
+        `${new Date(operacion.fecha).getMonth() + 1}/${new Date(operacion.fecha).getFullYear()}` === mesesSinRepetir[i]);
+    const porTipoGanancia = operacionesPorMes.filter((operacion) => operacion.tipo === "ganancia").reduce((prev, current) =>
+     prev + Number(current.monto), 0);
+    const porTipoGasto = operacionesPorMes.filter((operacion) => operacion.tipo === "gasto").reduce((prev, current) => 
+     prev + Number(current.monto), 0);
 
-    const totalMesMeses = document.getElementById(
-      "total-mes-meses"
-    )
+    const totalMesMeses = document.getElementById("total-mes-meses")
     totalMesMeses.innerHTML ="";
-    
-    totalMesMeses.innerHTML += `<div class="mt-4 mb-4">${mesesSinRepetir[i]} </div>`;
-    const totalMesGanancia = document.getElementById(
-      "total-mes-ganancias"
-      )
-      totalMesGanancia.innerHTML = "";
-    totalMesGanancia.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${porTipoGanancia}</div>`;
-    const totalMesGastos = document.getElementById(
-      "total-mes-gastos"
-    )
+    totalMesMeses.innerHTML += `<div class="mt-4 mb-4">
+                                  ${mesesSinRepetir[i]}
+                                </div>`;
+
+    const totalMesGanancia = document.getElementById("total-mes-ganancias")
+    totalMesGanancia.innerHTML = "";
+    totalMesGanancia.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$
+                                    ${porTipoGanancia}
+                                  </div>`;
+
+    const totalMesGastos = document.getElementById("total-mes-gastos")
     totalMesGastos.innerHTML = "";
-    totalMesGastos.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">+$${porTipoGasto}</div>`;
-    const totalMesBalance = document.getElementById(
-      "total-mes-balance"
-    )
+    totalMesGastos.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">+$
+                                  ${porTipoGasto}
+                                </div>`;
+
+    const totalMesBalance = document.getElementById("total-mes-balance")
     totalMesBalance.innerHTML = "";
-    totalMesBalance.innerHTML += `<div class="mb-4 mt-4 text-end">+$${
-      porTipoGanancia - porTipoGasto
-    }</div>`;
+    totalMesBalance.innerHTML += `<div class="mb-4 mt-4 text-end">+$
+                                    ${porTipoGanancia - porTipoGasto}
+                                  </div>`;
   }
 };
 
