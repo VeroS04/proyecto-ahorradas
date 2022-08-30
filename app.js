@@ -700,7 +700,7 @@ const reportesResumen = (arr) => {
 //   console.log()
  
 };
-
+//hacer un arreglo con los balances, 
 
 
 
@@ -768,28 +768,7 @@ totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
 //         arrConMonto.push(operacion);
 //       }
 
-//       const totalGananciaCategoria = porCategoria
-      
-//         .filter((operacion) => operacion.tipo === "ganancia")
-//         .reduce((count, current) => count + Number(current.monto), 0);
-//       const totalGastoCategoria = porCategoria
-//         .filter((operacion) => operacion.tipo === "gasto")
-//         .reduce((count, current) => count + Number(current.monto), 0);
-//       console.log(porCategoria)  
-//       const totalPorCategoria = (document.getElementById(
-//         "total-categoria-categoria"
-//       ).innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`);
-//       const totalPorCategoriaGanancia = (document.getElementById(
-//         "total-categoria-ganancias"
-//       ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${totalGananciaCategoria}</div>`);
-//       const totalPorCategoriaGasto = (document.getElementById(
-//         "total-categoria-gastos"
-//       ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">-$${totalGastoCategoria}</div>`);
-//       const totalPorCategoriaBalance = (document.getElementById(
-//         "total-categoria-balance"
-//       ).innerHTML += `<div class="mb-4 mt-4 text-end">$${
-//         totalGananciaCategoria - totalGastoCategoria
-//       }</div>`);
+//       
      
 //     });
 //     totalesPorCategoria(JSON.parse(localStorage.getItem("arrOperaciones, arrCategoriasIniciales")));
@@ -798,18 +777,50 @@ totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
 // };
 
 const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
-  arrCategoriasIniciales.forEach(categoria => {
-    const porCategoria = arrOperaciones.filter(operacion => operacion.categoria === categoria)
+  let total = 0
+  const conBalance = arrCategoriasIniciales.map(categoria => {
+    
+    const porCategoria = arrOperaciones.filter(operacion => operacion.categoria === categoria.categoria)
+    
+    if(porCategoria.length > 0){
+      
+      total = porCategoria.reduce((count, current) => count + Number(current.monto), 0)
+    }
+    
     const porCategoriaGanancia = porCategoria.filter(operacion => operacion.tipo === 'ganancia').reduce((count, current) => count + Number(current.monto), 0)
     const porCategoriaGasto = porCategoria.filter(operacion => operacion.tipo === 'gasto').reduce((count, current) => count + Number(current.monto), 0)
-    console.log(`La categoria ${categoria.categoria} su gasto es de: ${porCategoriaGasto}`)
-    console.log(`La categoria ${categoria.categoria} su ganacia es de: ${porCategoriaGanancia}`)
-    console.log(`El balance de la categoria  ${categoria.categoria} es de ${porCategoriaGanancia - porCategoriaGasto}`)
-  console.log(porCategoriaGanancia)
+    
+    console.log(total)
+      const totalPorCategoria = document.getElementById(
+        "total-categoria-categoria"
+      ).innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`;
+      const totalPorCategoriaGanancia = document.getElementById(
+        "total-categoria-ganancias"
+      ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${porCategoriaGanancia}</div>`;
+      const totalPorCategoriaGasto = document.getElementById(
+        "total-categoria-gastos"
+      ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">-$${porCategoriaGasto}</div>`;
+      const totalPorCategoriaBalance = document.getElementById(
+        "total-categoria-balance"
+      ).innerHTML += `<div class="mb-4 mt-4 text-end">$${
+        porCategoriaGanancia - porCategoriaGasto
+      }</div>`;
+      return {
+        ...categoria, balance: porCategoriaGanancia - porCategoriaGasto
+      }
+      
   })
-  
+  const categoriaMayorBalance = document.getElementById("categoria-mayor-balance");
+  const result = conBalance.sort((a, b) => b.balance - a.balance)
+  categoriaMayorBalance.innerHTML=
+  `<h6>Categoria con mayor Balance</h6>
+  <div>
+    <div class="color">${result[0].categoria}
+    </div>
+  </div> 
+      <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${result[0].balance}</div>`;
 };
-//totalesPorCategoria(JSON.parse(localStorage.getItem("arrOperaciones, categorias")));
+
 
 // Totales por Mes
 
@@ -842,20 +853,29 @@ const totalPorMes = (arr) => {
       .filter((operacion) => operacion.tipo === "gasto")
       .reduce((prev, current) => prev + Number(current.monto), 0);
 
-    const totalMesMeses = (document.getElementById(
+    const totalMesMeses = document.getElementById(
       "total-mes-meses"
-    ).innerHTML += `<div class="mt-4 mb-4">${mesesSinRepetir[i]} </div>`);
-    const totalMesGanancia = (document.getElementById(
+    )
+    totalMesMeses.innerHTML ="";
+    
+    totalMesMeses.innerHTML += `<div class="mt-4 mb-4">${mesesSinRepetir[i]} </div>`;
+    const totalMesGanancia = document.getElementById(
       "total-mes-ganancias"
-    ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${porTipoGanancia}</div>`);
-    const totalMesGastos = (document.getElementById(
+      )
+      totalMesGanancia.innerHTML = "";
+    totalMesGanancia.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${porTipoGanancia}</div>`;
+    const totalMesGastos = document.getElementById(
       "total-mes-gastos"
-    ).innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">+$${porTipoGasto}</div>`);
-    const totalMesBalance = (document.getElementById(
+    )
+    totalMesGastos.innerHTML = "";
+    totalMesGastos.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">+$${porTipoGasto}</div>`;
+    const totalMesBalance = document.getElementById(
       "total-mes-balance"
-    ).innerHTML += `<div class="mb-4 mt-4 text-end">+$${
+    )
+    totalMesBalance.innerHTML = "";
+    totalMesBalance.innerHTML += `<div class="mb-4 mt-4 text-end">+$${
       porTipoGanancia - porTipoGasto
-    }</div>`);
+    }</div>`;
   }
 };
 
@@ -869,7 +889,7 @@ const inicializar = () => {
   totalBalance(arrOperaciones);
   obtenerOperaciones(arrOperaciones);
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
-  totalPorMes(arrOperaciones);
+  
 };
 
 window.onload = inicializar;
