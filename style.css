@@ -1,273 +1,281 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /* *************** INICIO DEL NAV ********************** */
 
 .my-nav {
-    height: 13vh;
-    background-color: #1e5c50;
+  height: 13vh;
+  background-color: #1e5c50;
 }
 
 .my-nav-title {
-    font-size: 3em;
-    font-weight: bold;
-    padding: 0.5% 1%;
-    margin-left: 2%;
-
+  font-size: 3em;
+  font-weight: bold;
+  padding: 0.5% 1%;
+  margin-left: 2%;
 }
 
 .my-nav-title:hover {
-    background-color: #1c836e;
-    border-radius: 10px;
+  background-color: #1c836e;
+  border-radius: 10px;
 }
-
+.btns-nav{
+    padding-left: 5%;
+}
 .btns-nav:hover {
-    background-color: #1c836e;
-    border-radius: 10px;
+  background-color: #1c836e;
+  border-radius: 10px;
 }
 
 .operaciones-title {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .btn-nueva-operacion {
-    background-color: #1e5c50;
-    border: none;
-    color: white;
+  background-color: #1e5c50;
+  border: none;
+  color: white;
 }
 
 .btn-nueva-operacion:hover {
-    background-color: #56b4a1;
+  background-color: #56b4a1;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .main {
-    background-image: url(./assets/imagenes/fondo-ahorradas1.webp);
-    padding-top: 3%;
+  background-image: url(./assets/imagenes/fondo-ahorradas1.webp);
+  padding-top: 3%;
 }
 
 .my-operaciones {
-    padding-bottom: 9.3%;
-    width: 100%;
+  padding-bottom: 9.3%;
+  width: 100%;
 }
 
 .my-operaciones-editar {
-    padding-bottom: 13.4%;
-    width: 100%;
+  padding-bottom: 13.4%;
+  width: 100%;
 }
 
 .my-categorias,
 .my-reportes {
-    width: 40%;
-    margin: auto;
-    margin-top: 6%;
+  width: 40%;
+  margin: auto;
+  margin-top: 6%;
 }
 
 .descripcion-operaciones {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .input-nombre-categoria {
-    margin-right: 1%;
+  margin-right: 1%;
 }
 
 .color {
-    background-color: #ebfffc;
-    color: #00947e;
+  background-color: #ebfffc;
+  color: #00947e;
 }
 
-.green{
-    color: green;
+.green {
+  color: green;
 }
-  
-.green::before{
-    content: '+$';
+
+.green::before {
+  content: "+$";
 }
-  
-.red{
-    color: red;
+
+.red {
+  color: red;
 }
-  
-.red::before{
-    content: '-$';
+
+.red::before {
+  content: "-$";
 }
 
 .op-monto {
+  text-align: end;
+}
+
+.contenedor-operaciones-nuevas {
+  margin: auto;
+}
+
+@media screen and (max-width: 991px) and (min-width: 770px) {
+  .nav-hamburguesa {
+    background-color: #1e5c50;
+    color: #fff;
+    transition: 1.5s;
+  }
+
+  .container-responsive {
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .my-card,
+  .contenedor-card,
+  .my-operaciones {
+    width: 100%;
+  }
+
+  .contenedor-operaciones {
+    width: 100%;
+  }
+  .my-categorias,
+  .my-reportes {
+    margin-top: 20%;
+  }
+}
+
+@media screen and (max-width: 769px) and (min-width: 336px) {
+  .my-nav {
+    width: 100%;
+  }
+
+  .my-nav-title {
+    font-size: 1.8em;
+  }
+  .my-leter {
+    font-size: 1.2em;
+  }
+
+  .nav-hamburguesa {
+    background-color: #1e5c50;
+    color: #fff;
+    transition: 1.5s;
+  }
+
+  .container-responsive {
+    width: 100%;
+    margin-top: 10%;
+  }
+
+  .my-card,
+  .contenedor-card,
+  .my-operaciones {
+    width: 100%;
+  }
+
+  .my-categorias,
+  .my-reportes {
+    margin-top: 25%;
+  }
+
+  .operaciones-title {
+    display: block;
+  }
+
+  .descripcion-operaciones {
+    display: none;
+  }
+  .lista-op {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .op-descripcion {
+    width: 50%;
+  }
+  .op-categoria {
+    width: 50%;
     text-align: end;
+  }
+  .op-fecha {
+    display: none;
+  }
+  .op-monto {
+    width: 50%;
+    text-align: start;
+    margin-top: 4%;
+  }
+  .op-acciones {
+    width: 50%;
+    margin-top: 4%;
+  }
 }
 
-.contenedor-operaciones-nuevas{
-    margin: auto;
-}
+@media screen and (max-width: 335px) {
+  .my-nav {
+    width: 100%;
+  }
 
+  .my-nav-title {
+    font-size: 1.8em;
+  }
 
+  .nav-hamburguesa {
+    background-color: #1e5c50;
+    color: #fff;
+    transition: 1.5s;
+  }
 
-@media screen and (max-width: 991px) and (min-width: 770px){
-    .nav-hamburguesa {
-        background-color: #48C9B0;
-        color: #fff;
-        transition: 1.5s;
-    }
+  .my-leter {
+    font-size: 1.2em;
+  }
+  .container-responsive {
+    width: 100%;
+    margin-top: 10%;
+  }
 
-    .container-responsive {
-        width: 100%;
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-    .my-card, .contenedor-card, .my-operaciones {
-        width: 100%;
-    }
+  .my-card,
+  .contenedor-card,
+  .my-operaciones {
+    width: 100%;
+  }
 
-    .contenedor-operaciones {
-        width: 100%;
-    }
-    .my-categorias,
-    .my-reportes {
-        margin-top: 20%;
-    }
-}
+  .my-categorias,
+  .my-reportes {
+    margin-top: 35%;
+  }
 
+  .operaciones-title {
+    display: block;
+  }
 
-@media screen and (max-width: 769px) and (min-width: 336px){
+  .descripcion-operaciones {
+    display: none;
+  }
+  .lista-op {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
-    .my-nav{
-        width: 100%;
-    }
+  .op-descripcion {
+    width: 50%;
+  }
+  .op-categoria {
+    width: 50%;
+    text-align: end;
+  }
+  .op-fecha {
+    display: none;
+  }
+  .op-monto {
+    width: 50%;
+    text-align: start;
+    margin-top: 4%;
+  }
+  .op-acciones {
+    width: 50%;
+    margin-top: 4%;
+  }
+  .contenedor-total-mes {
+    background-color: #99f5e3;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
-    .my-nav-title {
-        font-size: 2em;
-    }
-
-    .nav-hamburguesa {
-        background-color: #48C9B0;
-        color: #fff;
-        transition: 1.5s;
-    }
-
-    .container-responsive {
-        width: 100%;
-        margin-top: 10%;
-    }
-
-    .my-card, .contenedor-card, .my-operaciones {
-        width: 100%;
-    }
-
-    .my-categorias,
-    .my-reportes {
-        margin-top: 25%;
-    }
-
-    .operaciones-title {
-        display: block;
-    }
-
-    .descripcion-operaciones {
-        display: none;
-    }
-    .lista-op {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .op-descripcion {
-        width: 50%;
-    }
-    .op-categoria {
-        width: 50%;
-        text-align: end;
-    }
-    .op-fecha {
-        display: none;
-    }
-    .op-monto {
-        width: 50%;
-        text-align: start;
-        margin-top: 4%;
-    }
-    .op-acciones {
-        width: 50%;
-        margin-top: 4%;
-    }
-}
-
-@media screen and (max-width: 335px){
-
-    .my-nav{
-        width: 100%;
-    }
-
-    .my-nav-title {
-        font-size: 2em;
-    }
-
-    .nav-hamburguesa {
-        background-color: #48C9B0;
-        color: #fff;
-        transition: 1.5s;
-    }
-
-    .container-responsive {
-        width: 100%;
-        margin-top: 10%;
-    }
-
-    .my-card, .contenedor-card, .my-operaciones {
-        width: 100%;
-    }
-
-    .my-categorias,
-    .my-reportes {
-        margin-top: 35%;
-    }
-
-    .operaciones-title {
-        display: block;
-    }
-
-    .descripcion-operaciones {
-        display: none;
-    }
-    .lista-op {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .op-descripcion {
-        width: 50%;
-    }
-    .op-categoria {
-        width: 50%;
-        text-align: end;
-    }
-    .op-fecha {
-        display: none;
-    }
-    .op-monto {
-        width: 50%;
-        text-align: start;
-        margin-top: 4%;
-    }
-    .op-acciones {
-        width: 50%;
-        margin-top: 4%;
-    }
-    .contenedor-total-mes {
-        background-color: #99f5e3;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .total-mes-meses {
-        background-color: #68c8ba;
-        width: 100%;
-        padding: 1%;
-    }
+  .total-mes-meses {
+    background-color: #68c8ba;
+    width: 100%;
+    padding: 1%;
+  }
 }
