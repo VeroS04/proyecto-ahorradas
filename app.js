@@ -86,7 +86,6 @@ btnReportes.addEventListener("click", () => {
   }
   reportesResumen(JSON.parse(localStorage.getItem("arrOperaciones")));
   mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
-  //totalPorMes(arrOperaciones)
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -697,7 +696,6 @@ const mesMayorGananciaYGasto = (arr) => {
                     ${gastoMayor[0].monto}
                   </div>`;
   }
-  totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
 };
 
 
@@ -777,25 +775,25 @@ const totalPorMes = (arr) => {
      prev + Number(current.monto), 0);
 
     const totalMesMeses = document.getElementById("total-mes-meses")
-    totalMesMeses.innerHTML ="";
+
     totalMesMeses.innerHTML += `<div class="mt-4 mb-4">
                                   ${mesesSinRepetir[i]}
                                 </div>`;
 
     const totalMesGanancia = document.getElementById("total-mes-ganancias")
-    totalMesGanancia.innerHTML = "";
+
     totalMesGanancia.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$
                                     ${porTipoGanancia}
                                   </div>`;
 
     const totalMesGastos = document.getElementById("total-mes-gastos")
-    totalMesGastos.innerHTML = "";
+    
     totalMesGastos.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">+$
                                   ${porTipoGasto}
                                 </div>`;
 
     const totalMesBalance = document.getElementById("total-mes-balance")
-    totalMesBalance.innerHTML = "";
+
     totalMesBalance.innerHTML += `<div class="mb-4 mt-4 text-end">+$
                                     ${porTipoGanancia - porTipoGasto}
                                   </div>`;
@@ -812,7 +810,7 @@ const inicializar = () => {
   totalBalance(arrOperaciones);
   obtenerOperaciones(arrOperaciones);
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
-  
+  totalPorMes(arrOperaciones)
 };
 
 window.onload = inicializar;
