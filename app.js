@@ -86,6 +86,7 @@ btnReportes.addEventListener("click", () => {
   }
   reportesResumen(JSON.parse(localStorage.getItem("arrOperaciones")));
   mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
+  //totalPorMes(arrOperaciones)
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -653,7 +654,6 @@ const reportesResumen = (arr) => {
                   </div> 
                   <div class= "mb-4  align-item-center" style="color:rgb(209, 7, 7);">-$${resumenMayorGasto[0].monto}</div>`;
   }
- 
 };
 
 // Funcion que realiza un filtrado de las operaciones y devuelve los meses con mayor ganancia y con mayor con gasto
@@ -702,7 +702,8 @@ const mesMayorGananciaYGasto = (arr) => {
 //Totales por categoria
 
 // Funcion que filtra las categorias y operaciones y devuelve las categorias que tienen operaciones y
-// la suma total de sus ganancias, gastos y el balance
+// la suma total de sus ganancias y gastos y el balance
+
 
 const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
   let total = 0
@@ -718,7 +719,8 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
     const porCategoriaGanancia = porCategoria.filter(operacion => operacion.tipo === 'ganancia').reduce((count, current) => count + Number(current.monto), 0)
     const porCategoriaGasto = porCategoria.filter(operacion => operacion.tipo === 'gasto').reduce((count, current) => count + Number(current.monto), 0)
     
-    console.log(total)
+    //console.log(total)
+    if(porCategoriaGanancia > 0 || porCategoriaGasto > 0){
       const totalPorCategoria = document.getElementById(
         "total-categoria-categoria"
       ).innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`;
@@ -736,7 +738,7 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
       return {
         ...categoria, balance: porCategoriaGanancia - porCategoriaGasto
       }
-      
+    } 
   })
   // Se realiza un sort para sacar la categoria con mayor balance y se pinta en el resumen
 
