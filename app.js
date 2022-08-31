@@ -83,7 +83,7 @@ btnReportes.addEventListener("click", () => {
   }
   reportesResumen(JSON.parse(localStorage.getItem("arrOperaciones")));
   mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
-  
+  //totalPorMes(arrOperaciones)
   
 });
 
@@ -759,7 +759,7 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
     const porCategoriaGanancia = porCategoria.filter(operacion => operacion.tipo === 'ganancia').reduce((count, current) => count + Number(current.monto), 0)
     const porCategoriaGasto = porCategoria.filter(operacion => operacion.tipo === 'gasto').reduce((count, current) => count + Number(current.monto), 0)
     
-    console.log(total)
+    //console.log(total)
     if(porCategoriaGanancia > 0 || porCategoriaGasto > 0){
       const totalPorCategoria = document.getElementById(
         "total-categoria-categoria"
@@ -822,7 +822,7 @@ const totalPorMes = (arr) => {
     const porTipoGasto = operacionesPorMes
       .filter((operacion) => operacion.tipo === "gasto")
       .reduce((prev, current) => prev + Number(current.monto), 0);
-
+      
     const totalMesMeses = document.getElementById(
       "total-mes-meses"
     )
@@ -847,6 +847,7 @@ const totalPorMes = (arr) => {
       porTipoGanancia - porTipoGasto
     }</div>`;
   }
+  console.log(totalPorMes)
 };
 
 
