@@ -63,6 +63,15 @@ a {
   width: 100%;
 }
 
+.img {
+  width: 60%;
+}
+
+.contriner-my-reportes {
+  padding-bottom: 9.3%;
+}
+
+
 .my-categorias,
 .my-reportes {
   width: 40%;

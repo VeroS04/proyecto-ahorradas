@@ -86,6 +86,8 @@ btnReportes.addEventListener("click", () => {
   }
   reportesResumen(JSON.parse(localStorage.getItem("arrOperaciones")));
   mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
+  totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
+  totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
 });
 
 // Boton a formulario de nueva operacion que oculta balance, categorias y reportes
@@ -168,6 +170,7 @@ operacionAgregada = (arr) => {
   document.getElementById("operaciones").innerHTML = "";
   let str = "";
   arr.forEach((operacion) => {
+    console.log(operacion);
     const { id, descripcion, categoria, fecha, tipo, monto } = operacion;
 
     str += `<div class="mi-flex d-flex flex-row mt-4 lista-op" aria-label="operacion">
@@ -367,7 +370,7 @@ const generarFiltrosCategorias = (arr) => {
       select.innerHTML = '<option value="todas">Todas</option>';
     }
     for (let j = 0; j < arr.length; j++) {
-      select.innerHTML += `<option value=${arr[j].categoria}>${arr[j].categoria}</option>`;
+      select.innerHTML += `<option value="${arr[j].categoria}">${arr[j].categoria}</option>`;
     }
   }
 };
@@ -485,6 +488,7 @@ categoriaNuevaBtn.addEventListener("click", () => {
     id: uuidv4(),
   };
   arrCategoriasIniciales.push(categoriaAdicional);
+  console.log(categoriaAdicional);
 
   inputNombreCategoria.value = "";
   localStorage.setItem("categorias", JSON.stringify(arrCategoriasIniciales));
@@ -775,25 +779,21 @@ const totalPorMes = (arr) => {
      prev + Number(current.monto), 0);
 
     const totalMesMeses = document.getElementById("total-mes-meses")
-
     totalMesMeses.innerHTML += `<div class="mt-4 mb-4">
                                   ${mesesSinRepetir[i]}
                                 </div>`;
 
     const totalMesGanancia = document.getElementById("total-mes-ganancias")
-
     totalMesGanancia.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$
                                     ${porTipoGanancia}
                                   </div>`;
 
     const totalMesGastos = document.getElementById("total-mes-gastos")
-    
     totalMesGastos.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(209, 7, 7);">+$
                                   ${porTipoGasto}
                                 </div>`;
 
     const totalMesBalance = document.getElementById("total-mes-balance")
-
     totalMesBalance.innerHTML += `<div class="mb-4 mt-4 text-end">+$
                                     ${porTipoGanancia - porTipoGasto}
                                   </div>`;
@@ -809,8 +809,6 @@ const inicializar = () => {
   listaOperaciones(arrOperaciones);
   totalBalance(arrOperaciones);
   obtenerOperaciones(arrOperaciones);
-  totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
-  totalPorMes(arrOperaciones)
 };
 
 window.onload = inicializar;
