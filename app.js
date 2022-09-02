@@ -623,7 +623,7 @@ pintarCategorias(arrCategoriasIniciales);
 
 // Falta resolver que no sea necesiario refrescarpara ver la categoria ediada
 
-//*** Resumen
+//******* Resumen ******
 
 // Funcion que realiza un filtrado de las operaciones y devuelve las categorias con mayor ganancia y con mayor con gasto
 
@@ -796,11 +796,10 @@ const totalPorMes = (arr) => {
   const totalMesGanancia = document.getElementById("total-mes-ganancias");
   const totalMesGastos = document.getElementById("total-mes-gastos");
   const totalMesBalance = document.getElementById("total-mes-balance");
-  totalMesMeses.innerHTML = '';
-  totalMesGanancia.innerHTML = '';
-  totalMesGastos.innerHTML = '';
-  totalMesBalance.innerHTML = '';
-
+  totalMesMeses.innerHTML = "";
+  totalMesGanancia.innerHTML = "";
+  totalMesGastos.innerHTML = "";
+  totalMesBalance.innerHTML = "";
 
   for (let i = 0; i < mesesSinRepetir.length; i++) {
     const operacionesPorMes = arr.filter(

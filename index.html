@@ -4,9 +4,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js" integrity="sha512-Bcog7KQsuePA92aZHcQfeAp3w4BiUKHgihhKJLsSVVU67s7KspPbywP7nTMZtJ8YOn//vLCeWvYnb00KryziDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"
+      integrity="sha512-Bcog7KQsuePA92aZHcQfeAp3w4BiUKHgihhKJLsSVVU67s7KspPbywP7nTMZtJ8YOn//vLCeWvYnb00KryziDA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" href="./assets/iconos/iconofavicon.png" />
     <title>Proyecto Ahorradas</title>
@@ -15,32 +31,62 @@
     <!-- **************************  INICIO DEL NAV *************************-->
 
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark my-nav" aria-label="navegador">
+      <nav
+        class="navbar navbar-expand-lg navbar-dark my-nav"
+        aria-label="navegador"
+      >
         <div class="container-fluid">
           <a class="navbar-brand my-nav-title" href="#">
             <img class="d-inline-block align-text-top" />
             <i class="fa-solid fa-wallet"></i>
             AhorrADAs
           </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="boton de navegacion">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="boton de navegacion"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-end nav-hamburguesa" id="navbarNav">
+          <div
+            class="collapse navbar-collapse justify-content-end nav-hamburguesa"
+            id="navbarNav"
+          >
             <ul class="navbar-nav p-2" id="nav-hamburguesa">
               <li class="nav-item h4 my-leter">
-                <a class="nav-link active btns-nav" aria-current="page" href="#" id="btn-balance" aria-label="boton a balance">
+                <a
+                  class="nav-link active btns-nav"
+                  aria-current="page"
+                  href="#"
+                  id="btn-balance"
+                  aria-label="boton a balance"
+                >
                   <i class="fa-solid fa-chart-line"></i>
                   Balance
                 </a>
               </li>
               <li class="nav-item h4 my-leter">
-                <a class="nav-link btns-nav" href="#" id="btn-categorias" aria-label="boton a categorias">
+                <a
+                  class="nav-link btns-nav"
+                  href="#"
+                  id="btn-categorias"
+                  aria-label="boton a categorias"
+                >
                   <i class="fa-solid fa-tag"></i>
                   Categorías
                 </a>
               </li>
               <li class="nav-item h4 my-leter">
-                <a class="nav-link btns-nav" href="#" id="btn-reportes" aria-label="boton a reportes">
+                <a
+                  class="nav-link btns-nav"
+                  href="#"
+                  id="btn-reportes"
+                  aria-label="boton a reportes"
+                >
                   <i class="fa-solid fa-chart-pie"></i>
                   Reportes
                 </a>
@@ -56,7 +102,6 @@
     <!-- ****************** INICIO DEL MAIN ***************** -->
 
     <main class="main">
-
       <!-- ****************** INICIO DE SECCION BALANCE ***************** -->
 
       <section id="balance">
@@ -66,14 +111,24 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div>
-                    <div class="card my-card shadow p-3 mb-5 mt-5 bg-body rounded border border-1" id="card-balance" aria-label="vista de balance">
+                    <div
+                      class="card my-card shadow p-3 mb-5 mt-5 bg-body rounded border border-1"
+                      id="card-balance"
+                      aria-label="vista de balance"
+                    >
                       <h2 class="card-title mb-5">Balance</h2>
-                      <div class="ganancias-total mb-2 d-flex justify-content-between" id="total-ganancia">
-                      </div>
-                      <div class="gastos-total mb-2 d-flex justify-content-between" id="total-gastos">
-                      </div>
-                      <div class="total mb-2 d-flex justify-content-between" id="total-balance">
-                      </div>
+                      <div
+                        class="ganancias-total mb-2 d-flex justify-content-between"
+                        id="total-ganancia"
+                      ></div>
+                      <div
+                        class="gastos-total mb-2 d-flex justify-content-between"
+                        id="total-gastos"
+                      ></div>
+                      <div
+                        class="total mb-2 d-flex justify-content-between"
+                        id="total-balance"
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -83,35 +138,79 @@
 
               <div class="row">
                 <div class="col-sm-12" id="filtros">
-                  <div class="contenedor-card" >
-                    <div class="card my-card shadow p-3 mb-5 bg-body rounded border border-1" aria-label="vista de filtros">
-                      <div class="operaciones-title d-flex justify-content-between" >
+                  <div class="contenedor-card">
+                    <div
+                      class="card my-card shadow p-3 mb-5 bg-body rounded border border-1"
+                      aria-label="vista de filtros"
+                    >
+                      <div
+                        class="operaciones-title d-flex justify-content-between"
+                      >
                         <h4 class="card-title fw-bold mb-4">Filtros</h4>
-                        <a href="#" id="ocultar-filtros" aria-label="boton para ocultar filtros">Ocultar filtros</a>
+                        <a
+                          href="#"
+                          id="ocultar-filtros"
+                          aria-label="boton para ocultar filtros"
+                          >Ocultar filtros</a
+                        >
                       </div>
                       <div class="container-filtros" id="container-filtros">
                         <div class="mb-4">
-                          <label for="select-filter-tipo" class="fw-bold mb-2 fs-6">Tipo</label>
-                          <select class="form-select" id="select-filter-tipo" aria-label="filtro por tipo">
+                          <label
+                            for="select-filter-tipo"
+                            class="fw-bold mb-2 fs-6"
+                            >Tipo</label
+                          >
+                          <select
+                            class="form-select"
+                            id="select-filter-tipo"
+                            aria-label="filtro por tipo"
+                          >
                             <option value="todos" selected>Todos</option>
                             <option value="gasto">Gasto</option>
                             <option value="ganancia">Ganancia</option>
                           </select>
                         </div>
                         <div class="mb-4">
-                          <label for="select-filter-categorias" class="fw-bold mb-2 fs-6">Categorías</label>
-                          <select class="form-select categoria-select filtro-categoria" id="select-filter-categorias"  aria-label="filtro por categoria">
-                          </select>
+                          <label
+                            for="select-filter-categorias"
+                            class="fw-bold mb-2 fs-6"
+                            >Categorías</label
+                          >
+                          <select
+                            class="form-select categoria-select filtro-categoria"
+                            id="select-filter-categorias"
+                            aria-label="filtro por categoria"
+                          ></select>
                         </div>
                         <div class="mb-4">
-                          <label for="date" class="form-label fw-bold mb-2 fs-6">Desde</label>
-                          <input type="date" class="form-control" id="date" aria-label="filtro desde"/>
+                          <label for="date" class="form-label fw-bold mb-2 fs-6"
+                            >Desde</label
+                          >
+                          <input
+                            type="date"
+                            class="form-control"
+                            id="date"
+                            aria-label="filtro desde"
+                          />
                         </div>
                         <div class="mb-4">
-                          <label for="filtro-ordenar-por" class="fw-bold mb-2 fs-6">Ordenar por</label>
-                          <select class="form-select" id="filtro-ordenar-por" aria-label="ordenar por">
-                            <option value="mas-reciente" selected>Más reciente</option>
-                            <option value="menos-reciente">Menos reciente</option>
+                          <label
+                            for="filtro-ordenar-por"
+                            class="fw-bold mb-2 fs-6"
+                            >Ordenar por</label
+                          >
+                          <select
+                            class="form-select"
+                            id="filtro-ordenar-por"
+                            aria-label="ordenar por"
+                          >
+                            <option value="mas-reciente" selected>
+                              Más reciente
+                            </option>
+                            <option value="menos-reciente">
+                              Menos reciente
+                            </option>
                             <option value="mayor-monto">Mayor monto</option>
                             <option value="menor-monto">Menor monto</option>
                             <option value="a-z">A/Z</option>
@@ -124,21 +223,38 @@
                 </div>
               </div>
             </div>
-              <!--  *** INICIO DE OPERACIONES *** -->
+            <!--  *** INICIO DE OPERACIONES *** -->
 
             <div class="col-sm-12 col-md-8 contenedor-operaciones">
-              <div class="card my-operaciones container-responsive shadow p-3 mb-5 mt-5 bg-body rounded border border-1" id="card-operaciones" aria-label="lista de operaciones">
+              <div
+                class="card my-operaciones container-responsive shadow p-3 mb-5 mt-5 bg-body rounded border border-1"
+                id="card-operaciones"
+                aria-label="lista de operaciones"
+              >
                 <div class="operaciones-title">
                   <h5 class="card-title fs-4 fw-bold mt-3">Operaciones</h5>
-                  <button type="button" class="btn btn-nueva-operacion mt-3" id="btn-nueva-operacion" aria-label="boton para nueva operacion">
+                  <button
+                    type="button"
+                    class="btn btn-nueva-operacion mt-3"
+                    id="btn-nueva-operacion"
+                    aria-label="boton para nueva operacion"
+                  >
                     + Nueva operación
                   </button>
                 </div>
-                <div class="img-operaciones d-flex justify-content-center flex-column mb-3" id="sin-operaciones">
+                <div
+                  class="img-operaciones d-flex justify-content-center flex-column mb-3"
+                  id="sin-operaciones"
+                >
                   <div class="d-flex justify-content-center mb-3">
-                    <img class="img" src="./assets/imagenes/Wallet_Isometric.svg" />
+                    <img
+                      class="img"
+                      src="./assets/imagenes/Wallet_Isometric.svg"
+                    />
                   </div>
-                  <div class="d-flex flex-column justify-content-center align-items-center">
+                  <div
+                    class="d-flex flex-column justify-content-center align-items-center"
+                  >
                     <h3>Sin resultados</h3>
                     <p>Cambia los filtros o agrega operaciones</p>
                   </div>
@@ -151,50 +267,90 @@
                     <div class="col-2 text-end">Monto</div>
                     <div class="col-3 text-end">Acciones</div>
                   </div>
-                  <div id="operaciones">
-                  </div>
+                  <div id="operaciones"></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      
-                          <!--  ************************* INICIO CONTAINER NUEVA OPERACION ********************-->
 
-      <div class="d-none mt-5 container-responsive my-operaciones" id="container-nueva-operacion">
+      <!--  ************************* INICIO CONTAINER NUEVA OPERACION ********************-->
+
+      <div
+        class="d-none mt-5 container-responsive my-operaciones"
+        id="container-nueva-operacion"
+      >
         <div class="col-md-6 mt-5 contenedor-operaciones-nuevas">
-          <form class="card my-card contenedor-operaciones shadow-lg px-5 py-4 mt-5 bg-body rounded">
+          <form
+            class="card my-card contenedor-operaciones shadow-lg px-5 py-4 mt-5 bg-body rounded"
+          >
             <h2 class="mt-5">Nueva operación</h2>
             <div class="mb-3">
-              <label for="description-input" class="form-label">Descripción</label>
-              <input type="text" class="form-control" id="descripcion-input" aria-label="escribir descripcion"/>
+              <label for="description-input" class="form-label"
+                >Descripción</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="descripcion-input"
+                aria-label="escribir descripcion"
+              />
             </div>
             <div class="mb-3">
               <label for="monto-input" class="form-label">Monto</label>
-              <input type="number" class="form-control" id="monto-input" value="0" aria-label="elegir monto"/>
+              <input
+                type="number"
+                class="form-control"
+                id="monto-input"
+                value="0"
+                aria-label="elegir monto"
+              />
             </div>
             <div class="mb-3">
               <label for="tipo-select" class="form-label">Tipo</label>
-              <select id="tipo-select" class="form-select" aria-label="elegir tipo">
+              <select
+                id="tipo-select"
+                class="form-select"
+                aria-label="elegir tipo"
+              >
                 <option value="gasto" selected>Gasto</option>
                 <option value="ganancia">Ganancia</option>
               </select>
             </div>
             <div class="mb-3">
               <label for="categoria-select" class="form-label">Categoria</label>
-              <select id="categoria-select" class="form-select categoria-select" aria-label="elegir categoria">
-              </select>
+              <select
+                id="categoria-select"
+                class="form-select categoria-select"
+                aria-label="elegir categoria"
+              ></select>
             </div>
             <div class="mb-3">
               <label for="fecha-input" class="form-label">Fecha</label>
-              <input type="date" class=" input form-control" name id="fecha-input" aria-label="elegir fecha"/>
+              <input
+                type="date"
+                class="input form-control"
+                name
+                id="fecha-input"
+                aria-label="elegir fecha"
+              />
             </div>
             <div class="text-end mt-5">
-              <button id="agregar-btn" type="button" class="btn btn-success" aria-label="boton para agregar operacion nueva">
-                 Agregar
+              <button
+                id="agregar-btn"
+                type="button"
+                class="btn btn-success"
+                aria-label="boton para agregar operacion nueva"
+              >
+                Agregar
               </button>
-              <button id="cancelar-btn" type="submit" class="btn btn-light" aria-label="boton para cancelar operacion nueva">
+              <button
+                id="cancelar-btn"
+                type="submit"
+                class="btn btn-light"
+                aria-label="boton para cancelar operacion nueva"
+              >
                 Cancelar
               </button>
             </div>
@@ -204,39 +360,80 @@
 
       <!--  ************************* INICIO CONTAINER EDITAR OPERACION ********************-->
 
-      <div class="d-none mt-5 container-responsive my-operaciones" id="container-editar-operacion">
+      <div
+        class="d-none mt-5 container-responsive my-operaciones"
+        id="container-editar-operacion"
+      >
         <div class="col-md-6 mt-5 contenedor-operaciones-nuevas">
-          <form class="shadow-lg p-4 mb-5 bg-body rounded my-card contenedor-operaciones">
+          <form
+            class="shadow-lg p-4 mb-5 bg-body rounded my-card contenedor-operaciones"
+          >
             <h2 class="mt-3 mb-4">Editar operación</h2>
             <div class="mb-3">
-              <label for="input-edit-descripcion" class="form-label">Descripción</label>
-              <input type="text" class="form-control" id="input-edit-descripcion" aria-label="editar descripcion"/>
+              <label for="input-edit-descripcion" class="form-label"
+                >Descripción</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="input-edit-descripcion"
+                aria-label="editar descripcion"
+              />
             </div>
             <div class="mb-3">
               <label for="input-edit-monto" class="form-label">Monto</label>
-              <input type="number" class="form-control" id="input-edit-monto" aria-label="editar monto"/>
+              <input
+                type="number"
+                class="form-control"
+                id="input-edit-monto"
+                aria-label="editar monto"
+              />
             </div>
             <div class="mb-3">
               <label for="select-edit-tipo" class="form-label">Tipo</label>
-              <select id="select-edit-tipo" class="form-select" aria-label="editar tipo">
+              <select
+                id="select-edit-tipo"
+                class="form-select"
+                aria-label="editar tipo"
+              >
                 <option value="gasto" selected>Gasto</option>
                 <option value="ganancia">Ganancia</option>
               </select>
             </div>
             <div class="mb-3">
-              <label for="select-edit-categoria" class="form-label">Categoria</label>
-              <select id="select-edit-categoria" class="form-select categoria-select" aria-label="editar categoria">
-              </select>
+              <label for="select-edit-categoria" class="form-label"
+                >Categoria</label
+              >
+              <select
+                id="select-edit-categoria"
+                class="form-select categoria-select"
+                aria-label="editar categoria"
+              ></select>
             </div>
             <div class="mb-3">
               <label for="input-edit-fecha" class="form-label">Fecha</label>
-              <input type="date" class="form-control" id="input-edit-fecha" aria-label="editar fecha"/>
+              <input
+                type="date"
+                class="form-control"
+                id="input-edit-fecha"
+                aria-label="editar fecha"
+              />
             </div>
             <div class="text-end">
-              <button id="agregar-editado-btn" type="submit" class="btn btn-success" aria-label="boton para agregar edicion de operacion">
+              <button
+                id="agregar-editado-btn"
+                type="submit"
+                class="btn btn-success"
+                aria-label="boton para agregar edicion de operacion"
+              >
                 Editar
               </button>
-              <button id="cancelar-editar-btn" type="submit" class="btn btn-light" aria-label="boton para cancelar edicion">
+              <button
+                id="cancelar-editar-btn"
+                type="submit"
+                class="btn btn-light"
+                aria-label="boton para cancelar edicion"
+              >
                 Cancelar
               </button>
             </div>
@@ -244,39 +441,85 @@
         </div>
       </div>
 
-
       <!-- *************** FIN SECTION DE BALANCE, FILTROS Y OPERACIONES *************** -->
 
       <!--  ******************* INICIO DE SECCION CATEGORIAS ********************** -->
 
-      <section class="d-none container-responsive my-operaciones" id="categorias">
-        <div class="card shadow p-3 rounded border border-1 my-card my-categorias" id="card-categorias" aria-label="formulario para nueva categoria">
+      <section
+        class="d-none container-responsive my-operaciones"
+        id="categorias"
+      >
+        <div
+          class="card shadow p-3 rounded border border-1 my-card my-categorias"
+          id="card-categorias"
+          aria-label="formulario para nueva categoria"
+        >
           <h1 class="mb-5">Categorias</h1>
           <form>
             <div class="mb-3">
-              <label for="nombre-input" class="form-label mb-3 fw-bold fs-6">Nombre</label>
+              <label for="nombre-input" class="form-label mb-3 fw-bold fs-6"
+                >Nombre</label
+              >
               <div class="d-flex ml-2">
-                <input type="text" class="form-control input-nombre-categoria mb-4" id="nombre-input" aria-label="escribir categoria nueva">
+                <input
+                  type="text"
+                  class="form-control input-nombre-categoria mb-4"
+                  id="nombre-input"
+                  aria-label="escribir categoria nueva"
+                />
                 <div class="buttom-agregar">
-                  <button type="submit" class="btn btn-success" id="agregar-categoria-nueva" aria-label="boton para agregar categoria nueva">Agregar</button>
+                  <button
+                    type="submit"
+                    class="btn btn-success"
+                    id="agregar-categoria-nueva"
+                    aria-label="boton para agregar categoria nueva"
+                  >
+                    Agregar
+                  </button>
                 </div>
               </div>
-              <div id="lista-categorias" class="d-flex flex-column">
-              </div>
+              <div id="lista-categorias" class="d-flex flex-column"></div>
             </div>
           </form>
         </div>
-        <div class="d-none mt-5 container-responsive my-operaciones-editar" id="card-editar-categorias" aria-label="formulario para editar categoria">
-          <div class="card shadow p-3 rounded border border-1 my-card my-categorias">
+        <div
+          class="d-none mt-5 container-responsive my-operaciones-editar"
+          id="card-editar-categorias"
+          aria-label="formulario para editar categoria"
+        >
+          <div
+            class="card shadow p-3 rounded border border-1 my-card my-categorias"
+          >
             <h1 class="mb-5">Editar Categorias</h1>
             <form>
               <div class="mb-3">
-                <label for="nombre-input" class="form-label mb-3 fw-bold fs-6">Nombre</label>
+                <label for="nombre-input" class="form-label mb-3 fw-bold fs-6"
+                  >Nombre</label
+                >
                 <div class="ml-2">
-                  <input type="text" class="form-control input-nombre-categoria mb-4" id="editado-nombre-input" aria-label="editar categoria">
+                  <input
+                    type="text"
+                    class="form-control input-nombre-categoria mb-4"
+                    id="editado-nombre-input"
+                    aria-label="editar categoria"
+                  />
                   <div class="buttom-agregar text-end">
-                    <button type="submit" class="btn btn-light" id="cancelar-categoria-editada" aria-label="boton para cancelar edicion de categoria">Cancelar</button>
-                    <button type="submit" class="btn btn-success" id="agregar-categoria-editada" aria-label="boton para agregar categoria editada">Editar</button>
+                    <button
+                      type="submit"
+                      class="btn btn-light"
+                      id="cancelar-categoria-editada"
+                      aria-label="boton para cancelar edicion de categoria"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-success"
+                      id="agregar-categoria-editada"
+                      aria-label="boton para agregar categoria editada"
+                    >
+                      Editar
+                    </button>
                   </div>
                 </div>
               </div>
@@ -287,36 +530,64 @@
 
       <!--  ******************** INICIO DE SECCION REPORTES ************************* -->
 
-      <section class="d-none container-responsive contriner-my-reportes" id="reportes">
-        <div class="card shadow p-3 rounded border border-1 my-card my-reportes" id="card-reportes" aria-label="vista de reportes">
+      <section
+        class="d-none container-responsive contriner-my-reportes"
+        id="reportes"
+      >
+        <div
+          class="card shadow p-3 rounded border border-1 my-card my-reportes"
+          id="card-reportes"
+          aria-label="vista de reportes"
+        >
           <h1 class="card-title fw-bold mb-5">Reportes</h1>
-          <div id="reporte-sin-operacion"  class="d-none">
+          <div id="reporte-sin-operacion" class="d-none">
             <div class="img-operaciones d-flex justify-content-center mb-3">
               <img src="./assets/imagenes/Report analysis _Isometric.svg" />
             </div>
-            <div class="d-flex flex-column justify-content-center align-items-center">
+            <div
+              class="d-flex flex-column justify-content-center align-items-center"
+            >
               <h3>Operaciones insuficientes</h3>
               <p>Prueba agregando más operaciones</p>
             </div>
           </div>
-          <div id="reporte-con-operaciones" >
+          <div id="reporte-con-operaciones">
             <div class="resumen p-3 mb-3" aria-label="vista de resumen">
               <h5 class="card-title fw-bold mb-5">Resumen</h5>
-              <div id="categoria-mayor-ganancia" class="d-flex justify-content-between">
-              </div>
-              <div id="categoria-mayor-gasto" class="d-flex justify-content-between">               
-              </div>
-              <div id="categoria-mayor-balance" class="d-flex justify-content-between">               
-              </div>
-              <div id="mes-mayor-ganancia" class="d-flex justify-content-between">               
-              </div>
-              <div id="mes-mayor-gasto" class="d-flex justify-content-between">              
-              </div>
+              <div
+                id="categoria-mayor-ganancia"
+                class="d-flex justify-content-between"
+              ></div>
+              <div
+                id="categoria-mayor-gasto"
+                class="d-flex justify-content-between"
+              ></div>
+              <div
+                id="categoria-mayor-balance"
+                class="d-flex justify-content-between"
+              ></div>
+              <div
+                id="mes-mayor-ganancia"
+                class="d-flex justify-content-between"
+              ></div>
+              <div
+                id="mes-mayor-gasto"
+                class="d-flex justify-content-between"
+              ></div>
             </div>
-            <div id="total-por-categoria" class="total-categoria mb-2 p-3" aria-label="vista de totales por categoria">
-               <h5 class="card-title fw-bold mb-5">Total por categoría</h5>
-             <div class="mt-4 d-flex justify-content-between contenedor-total-categoria">
-                <div id="total-categoria-categoria" class="total-categoria-categorias">
+            <div
+              id="total-por-categoria"
+              class="total-categoria mb-2 p-3"
+              aria-label="vista de totales por categoria"
+            >
+              <h5 class="card-title fw-bold mb-5">Total por categoría</h5>
+              <div
+                class="mt-4 d-flex justify-content-between contenedor-total-categoria"
+              >
+                <div
+                  id="total-categoria-categoria"
+                  class="total-categoria-categorias"
+                >
                   <h6>Categoria</h6>
                 </div>
                 <div id="total-categoria-ganancias">
@@ -329,10 +600,12 @@
                   <h6>Balance</h6>
                 </div>
               </div>
-            </div> 
+            </div>
             <div class="total-mes p-3" aria-label="vista de totales por mes">
               <h5 class="card-title fw-bold">Total por mes</h5>
-              <div class="mt-4 d-flex justify-content-between contenedor-total-mes">
+              <div
+                class="mt-4 d-flex justify-content-between contenedor-total-mes"
+              >
                 <div id="total-mes-meses" class="total-mes-meses">
                   <h6>Mes</h6>
                 </div>
@@ -345,15 +618,18 @@
                 <div id="total-mes-balance">
                   <h6>Balance</h6>
                 </div>
-              </div>          
+              </div>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
-    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
     <script src="./app.js"></script>
   </body>
 </html>
