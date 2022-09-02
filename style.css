@@ -257,15 +257,6 @@ a {
     flex-wrap: wrap;
   }
 
-  .my-responsive {
-    font-size: 0.8em;
-  }
-
-  .my-responsive-resumen{
-    width: 50%;
-    
-  }
-
   .op-descripcion {
     width: 50%;
   }

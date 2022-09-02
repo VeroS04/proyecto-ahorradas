@@ -634,7 +634,7 @@ const reportesResumen = (arr) => {
   if (resumenMayorGanancia.length > 0) {
     document.getElementById(
       "categoria-mayor-ganancia"
-    ).innerHTML = `<h6 class="my-responsive-resumen">Categoria con mayor ganancia</h6>
+    ).innerHTML = `<h6>Categoria con mayor ganancia</h6>
                   <div>
                     <div class="color">${resumenMayorGanancia[0].categoria}
                     </div>
@@ -648,7 +648,7 @@ const reportesResumen = (arr) => {
   if (resumenMayorGasto.length > 0) {
     document.getElementById(
       "categoria-mayor-gasto"
-    ).innerHTML = `<h6 class="my-responsive-resumen">Categoria con mayor gasto</h6>
+    ).innerHTML = `<h6>Categoria con mayor gasto</h6>
                   <div>
                     <div class="color">${resumenMayorGasto[0].categoria}
                     </div>
@@ -668,7 +668,7 @@ const mesMayorGananciaYGasto = (arr) => {
   if (gananciaMayor.length > 0) {
     document.getElementById(
       "mes-mayor-ganancia"
-    ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor ganancia</h6>
+    ).innerHTML = `<h6>Mes con mayor ganancia</h6>
                     <div>
                       <div class="color">
                       ${
@@ -688,7 +688,7 @@ const mesMayorGananciaYGasto = (arr) => {
   if (gastoMayor.length > 0) {
     document.getElementById(
       "mes-mayor-gasto"
-    ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor gasto</h6>
+    ).innerHTML = `<h6>Mes con mayor gasto</h6>
                   <div>
                     <div class="color">
                       ${
@@ -764,7 +764,7 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
     "categoria-mayor-balance"
   );
   const result = conBalance.sort((a, b) => b.balance - a.balance);
-  categoriaMayorBalance.innerHTML = `<h6 class="my-responsive-resumen">Categoria con mayor Balance</h6>
+  categoriaMayorBalance.innerHTML = `<h6>Categoria con mayor Balance</h6>
                                   <div>
                                     <div class="color">
                                       ${result[0].categoria}
