@@ -621,9 +621,7 @@ pintarCategorias(arrCategoriasIniciales);
 //                                                                     SECCION REPORTES
 //                                            *********************************************************************
 
-// Falta resolver que no sea necesiario refrescarpara ver la categoria ediada
 
-//******* Resumen ******
 
 // Funcion que realiza un filtrado de las operaciones y devuelve las categorias con mayor ganancia y con mayor con gasto
 
