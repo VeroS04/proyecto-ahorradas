@@ -7,6 +7,7 @@ const btnNuevaOperacion = document.getElementById("btn-nueva-operacion");
 const cancelarBtn = document.getElementById("cancelar-btn");
 const agregarBtn = document.getElementById("agregar-btn");
 const ocultarFiltros = document.getElementById("ocultar-filtros");
+const mostrarFiltros = document.getElementById("mostrar-filtros");
 const selectEditarTipo = document.getElementById("select-edit-tipo");
 
 // PAGINAS Y FORMULARIOS
@@ -105,8 +106,18 @@ cancelarBtn.addEventListener("click", () => {
 });
 
 ocultarFiltros.addEventListener("click", () => {
-  containerFiltros.classList.toggle("d-none");
+  containerFiltros.classList.add("d-none"); 
+  mostrarFiltros.classList.remove("d-none");
+  ocultarFiltros.classList.add("d-none")
 });
+
+mostrarFiltros.addEventListener("click", () => {
+  containerFiltros.classList.remove("d-none"); 
+  mostrarFiltros.classList.add("d-none");
+  ocultarFiltros.classList.remove("d-none");
+});
+
+
 
 //                                                             ************************************
 //                                                                     SECCION OPERACIONES
