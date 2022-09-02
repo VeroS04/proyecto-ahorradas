@@ -243,7 +243,13 @@ a {
   .my-reportes {
     margin-top: 35%;
   }
+  .my-responsive {
+    font-size: 0.8em;
+  }
 
+  .my-responsive-resumen{
+    width: 50%;
+  }
   .operaciones-title {
     display: block;
   }
