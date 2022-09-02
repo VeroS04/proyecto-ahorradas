@@ -64,10 +64,14 @@ a {
 }
 
 .img {
-  width: 60%;
+  width: 80%;
 }
 
-.contriner-my-reportes {
+.img-reportes{
+  width: 90%;
+}
+
+.container-my-reportes {
   padding-bottom: 9.3%;
 }
 
