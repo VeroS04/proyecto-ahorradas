@@ -21,8 +21,8 @@
   background-color: #1c836e;
   border-radius: 10px;
 }
-.btns-nav{
-    padding-left: 5%;
+.btns-nav {
+  padding-left: 5%;
 }
 .btns-nav:hover {
   background-color: #1c836e;
@@ -70,7 +70,6 @@ a {
 .contriner-my-reportes {
   padding-bottom: 9.3%;
 }
-
 
 .my-categorias,
 .my-reportes {
