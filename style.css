@@ -170,11 +170,12 @@ a {
   .contenedor-card,
   .my-operaciones {
     width: 100%;
+    margin-top: 30%;
   }
 
   .my-categorias,
   .my-reportes {
-    margin-top: 25%;
+    margin-top: 30%;
   }
 
   .operaciones-title {
