@@ -286,4 +286,12 @@ a {
     width: 100%;
     padding: 1%;
   }
+
+  .my-responsive {
+    font-size: 0.8em;
+  }
+
+  .my-responsive-resumen{
+    width: 50%;
+  }
 }
