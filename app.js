@@ -486,7 +486,6 @@ categoriaNuevaBtn.addEventListener("click", () => {
     id: uuidv4(),
   };
   arrCategoriasIniciales.push(categoriaAdicional);
-  console.log(categoriaAdicional);
 
   inputNombreCategoria.value = "";
   localStorage.setItem("categorias", JSON.stringify(arrCategoriasIniciales));
@@ -746,7 +745,6 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
       .filter((operacion) => operacion.tipo === "gasto")
       .reduce((count, current) => count + Number(current.monto), 0);
 
-    //console.log(total)
     if (porCategoriaGanancia > 0 || porCategoriaGasto > 0) {
       totalPorCategoria.innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`;
       totalPorCategoriaGanancia.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${porCategoriaGanancia}</div>`;
