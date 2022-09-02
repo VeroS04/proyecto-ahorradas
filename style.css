@@ -170,6 +170,10 @@ a {
   .contenedor-card,
   .my-operaciones {
     width: 100%;
+    margin-top: 25%;
+  }
+
+  .my-card-balance {
     margin-top: 30%;
   }
 
@@ -239,6 +243,9 @@ a {
   .container-responsive {
     width: 100%;
     margin-top: 10%;
+  }
+  .my-card-balance {
+    margin-top: 30%;
   }
 
   .my-card,
