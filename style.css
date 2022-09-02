@@ -169,6 +169,7 @@ a {
   .my-card,
   .contenedor-card,
   .my-operaciones {
+    margin-top: 25%;
     width: 100%;
     margin-top: 25%;
   }
@@ -176,7 +177,9 @@ a {
   .my-card-balance {
     margin-top: 30%;
   }
-
+  .my-card-balance{
+    margin-top: 30%;
+  }
   .my-categorias,
   .my-reportes {
     margin-top: 30%;
@@ -244,7 +247,8 @@ a {
     width: 100%;
     margin-top: 10%;
   }
-  .my-card-balance {
+  
+  .my-card-balance{
     margin-top: 30%;
   }
 
@@ -258,7 +262,13 @@ a {
   .my-reportes {
     margin-top: 35%;
   }
+  .my-responsive {
+    font-size: 0.8em;
+  }
 
+  .my-responsive-resumen{
+    width: 50%;
+  }
   .operaciones-title {
     display: block;
   }
