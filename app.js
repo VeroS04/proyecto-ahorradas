@@ -486,7 +486,6 @@ categoriaNuevaBtn.addEventListener("click", () => {
     id: uuidv4(),
   };
   arrCategoriasIniciales.push(categoriaAdicional);
-  console.log(categoriaAdicional);
 
   inputNombreCategoria.value = "";
   localStorage.setItem("categorias", JSON.stringify(arrCategoriasIniciales));
@@ -624,7 +623,7 @@ pintarCategorias(arrCategoriasIniciales);
 
 // Falta resolver que no sea necesiario refrescarpara ver la categoria ediada
 
-//*** Resumen
+//******* Resumen ******
 
 // Funcion que realiza un filtrado de las operaciones y devuelve las categorias con mayor ganancia y con mayor con gasto
 
@@ -746,7 +745,6 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
       .filter((operacion) => operacion.tipo === "gasto")
       .reduce((count, current) => count + Number(current.monto), 0);
 
-    //console.log(total)
     if (porCategoriaGanancia > 0 || porCategoriaGasto > 0) {
       totalPorCategoria.innerHTML += `<div class="mb-4 mt-4">${categoria.categoria}</div>`;
       totalPorCategoriaGanancia.innerHTML += `<div class="mb-4 mt-4 text-end" style="color:rgb(109, 213, 6);">+$${porCategoriaGanancia}</div>`;
@@ -798,11 +796,10 @@ const totalPorMes = (arr) => {
   const totalMesGanancia = document.getElementById("total-mes-ganancias");
   const totalMesGastos = document.getElementById("total-mes-gastos");
   const totalMesBalance = document.getElementById("total-mes-balance");
-  totalMesMeses.innerHTML = '';
-  totalMesGanancia.innerHTML = '';
-  totalMesGastos.innerHTML = '';
-  totalMesBalance.innerHTML = '';
-
+  totalMesMeses.innerHTML = "";
+  totalMesGanancia.innerHTML = "";
+  totalMesGastos.innerHTML = "";
+  totalMesBalance.innerHTML = "";
 
   for (let i = 0; i < mesesSinRepetir.length; i++) {
     const operacionesPorMes = arr.filter(
