@@ -169,12 +169,15 @@ a {
   .my-card,
   .contenedor-card,
   .my-operaciones {
+    margin-top: 25%;
     width: 100%;
   }
-
+  .my-card-balance{
+    margin-top: 30%;
+  }
   .my-categorias,
   .my-reportes {
-    margin-top: 25%;
+    margin-top: 30%;
   }
 
   .operaciones-title {
@@ -208,6 +211,14 @@ a {
     width: 50%;
     margin-top: 4%;
   }
+
+  .my-responsive {
+    font-size: 0.8em;
+  }
+
+  .my-responsive-resumen{
+    width: 50%;
+  }
 }
 
 @media screen and (max-width: 335px) {
@@ -232,6 +243,10 @@ a {
     width: 100%;
     margin-top: 10%;
   }
+  
+  .my-card-balance{
+    margin-top: 30%;
+  }
 
   .my-card,
   .contenedor-card,
@@ -243,7 +258,13 @@ a {
   .my-reportes {
     margin-top: 35%;
   }
+  .my-responsive {
+    font-size: 0.8em;
+  }
 
+  .my-responsive-resumen{
+    width: 50%;
+  }
   .operaciones-title {
     display: block;
   }
