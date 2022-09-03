@@ -64,10 +64,14 @@ a {
 }
 
 .img {
-  width: 60%;
+  width: 80%;
 }
 
-.contriner-my-reportes {
+.img-reportes{
+  width: 90%;
+}
+
+.container-my-reportes {
   padding-bottom: 9.3%;
 }
 
@@ -231,8 +235,6 @@ a {
   }
 
   .nav-hamburguesa {
-    background-color: #1e5c50;
-    color: #fff;
     transition: 1.5s;
   }
 
@@ -243,7 +245,7 @@ a {
     width: 100%;
     margin-top: 10%;
   }
-  
+
   .my-card-balance{
     margin-top: 30%;
   }
@@ -296,14 +298,8 @@ a {
     width: 50%;
     margin-top: 4%;
   }
-  .contenedor-total-mes {
-    background-color: #99f5e3;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
 
   .total-mes-meses {
-    background-color: #68c8ba;
     width: 100%;
     padding: 1%;
   }
