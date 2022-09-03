@@ -389,7 +389,7 @@ const selectFilterCategorias = document.getElementById(
   "select-filter-categorias"
 );
 
-//         ****************   FILTROS ********************
+//         ****************   FILTROS   ********************
 
 const filtroOrdenarPor = document.getElementById("filtro-ordenar-por");
 const filtroDesde = document.getElementById("date");
@@ -628,9 +628,9 @@ const pintarCategorias = (arr) => {
 };
 pintarCategorias(arrCategoriasIniciales);
 
-//                                            *********************************************************************
+//                                            ********************************************************************
 //                                                                     SECCION REPORTES
-//                                            *********************************************************************
+//                                            ********************************************************************
 
 
 
