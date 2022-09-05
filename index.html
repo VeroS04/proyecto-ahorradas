@@ -29,11 +29,11 @@
   </head>
   <body>
     <!-- **************************  INICIO DEL NAV *************************-->
-
     <header>
       <nav
         class="navbar navbar-expand-lg navbar-dark my-nav"
         aria-label="navegador"
+        id="my-nav"
       >
         <div class="container-fluid">
           <a class="navbar-brand my-nav-title" href="#">
@@ -41,6 +41,14 @@
             <i class="fa-solid fa-wallet"></i>
             AhorrADAs
           </a>
+          <div class="d-flex modo-fondo">
+            <button id="modo-claro">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+            <button id="modo-oscuro" class="d-none">
+              <i class="fa-regular fa-moon"></i>
+            </button>
+          </div>
           <button
             class="navbar-toggler"
             type="button"
@@ -101,7 +109,7 @@
 
     <!-- ****************** INICIO DEL MAIN ***************** -->
 
-    <main class="main">
+    <main class="main" id="main">
       <!-- ****************** INICIO DE SECCION BALANCE ***************** -->
 
       <section id="balance">
@@ -112,10 +120,10 @@
                 <div class="col-sm-12">
                   <div>
                     <div
-                      class="card my-card shadow p-3 mb-5 mt-5 bg-body rounded border border-1"
+                      class="card my-card shadow p-3 mb-5 mt-5 rounded border border-1"
                       id="card-balance"
                       aria-label="vista de balance"
-                    >
+                      >
                       <h2 class="card-title mb-5">Balance</h2>
                       <div
                         class="ganancias-total mb-2 d-flex justify-content-between"
@@ -137,11 +145,12 @@
               <!-- *** INICIO DE FILTROS ****  -->
 
               <div class="row">
-                <div class="col-sm-12" id="filtros">
+                <div class="col-sm-12">
                   <div class="contenedor-card">
                     <div
-                      class="card my-card shadow p-3 mb-5 bg-body rounded border border-1"
+                      class="card my-card shadow p-3 mb-5 rounded border border-1"
                       aria-label="vista de filtros"
+                      id="card-filtros"
                     >
                       <div
                         class="operaciones-title d-flex justify-content-between"
@@ -231,9 +240,9 @@
             </div>
             <!--  *** INICIO DE OPERACIONES *** -->
 
-            <div class="col-sm-12 col-md-8 contenedor-operaciones">
+            <div class="col-sm-12 col-md-8">
               <div
-                class="card my-operaciones container-responsive shadow p-3 mb-5 mt-5 bg-body rounded border border-1"
+                class="card my-operaciones container-responsive shadow p-3 mb-5 mt-5 rounded border border-1"
                 id="card-operaciones"
                 aria-label="lista de operaciones"
               >
@@ -289,7 +298,8 @@
       >
         <div class="col-md-6 mt-5 contenedor-operaciones-nuevas">
           <form
-            class="card my-card contenedor-operaciones shadow-lg px-5 py-4 mt-5 bg-body rounded"
+            class="card contenedor-operaciones shadow-lg px-5 py-4 mt-5 rounded"
+            id="card-nueva-operacion"
           >
             <h2 class="mt-5">Nueva operación</h2>
             <div class="mb-3">
@@ -372,7 +382,8 @@
       >
         <div class="col-md-6 mt-5 contenedor-operaciones-nuevas">
           <form
-            class="shadow-lg p-4 mb-5 bg-body rounded my-card contenedor-operaciones"
+            class="card contenedor-operaciones shadow-lg px-5 py-4 mt-5 rounded"
+            id="card-editar-operacion"
           >
             <h2 class="mt-3 mb-4">Editar operación</h2>
             <div class="mb-3">
@@ -495,6 +506,7 @@
         >
           <div
             class="card shadow p-3 rounded border border-1 my-card my-categorias"
+            id="card-editar-categoria-oscuro"
           >
             <h1 class="mb-5">Editar Categorias</h1>
             <form>
