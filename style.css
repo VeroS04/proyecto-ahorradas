@@ -53,6 +53,29 @@ a {
   padding-top: 3%;
 }
 
+.modo-fondo {
+  position: absolute;
+  top: 0%;
+}
+
+.main-oscuro {
+	background-color: #89a88e;
+  background-blend-mode: darken;
+}
+
+.card-oscuro {
+  background-color: #21474a;
+  color: #fff;
+}
+.oscuro {
+  background-color: #21474a;
+  color: #fff;
+}
+.btns-modo-claro{
+  background-color:#56b4a1;
+  color: #000;
+}
+
 .my-operaciones {
   padding-bottom: 9.3%;
   width: 100%;
@@ -61,6 +84,11 @@ a {
 .my-operaciones-editar {
   padding-bottom: 13.4%;
   width: 100%;
+}
+
+.color-categoria {
+  background-color: #ebfffc;
+  color:#00947e;
 }
 
 .img {
@@ -174,8 +202,13 @@ a {
   .contenedor-card,
   .my-operaciones {
     margin-top: 25%;
-    width: 100%;
+    width: 95%;
     margin-top: 25%;
+  }
+
+  .contenedor-operaciones {
+    margin: auto;
+    width: 90%;
   }
 
   .my-card-balance {
@@ -238,7 +271,9 @@ a {
     font-size: 1.8em;
   }
 
-  .nav-hamburguesa {
+ .nav-hamburguesa {
+    background-color: #1e5c50;
+    color: #fff;
     transition: 1.5s;
   }
 
@@ -257,7 +292,12 @@ a {
   .my-card,
   .contenedor-card,
   .my-operaciones {
-    width: 100%;
+    width: 98%;
+  }
+
+  .contenedor-operaciones {
+    margin: auto;
+    width: 90%;
   }
 
   .my-categorias,
