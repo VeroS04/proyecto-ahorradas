@@ -9,6 +9,8 @@ const agregarBtn = document.getElementById("agregar-btn");
 const ocultarFiltros = document.getElementById("ocultar-filtros");
 const mostrarFiltros = document.getElementById("mostrar-filtros");
 const selectEditarTipo = document.getElementById("select-edit-tipo");
+const modoClaro = document.getElementById("modo-claro");
+const modoOscuro = document.getElementById("modo-oscuro");
 
 // PAGINAS Y FORMULARIOS
 const balance = document.getElementById("balance");
@@ -19,17 +21,22 @@ const containerNuevaOperacion = document.getElementById(
 );
 const cardBalance = document.getElementById("card-balance");
 const containerFiltros = document.getElementById("container-filtros");
+const cardFiltros = document.getElementById("card-filtros");
+const cardOperaciones = document.getElementById("card-operaciones");
+const cardNuevaOperacion = document.getElementById("card-nueva-operacion");
 const sinOperaciones = document.getElementById("sin-operaciones");
 const conOperaciones = document.getElementById("con-operaciones");
 const operaciones = document.getElementById("operaciones");
-const cardEditarOperacion = document.getElementById(
-  "container-editar-operacion"
-);
+const cardEditarOperacion = document.getElementById("container-editar-operacion");
+const cardEditarOperacionOscuro = document.getElementById("card-editar-operacion");
 const cardEditarcategoria = document.getElementById("card-editar-categorias");
+const cardEditarCategoriaOscuro = document.getElementById("card-editar-categoria-oscuro");
 const cardCategoria = document.getElementById("card-categorias");
+const cardReportes = document.getElementById("card-reportes");
 const reporteSinOperacion = document.getElementById("reporte-sin-operacion");
 const reporteConOperacion = document.getElementById("reporte-con-operaciones");
 const PorCategoriaLista = document.getElementById("total-por-categoria");
+const main = document.getElementById("main");
 
 // INPUTS
 
@@ -46,6 +53,37 @@ const selectEditarCategoria = document.getElementById("select-edit-categoria");
 const inputEditarFecha = document.getElementById("input-edit-fecha");
 
 // ************ SECCION EVENTOS NAV ************
+
+
+modoClaro.addEventListener('click', () => {
+  modoClaro.classList.add('d-none');
+  modoOscuro.classList.remove('d-none');
+  main.classList.add('main-oscuro');
+  cardCategoria.classList.add('card-oscuro');
+  cardReportes.classList.add('card-oscuro');
+  cardBalance.classList.add('card-oscuro');
+  cardFiltros.classList.add('card-oscuro');
+  cardOperaciones.classList.add('card-oscuro');
+  cardNuevaOperacion.classList.add('card-oscuro');
+  cardEditarOperacionOscuro.classList.add('card-oscuro');
+  cardEditarCategoriaOscuro.classList.add('card-oscuro');
+  btnNuevaOperacion.classList.add('btns-modo-claro');
+})
+
+modoOscuro.addEventListener('click', () => {
+  modoClaro.classList.remove('d-none');
+  modoOscuro.classList.add('d-none');
+  main.classList.remove('main-oscuro');
+  cardCategoria.classList.remove('card-oscuro');
+  cardReportes.classList.remove('card-oscuro');
+  cardBalance.classList.remove('card-oscuro');
+  cardFiltros.classList.remove('card-oscuro');
+  cardOperaciones.classList.remove('card-oscuro');
+  cardNuevaOperacion.classList.remove('card-oscuro');
+  cardEditarOperacionOscuro.classList.remove('card-oscuro');
+  cardEditarCategoriaOscuro.classList.remove('card-oscuro');
+  btnNuevaOperacion.classList.remove('btns-modo-claro');
+})
 
 // Boton a balance que oculta categorias, reportes y formulario de nueva operacion
 
@@ -513,7 +551,7 @@ const pintarCategorias = (arr) => {
   arr.forEach((arrCategoriasIniciales) => {
     const { id, categoria } = arrCategoriasIniciales;
     str += ` <div class="d-flex justify-content-between mt-3 mb-2">
-                 <div style="color:#00947e; background-color: #ebfffc;">${categoria}</div>
+                 <div class="color-categoria" id="color-categoria">${categoria}</div>
                   <div>
                     <a href="#" class="btn-editar-categoria me-2" data-id=${id}>Editar</a>
                     <a href="#" class="btn-eliminar-categoria" data-id=${id}>Eliminar</a> 
