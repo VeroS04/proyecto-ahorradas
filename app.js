@@ -27,10 +27,16 @@ const cardNuevaOperacion = document.getElementById("card-nueva-operacion");
 const sinOperaciones = document.getElementById("sin-operaciones");
 const conOperaciones = document.getElementById("con-operaciones");
 const operaciones = document.getElementById("operaciones");
-const cardEditarOperacion = document.getElementById("container-editar-operacion");
-const cardEditarOperacionOscuro = document.getElementById("card-editar-operacion");
+const cardEditarOperacion = document.getElementById(
+  "container-editar-operacion"
+);
+const cardEditarOperacionOscuro = document.getElementById(
+  "card-editar-operacion"
+);
 const cardEditarcategoria = document.getElementById("card-editar-categorias");
-const cardEditarCategoriaOscuro = document.getElementById("card-editar-categoria-oscuro");
+const cardEditarCategoriaOscuro = document.getElementById(
+  "card-editar-categoria-oscuro"
+);
 const cardCategoria = document.getElementById("card-categorias");
 const cardReportes = document.getElementById("card-reportes");
 const reporteSinOperacion = document.getElementById("reporte-sin-operacion");
@@ -54,36 +60,35 @@ const inputEditarFecha = document.getElementById("input-edit-fecha");
 
 // ************ SECCION EVENTOS NAV ************
 
+modoClaro.addEventListener("click", () => {
+  modoClaro.classList.add("d-none");
+  modoOscuro.classList.remove("d-none");
+  main.classList.add("main-oscuro");
+  cardCategoria.classList.add("card-oscuro");
+  cardReportes.classList.add("card-oscuro");
+  cardBalance.classList.add("card-oscuro");
+  cardFiltros.classList.add("card-oscuro");
+  cardOperaciones.classList.add("card-oscuro");
+  cardNuevaOperacion.classList.add("card-oscuro");
+  cardEditarOperacionOscuro.classList.add("card-oscuro");
+  cardEditarCategoriaOscuro.classList.add("card-oscuro");
+  btnNuevaOperacion.classList.add("btns-modo-claro");
+});
 
-modoClaro.addEventListener('click', () => {
-  modoClaro.classList.add('d-none');
-  modoOscuro.classList.remove('d-none');
-  main.classList.add('main-oscuro');
-  cardCategoria.classList.add('card-oscuro');
-  cardReportes.classList.add('card-oscuro');
-  cardBalance.classList.add('card-oscuro');
-  cardFiltros.classList.add('card-oscuro');
-  cardOperaciones.classList.add('card-oscuro');
-  cardNuevaOperacion.classList.add('card-oscuro');
-  cardEditarOperacionOscuro.classList.add('card-oscuro');
-  cardEditarCategoriaOscuro.classList.add('card-oscuro');
-  btnNuevaOperacion.classList.add('btns-modo-claro');
-})
-
-modoOscuro.addEventListener('click', () => {
-  modoClaro.classList.remove('d-none');
-  modoOscuro.classList.add('d-none');
-  main.classList.remove('main-oscuro');
-  cardCategoria.classList.remove('card-oscuro');
-  cardReportes.classList.remove('card-oscuro');
-  cardBalance.classList.remove('card-oscuro');
-  cardFiltros.classList.remove('card-oscuro');
-  cardOperaciones.classList.remove('card-oscuro');
-  cardNuevaOperacion.classList.remove('card-oscuro');
-  cardEditarOperacionOscuro.classList.remove('card-oscuro');
-  cardEditarCategoriaOscuro.classList.remove('card-oscuro');
-  btnNuevaOperacion.classList.remove('btns-modo-claro');
-})
+modoOscuro.addEventListener("click", () => {
+  modoClaro.classList.remove("d-none");
+  modoOscuro.classList.add("d-none");
+  main.classList.remove("main-oscuro");
+  cardCategoria.classList.remove("card-oscuro");
+  cardReportes.classList.remove("card-oscuro");
+  cardBalance.classList.remove("card-oscuro");
+  cardFiltros.classList.remove("card-oscuro");
+  cardOperaciones.classList.remove("card-oscuro");
+  cardNuevaOperacion.classList.remove("card-oscuro");
+  cardEditarOperacionOscuro.classList.remove("card-oscuro");
+  cardEditarCategoriaOscuro.classList.remove("card-oscuro");
+  btnNuevaOperacion.classList.remove("btns-modo-claro");
+});
 
 // Boton a balance que oculta categorias, reportes y formulario de nueva operacion
 
@@ -124,7 +129,7 @@ btnReportes.addEventListener("click", () => {
     reporteSinOperacion.classList.add("d-none");
   }
   reportesResumen(JSON.parse(localStorage.getItem("arrOperaciones")));
-  mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
+  //mesMayorGananciaYGasto(JSON.parse(localStorage.getItem("arrOperaciones")));
   totalesPorCategoria(arrOperaciones, arrCategoriasIniciales);
   totalPorMes(JSON.parse(localStorage.getItem("arrOperaciones")));
 });
@@ -144,18 +149,16 @@ cancelarBtn.addEventListener("click", () => {
 });
 
 ocultarFiltros.addEventListener("click", () => {
-  containerFiltros.classList.add("d-none"); 
+  containerFiltros.classList.add("d-none");
   mostrarFiltros.classList.remove("d-none");
-  ocultarFiltros.classList.add("d-none")
+  ocultarFiltros.classList.add("d-none");
 });
 
 mostrarFiltros.addEventListener("click", () => {
-  containerFiltros.classList.remove("d-none"); 
+  containerFiltros.classList.remove("d-none");
   mostrarFiltros.classList.add("d-none");
   ocultarFiltros.classList.remove("d-none");
 });
-
-
 
 //                                                             ************************************
 //                                                                     SECCION OPERACIONES
@@ -670,8 +673,6 @@ pintarCategorias(arrCategoriasIniciales);
 //                                                                     SECCION REPORTES
 //                                            ********************************************************************
 
-
-
 // Funcion que realiza un filtrado de las operaciones y devuelve las categorias con mayor ganancia y con mayor con gasto
 
 const reportesResumen = (arr) => {
@@ -706,48 +707,48 @@ const reportesResumen = (arr) => {
 
 // Funcion que realiza un filtrado de las operaciones y devuelve los meses con mayor ganancia y con mayor con gasto
 
-const mesMayorGananciaYGasto = (arr) => {
-  const resumenMayorMonto = arr.sort((a, b) => b.monto - a.monto);
+// const mesMayorGananciaYGasto = (arr) => {
+//   const resumenMayorMonto = arr.sort((a, b) => b.monto - a.monto);
 
-  const gananciaMayor = resumenMayorMonto.filter(
-    (operacion) => operacion.tipo === "ganancia"
-  );
-  if (gananciaMayor.length > 0) {
-    document.getElementById(
-      "mes-mayor-ganancia"
-    ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor ganancia</h6>
-                    <div>
-                      <div class="color">
-                      ${
-                        new Date(gananciaMayor[0].fecha).getMonth() + 1
-                      }/${new Date(gananciaMayor[0].fecha).getFullYear()}
-                      </div>
-                    </div> 
-                    <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${
-                      gananciaMayor[0].monto
-                    }
-                    </div>`;
-  }
+//   const gananciaMayor = resumenMayorMonto.filter(
+//     (operacion) => operacion.tipo === "ganancia"
+//   );
+//   if (gananciaMayor.length > 0) {
+// document.getElementById(
+//   "mes-mayor-ganancia"
+// ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor ganancia</h6>
+//                 <div>
+//                   <div class="color">
+//                   ${
+//                     new Date(gananciaMayor[0].fecha).getMonth() + 1
+//                   }/${new Date(gananciaMayor[0].fecha).getFullYear()}
+//                   </div>
+//                 </div>
+//                 <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${
+//                   gananciaMayor[0].monto
+//                 }
+//                 </div>`;
+//   }
 
-  const gastoMayor = resumenMayorMonto.filter(
-    (operacion) => operacion.tipo === "gasto"
-  );
-  if (gastoMayor.length > 0) {
-    document.getElementById(
-      "mes-mayor-gasto"
-    ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor gasto</h6>
-                  <div>
-                    <div class="color">
-                      ${
-                        new Date(gastoMayor[0].fecha).getMonth() + 1
-                      }/${new Date(gastoMayor[0].fecha).getFullYear()}
-                    </div>
-                  </div> 
-                  <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$
-                    ${gastoMayor[0].monto}
-                  </div>`;
-  }
-};
+//   const gastoMayor = resumenMayorMonto.filter(
+//     (operacion) => operacion.tipo === "gasto"
+//   );
+//   if (gastoMayor.length > 0) {
+// document.getElementById(
+//   "mes-mayor-gasto"
+// ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor gasto</h6>
+//               <div>
+//                 <div class="color">
+//                   ${
+//                     new Date(gastoMayor[0].fecha).getMonth() + 1
+//                   }/${new Date(gastoMayor[0].fecha).getFullYear()}
+//                 </div>
+//               </div>
+//               <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$
+//                 ${gastoMayor[0].monto}
+//               </div>`;
+//   }
+// };
 
 //Totales por categoria
 
@@ -828,6 +829,7 @@ const totalesPorCategoria = (arrOperaciones, arrCategoriasIniciales) => {
 // la suma total de sus ganancias y gastos y su balance
 
 const totalPorMes = (arr) => {
+  let totalesPorMeses = [];
   const mesesSinRepetir = [
     ...new Set(
       arr.map(
@@ -877,7 +879,47 @@ const totalPorMes = (arr) => {
     totalMesBalance.innerHTML += `<div class="mb-4 mt-4 text-end">+$
                                     ${porTipoGanancia - porTipoGasto}
                                   </div>`;
+    const arrMesGananciaGasto = {
+      mes: mesesSinRepetir[i],
+      ganancia: porTipoGanancia,
+      gasto: porTipoGasto,
+      balance: porTipoGanancia - porTipoGasto,
+    };
+    totalesPorMeses.push(arrMesGananciaGasto);
   }
+
+  const MesMayorGanancia = totalesPorMeses
+    .filter((operacion) => operacion.ganancia)
+    .sort(function (a, b) {
+      return b.ganancia - a.ganancia;
+    });
+  document.getElementById(
+    "mes-mayor-ganancia"
+  ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor ganancia</h6>
+                  <div>
+                    <div class="color">
+                    ${MesMayorGanancia[0].mes}
+                    </div>
+                  </div>
+                  <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${MesMayorGanancia[0].ganancia}
+                  </div>`;
+
+  const MesMayorGasto = totalesPorMeses
+    .filter((operacion) => operacion.gasto)
+    .sort(function (a, b) {
+      return b.gasto - a.gasto;
+    });
+  document.getElementById(
+    "mes-mayor-gasto"
+  ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor gasto</h6>
+                <div>
+                  <div class="color">
+                    ${MesMayorGasto[0].mes}
+                  </div>
+                </div>
+                <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$
+                  ${MesMayorGasto[0].gasto}
+                </div>`;
 };
 
 const inicializar = () => {
