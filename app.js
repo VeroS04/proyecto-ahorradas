@@ -705,51 +705,6 @@ const reportesResumen = (arr) => {
   }
 };
 
-// Funcion que realiza un filtrado de las operaciones y devuelve los meses con mayor ganancia y con mayor con gasto
-
-// const mesMayorGananciaYGasto = (arr) => {
-//   const resumenMayorMonto = arr.sort((a, b) => b.monto - a.monto);
-
-//   const gananciaMayor = resumenMayorMonto.filter(
-//     (operacion) => operacion.tipo === "ganancia"
-//   );
-//   if (gananciaMayor.length > 0) {
-// document.getElementById(
-//   "mes-mayor-ganancia"
-// ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor ganancia</h6>
-//                 <div>
-//                   <div class="color">
-//                   ${
-//                     new Date(gananciaMayor[0].fecha).getMonth() + 1
-//                   }/${new Date(gananciaMayor[0].fecha).getFullYear()}
-//                   </div>
-//                 </div>
-//                 <div class= "mb-4  align-item-center" style="color:rgb(109, 213, 6);">+$${
-//                   gananciaMayor[0].monto
-//                 }
-//                 </div>`;
-//   }
-
-//   const gastoMayor = resumenMayorMonto.filter(
-//     (operacion) => operacion.tipo === "gasto"
-//   );
-//   if (gastoMayor.length > 0) {
-// document.getElementById(
-//   "mes-mayor-gasto"
-// ).innerHTML = `<h6 class="my-responsive-resumen">Mes con mayor gasto</h6>
-//               <div>
-//                 <div class="color">
-//                   ${
-//                     new Date(gastoMayor[0].fecha).getMonth() + 1
-//                   }/${new Date(gastoMayor[0].fecha).getFullYear()}
-//                 </div>
-//               </div>
-//               <div class= "mb-4 justify-content-center" style="color:rgb(209, 7, 7);">-$
-//                 ${gastoMayor[0].monto}
-//               </div>`;
-//   }
-// };
-
 //Totales por categoria
 
 // Funcion que filtra las categorias y operaciones y devuelve las categorias que tienen operaciones y
@@ -879,6 +834,9 @@ const totalPorMes = (arr) => {
     totalMesBalance.innerHTML += `<div class="mb-4 mt-4 text-end">+$
                                     ${porTipoGanancia - porTipoGasto}
                                   </div>`;
+
+    //Creamos un objeto para poder sacar el mes con mayor y menor gasto y ganancia
+
     const arrMesGananciaGasto = {
       mes: mesesSinRepetir[i],
       ganancia: porTipoGanancia,
@@ -887,6 +845,8 @@ const totalPorMes = (arr) => {
     };
     totalesPorMeses.push(arrMesGananciaGasto);
   }
+
+  // Funcion que realiza un filtrado de las operaciones y devuelve los meses con mayor ganancia y con mayor con gasto
 
   const MesMayorGanancia = totalesPorMeses
     .filter((operacion) => operacion.ganancia)
